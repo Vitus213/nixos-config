@@ -11,7 +11,7 @@
     ./../../modules/system/base.nix # 基础设置
     ./../../modules/system/desktop.nix # 桌面环境相关
     ./../../modules/system/nvidia.nix # Nvidia 驱动
-    #./../../modules/system/network.nix   # 网络相关
+    ./../../modules/system/network.nix # 网络相关
     #./../../modules/system/services.nix  # 其他系统服务
     ./../../modules/system/fonts.nix # 字体
   ];
@@ -52,8 +52,6 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
   # use th fcitx5
   i18n.inputMethod = {
     enable = true;
@@ -64,23 +62,6 @@
       fcitx5-nord
     ];
   };
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  # Configure console keymap
-  console.keyMap = "uk";
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -103,16 +84,6 @@
     dumpcap.enable = true;
   };
   programs.zsh.enable = true;
-  #open ssh
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no";
-      PasswordAuthentication = true;
-    };
-    openFirewall = false;
-  };
   # Install firefox.
   programs.firefox.enable = true;
   programs.direnv.enable = true;

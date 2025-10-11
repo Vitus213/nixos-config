@@ -7,7 +7,6 @@
   ];
   home.packages = with pkgs; [
     neofetch
-    #     zip
     unstable.wechat-uos
     unstable.warp-terminal
     flclash
@@ -18,17 +17,17 @@
     qq
     wpsoffice-cn
     activitywatch
-# misc
+    # misc
     which
     tree
     nodejs_24
     pnpm
-# typst
+    # typst
     typst
     tinymist
     vscode-extensions.myriad-dreamin.tinymist
     pandoc
-# development tools
+    # development tools
     zsh
     nixfmt-classic
     android-tools
@@ -38,17 +37,16 @@
     llvmPackages_latest.libcxxClang
     llvmPackages_latest.clang-tools
     cmake
-    #     # Java
-    #     jetbrains.idea-community
-    #     jdk8
     qbittorrent-enhanced
+    #小工具
+    zip
     bind
     curl
+    #net
     clash-verge-rev
     #nvidia
     lshw
     netease-cloud-music-gtk
-    nixfmt
   ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {
