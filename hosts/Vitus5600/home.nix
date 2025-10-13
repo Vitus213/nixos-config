@@ -1,9 +1,10 @@
-{ config, pkgs, unstable, ... }: {
+{ inputs, config, pkgs, unstable, ... }: {
   home.username = "vitus";
   home.homeDirectory = "/home/vitus";
   # 导入公共 home-manager 模块
   imports = [
     ./../../modules/home/programs/zsh.nix # 确保这个路径相对于 home.nix 是正确的
+    ./../../modules/home/programs/hyprland.nix
   ];
   home.packages = with pkgs; [
     neofetch
@@ -46,7 +47,9 @@
     clash-verge-rev
     #nvidia
     lshw
+    #出问题用不了
     netease-cloud-music-gtk
+    go-musicfox
   ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {
@@ -59,7 +62,8 @@
     };
   };
 
-  # 启用 starship，这是一个漂亮的 shell 提示符
+  # 启用 starship，这是一个漂亮的 shell 提示符,
+  #zsh的p10k会覆盖starship，但是bash会用上
   programs.starship = {
     enable = true;
     settings = {
@@ -97,6 +101,7 @@
   };
 
   # 如果你使用 zoxide，并且它有自己的顶层启用选项
+  #自动跳转
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
