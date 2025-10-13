@@ -21,6 +21,7 @@
   console.keyMap = "uk";
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # enable hyprland 
   programs.hyprland = {
     enable = true;
     # set the flake package
