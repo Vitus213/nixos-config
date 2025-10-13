@@ -1,0 +1,119 @@
+{ inputs, config, pkgs, unstable, ... }: {
+  home.username = "vitus";
+  home.homeDirectory = "/home/vitus";
+  # 导入公共 home-manager 模块
+  imports = [
+    ./../../modules/home/programs/zsh.nix # 确保这个路径相对于 home.nix 是正确的
+    ./../../modules/home/programs/hyprland.nix
+  ];
+  home.packages = with pkgs; [
+    neofetch
+    unstable.wechat-uos
+    unstable.warp-terminal
+    flclash
+    ente-auth
+    # offical tools
+    feishu
+    typora
+    qq
+    wpsoffice-cn
+    activitywatch
+    # misc
+    which
+    tree
+    nodejs_24
+    pnpm
+    # typst
+    typst
+    tinymist
+    vscode-extensions.myriad-dreamin.tinymist
+    pandoc
+    # development tools
+    zsh
+    nixfmt-classic
+    android-tools
+    #rust
+    rustup
+    # C++
+    llvmPackages_latest.libcxxClang
+    llvmPackages_latest.clang-tools
+    cmake
+    qbittorrent-enhanced
+    #小工具
+    zip
+    bind
+    curl
+    #net
+    clash-verge-rev
+    #nvidia
+    lshw
+    #出问题用不了
+    netease-cloud-music-gtk
+    go-musicfox
+  ];
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
+  programs.git = {
+    enable = true;
+    userName = "Vitus";
+    userEmail = "zhzvitus@gmail.com";
+    extraConfig = {
+      init.defaultBranch = "main";
+      safe.directory = "etc/nixos";
+    };
+  };
+
+  # 启用 starship，这是一个漂亮的 shell 提示符,
+  #zsh的p10k会覆盖starship，但是bash会用上
+  programs.starship = {
+    enable = true;
+    settings = {
+      username = {
+        disabled = false;
+        show_always = true;
+      };
+      add_newline = false;
+      aws.disabled = true;
+      gcloud.disabled = true;
+      line_break.disabled = false;
+    };
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      env.TERM = "xterm-256color";
+      font = { size = 12; };
+      scrolling.multiplier = 5;
+      selection.save_to_clipboard = true;
+      window.opacity = 0.9;
+      keyboard.bindings = [{
+        key = "Q";
+        mods = "Control|Shift";
+        action = "Quit";
+      }];
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    bashrcExtra = "";
+  };
+
+  # 如果你使用 zoxide，并且它有自己的顶层启用选项
+  #自动跳转
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.vscode = {
+    enable = true;
+    package = unstable.vscode;
+  };
+
+  services.kdeconnect.enable = true;
+
+  programs.home-manager.enable = true;
+  home.stateVersion = "25.05";
+}
