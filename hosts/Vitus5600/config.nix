@@ -14,31 +14,8 @@
     ./../../modules/system/network.nix # 网络相关
     #./../../modules/system/services.nix  # 其他系统服务
     ./../../modules/system/fonts.nix # 字体
+    ./../../modules/system/users.nix
   ];
-  networking.hostName = "Vitus5600"; # Define your hostname.
-  #用户
-  users.users.vitus = {
-    isNormalUser = true;
-    description = "VitusApollo";
-    extraGroups =
-      [ "networkmanager" "wheel" "docker" "wireshark" "adbusers" "kvm" ];
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = [ "~/.ssh/authorized_keys" ];
-    #软件包
-    packages = with pkgs;
-      [
-        kdePackages.kate
-        #  thunderbird
-      ];
-  };
-  environment.systemPackages = with pkgs; [
-    vim-full
-    git
-    wget
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-  ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.access-tokens =
     "github.com=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";
@@ -78,27 +55,11 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-  #配置wireshark
-  programs.wireshark = {
-    enable = true;
-    dumpcap.enable = true;
-  };
-  programs.zsh.enable = true;
-  # Install firefox.
-  programs.firefox.enable = true;
-  programs.direnv.enable = true;
-  programs.adb.enable = true;
-  programs.steam.enable = true;
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   #使用dbus
   services.dbus = {
     implementation = "broker";
     packages = [ pkgs.haskellPackages.dbus-app-launcher ];
   };
-
-  networking.firewall.enable = false;
 
   system.stateVersion = "25.05"; # Did you read the comment?
 

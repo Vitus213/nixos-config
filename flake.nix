@@ -17,26 +17,36 @@
       inputs.hyprland.follows = "hyprland"; # import plugin
     };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server
     , rust-overlay, ... }@inputs:
     let
       system = "x86_64-linux";
       overlays = [ (import rust-overlay) ];
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       nixosConfigurations.Vitus5600 = nixpkgs.lib.nixosSystem {
-        # 将 let 块中的 system 变量传递给 nixosSystem
-        inherit system;
-        #传递给所有nixos模块的额外参数
         specialArgs = {
+          inherit system;
           inherit inputs;
-          unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit unstable;
         };
         modules = [
-          ./hosts/Vitus5600/configuration.nix
+          ./hosts/Vitus5600/config.nix
+          # inputs.distro-grub-themes.nixosModules.${system}.default
+          ./modules/system/quickshell.nix # quickshell module
+          ./modules/system/packages.nix # Software packages
+          ./modules/system/fonts.nix # Fonts packages
+          ./modules/system/portals.nix # portal
+          ./modules/system/theme.nix # Set dark theme
+          ./modules/system/nvidia.nix
           #配置pkgs
           {
             nixpkgs = {
