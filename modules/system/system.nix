@@ -25,15 +25,6 @@
     time.timeZone = "Asia/Shanghai";
 
   i18n = {
-        inputMethod = {
-      enable = true;
-      type = "fcitx5";
-      fcitx5.addons = with pkgs; [
-        fcitx5-rime
-        fcitx5-chinese-addons
-        fcitx5-nord
-      ];
-    };
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "zh_CN.UTF-8";
