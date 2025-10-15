@@ -6,14 +6,11 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+        ./hardware-configuration.nix
     # 导入自定义的通用系统模块
     ./../../modules/system/desktop.nix # 桌面环境相关
-    ./../../modules/system/nvidia.nix # Nvidia 驱动
-    ./../../modules/system/network.nix # 网络相关
     #./../../modules/system/services.nix  # 其他系统服务
-    ./../../modules/system/fonts.nix # 字体
-    ./../../modules/system/users.nix
+    ./../../modules/system/system.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.access-tokens =
@@ -70,11 +67,24 @@
   virtualisation.docker.enable = true;
   users.extraGroups.vboxusers.members = [ "vitus" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = "neovim";
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  networking.hostName = "${username}"; # Define your hostname.
+  # Enable networking
+  networking.networkmanager.enable = true;
+  networking.firewall.enable = false;
+  #open ssh
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+    openFirewall = false;
+  };
   services = {
     # Enable sound with pipewire.
     pulseaudio.enable = false;
