@@ -27,10 +27,12 @@
     };
 
     initContent = ''
-      alias ls="ls --color=auto"
-      alias la="ls -a"
-      alias ll="ls -l"
-       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        alias ls="ls --color=auto"
+        alias la="ls -a"
+        alias ll="ls -l"
+         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      ex
+
     '';
   };
 

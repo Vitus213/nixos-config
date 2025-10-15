@@ -36,8 +36,4 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  hardware.nvidia.prime = {
-
-    nvidiaBusId = "PCI:7:0:0";
-  };
 }

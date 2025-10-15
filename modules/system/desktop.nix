@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }: {
+{ username, inputs, config, pkgs, unstable, ... }: {
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys =
@@ -6,22 +6,43 @@
   };
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-  # # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable =false;
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+
+  # Services to start
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+    desktopManager.plasma6.enable = true;
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true; # 支持 Wayland 会话
+      theme = "breeze"; # Plasma 默认主题
+    };
+    #用sddm
+    # greetd = {
+    #   enable = true;
+    #   settings = {
+    #     default_session = {
+    #       user = "vitus";
+    #       command =
+    #         "${unstable.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
+    #     };
+    #   };
+    # };
   };
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+
   # Configure console keymap
   console.keyMap = "uk";
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # # enable hyprland 
+  # enable hyprland 
   # programs.hyprland = {
   #   enable = true;
   #   # set the flake package

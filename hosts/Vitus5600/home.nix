@@ -6,51 +6,7 @@
     ./../../modules/home/programs/zsh.nix # 确保这个路径相对于 home.nix 是正确的
     ./../../modules/home/programs/hyprland.nix
   ];
-  home.packages = with pkgs; [
-    neofetch
-    unstable.wechat-uos
-    unstable.warp-terminal
-    flclash
-    ente-auth
-    # offical tools
-    feishu
-    typora
-    qq
-    wpsoffice-cn
-    activitywatch
-    # misc
-    which
-    tree
-    nodejs_24
-    pnpm
-    # typst
-    typst
-    tinymist
-    vscode-extensions.myriad-dreamin.tinymist
-    pandoc
-    # development tools
-    zsh
-    nixfmt-classic
-    android-tools
-    #rust
-    rustup
-    # C++
-    llvmPackages_latest.libcxxClang
-    llvmPackages_latest.clang-tools
-    cmake
-    qbittorrent-enhanced
-    #小工具
-    zip
-    bind
-    curl
-    #net
-    clash-verge-rev
-    #nvidia
-    lshw
-    #出问题用不了
-    netease-cloud-music-gtk
-    go-musicfox
-  ];
+  home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {
     enable = true;
