@@ -26,10 +26,6 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-
-  
-
-
   # Select internationalisation properties.
   services.logind = {
     lidSwitch = "ignore";
@@ -41,7 +37,7 @@
       HandleSuspendKey=ignore
     '';
   };
-    # Enable networking
+  # Enable networking
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
   #open ssh
@@ -60,8 +56,6 @@
   #virtualization开启docker支持
   virtualisation.docker.enable = true;
   users.extraGroups.vboxusers.members = [ "vitus" ];
-
-
 
   security.rtkit.enable = true;
   #使用dbus

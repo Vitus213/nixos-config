@@ -1,11 +1,12 @@
-{ inputs, config, pkgs, unstable, ... }: {
-  home.username = "vitus";
-  home.homeDirectory = "/home/vitus";
+{ username, inputs, config, pkgs, unstable, ... }: {
+
   # 导入公共 home-manager 模块
   imports = [
+    ./../../home/core.nix
     ./../../modules/home/programs/zsh.nix # 确保这个路径相对于 home.nix 是正确的
     ./../../modules/home/programs/hyprland.nix
     ./../../home/fcitx5
+
   ];
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
@@ -70,7 +71,4 @@
   };
 
   services.kdeconnect.enable = true;
-
-  programs.home-manager.enable = true;
-  home.stateVersion = "25.05";
 }

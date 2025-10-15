@@ -1,19 +1,11 @@
-  {
-  pkgs,
-  lib,
-  username,
-  ...
-}: {
+{ pkgs, lib, username, ... }: {
   users = {
     mutableUsers = true;
     users."${username}" = {
       homeMode = "755";
       isNormalUser = true;
       description = "Vitus213";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
+      extraGroups = [ "networkmanager" "wheel" ];
       # define user packages here
       packages = with pkgs; [ ];
       openssh.authorizedKeys.keys = [ "~/.ssh/authorized_keys" ];
@@ -22,7 +14,7 @@
     defaultUserShell = pkgs.zsh;
 
   };
-    time.timeZone = "Asia/Shanghai";
+  time.timeZone = "Asia/Shanghai";
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -38,13 +30,13 @@
       LC_TIME = "zh_CN.UTF-8";
     };
 
-};
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   environment.variables.EDITOR = "neovim";
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    services = {
+  services = {
     # Enable sound with pipewire.
     pulseaudio.enable = false;
     pipewire = {
@@ -55,14 +47,15 @@
     };
   };
   environment.shells = with pkgs; [ zsh ];
-  environment.systemPackages = with pkgs; [  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
     git
     neofetch
     htop
   ];
-   fonts = {
+  fonts = {
     packages = with pkgs; [
       dejavu_fonts
       fira-code

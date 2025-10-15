@@ -41,14 +41,13 @@
           inherit unstable;
           inherit username;
         };
-
         modules = [
           ./hosts/Vitus5600
           # inputs.distro-grub-themes.nixosModules.${system}.default
-          ./modules/system/quickshell.nix # quickshell module
+          #./modules/system/quickshell.nix # quickshell module
           ./modules/system/packages.nix # Software packages
-          ./modules/system/portals.nix # portal
-          ./modules/system/theme.nix # Set dark theme
+          #./modules/system/portals.nix # portal
+          # ./modules/system/theme.nix # Set dark theme
           ./modules/system/nvidia.nix
           #配置pkgs
           {
@@ -64,61 +63,11 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.vitus = import ./users/${username}/home.nix;
-              extraSpecialArgs = { inherit unstable; };
+              users.${username} = import ./users/${username}/home.nix;
+              extraSpecialArgs = { inherit unstable username; };
               backupFileExtension = "backup";
             };
           })
-
-          vscode-server.nixosModules.default
-          #启动tailscale
-          ({ pkgs, ... }: {
-            services.tailscale.enable = true;
-            environment.systemPackages = with pkgs; [ tailscale ];
-          })
-          #启动蓝牙
-          ({ pkgs, ... }: {
-            hardware.bluetooth.enable = true;
-            hardware.bluetooth.powerOnBoot = true;
-          })
-        ];
-      };
-      nixosConfigurations.Vitus8500 = let username = "vitus";
-      in nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system;
-          inherit inputs;
-          inherit unstable;
-          inherit username;
-        };
-        modules = [
-          ./hosts/Vitus8500
-          # inputs.distro-grub-themes.nixosModules.${system}.default
-          ./modules/system/quickshell.nix # quickshell module
-          ./modules/system/packages.nix # Software packages
-          ./modules/system/portals.nix # portal
-          ./modules/system/theme.nix # Set dark theme
-          #./modules/system/nvidia.nix
-          #配置pkgs
-          {
-            nixpkgs = {
-              overlays = overlays;
-              config = { allowUnfree = true; };
-            };
-          }
-          #将home-manager模块添加到NixOS配置中
-          #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
-          home-manager.nixosModules.home-manager
-          ({ username, unstable, ... }: {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.vitus = import ./hosts/${username}/home.nix;
-              extraSpecialArgs = { inherit unstable; };
-              backupFileExtension = "backup";
-            };
-          })
-
           vscode-server.nixosModules.default
           #启动tailscale
           ({ pkgs, ... }: {
