@@ -31,15 +31,20 @@
         inherit system;
         config.allowUnfree = true;
       };
+
     in {
-      nixosConfigurations.Vitus5600 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.Vitus5600 = let networkusername = "Vitus5600";
+      in nixpkgs.lib.nixosSystem {
+
         specialArgs = {
           inherit system;
           inherit inputs;
           inherit unstable;
+          inherit networkusername;
         };
+
         modules = [
-          ./hosts/Vitus5600/config.nix
+          ./hosts/${networkusername}/config.nix
           # inputs.distro-grub-themes.nixosModules.${system}.default
           ./modules/system/quickshell.nix # quickshell module
           ./modules/system/packages.nix # Software packages
@@ -57,11 +62,11 @@
           #将home-manager模块添加到NixOS配置中
           #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
-          ({ unstable, ... }: {
+          ({ networkusername, unstable, ... }: {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.vitus = import ./hosts/Vitus5600/home.nix;
+              users.vitus = import ./hosts/${networkusername}/home.nix;
               extraSpecialArgs = { inherit unstable; };
               backupFileExtension = "backup";
             };
@@ -80,19 +85,23 @@
           })
         ];
       };
-      nixosConfigurations.Vitus8500 = nixpkgs.lib.nixosSystem {
-        # 将 let 块中的 system 变量传递给 nixosSystem
-        inherit system;
-        #传递给所有nixos模块的额外参数
+      nixosConfigurations.Vitus8500 = let networkusername = "Vitus8500";
+      in nixpkgs.lib.nixosSystem {
         specialArgs = {
+          inherit system;
           inherit inputs;
-          unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit unstable;
+          inherit networkusername;
         };
         modules = [
-          ./hosts/Vitus8500/configuration.nix
+          ./hosts/${networkusername}/config.nix
+          # inputs.distro-grub-themes.nixosModules.${system}.default
+          ./modules/system/quickshell.nix # quickshell module
+          ./modules/system/packages.nix # Software packages
+          ./modules/system/fonts.nix # Fonts packages
+          ./modules/system/portals.nix # portal
+          ./modules/system/theme.nix # Set dark theme
+          #./modules/system/nvidia.nix
           #配置pkgs
           {
             nixpkgs = {
@@ -103,11 +112,11 @@
           #将home-manager模块添加到NixOS配置中
           #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
-          ({ unstable, ... }: {
+          ({ networkusername, unstable, ... }: {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.vitus = import ./hosts/Vitus8500/home.nix;
+              users.vitus = import ./hosts/${networkusername}/home.nix;
               extraSpecialArgs = { inherit unstable; };
               backupFileExtension = "backup";
             };
@@ -127,5 +136,4 @@
         ];
       };
     };
-
 }

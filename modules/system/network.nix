@@ -1,5 +1,5 @@
-{ config, nixpkgs, pkgs, ... }: {
-  networking.hostName = "Vitus5600"; # Define your hostname.
+{ networkusername, config, nixpkgs, pkgs, ... }: {
+  networking.hostName = "${networkusername}"; # Define your hostname.
   # Enable networking
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
