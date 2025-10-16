@@ -69,7 +69,24 @@
     btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     jq.enable = true; # A lightweight and flexible command-line JSON processor
-    ssh.enable = true;
+    ssh={
+      enable=true;
+      matchBlocks={
+    # 你的 "Host 5600" 配置
+    "5600" = { # 这里的键就是 Host 别名
+      hostname = "100.64.0.47";
+      user = "vitus";
+      # 你也可以在这里添加其他针对 5600 的设置
+      # identityFile = "~/.ssh/id_rsa_5600";
+    };
+
+    # 你的 "Host Nixos" 配置
+    "Nixos" = {
+      hostname = "100.64.0.41";
+      user = "vitus";
+    };
+    };
+    };
     aria2.enable = true;
 
     skim = {

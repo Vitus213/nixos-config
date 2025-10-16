@@ -1,83 +1,217 @@
 { inputs, config, pkgs, ... }: {
-  imports = [ ./waybar.nix ];
+  imports = [ ./waybar.nix ./dunst.nix ./hyprland-environment.nix ];
+
+  home.packages = with pkgs; [ waybar swww ];
   wayland.windowManager.hyprland = {
-    # Whether to enable Hyprland wayland compositor
     enable = true;
-    # The hyprland package to use
-    # Use the same hyprland package coming from the flake inputs to avoid
-    # version/protocol mismatches between system and user packages.
-    package = pkgs.hyprland;
-    # Whether to enable XWayland
-    xwayland.enable = true;
-    plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars ];
-    # Optional
-    # Whether to enable hyprland-session.target on hyprland startup
-    systemd.enable = true;
-    settings = {
-      "$mod" = "SUPER"; # 定义你的 Super 键 (Windows 键)
-      "$fuck" = "alt";
-      # 启动应用程序的快捷键示例
-      bind = [
-        "$mod, Q, exec, alacritty" # Super + Q 启动 kitty 终端
-        "$mod, E, exec, thunar" # Super + E 启动 Thunar 文件管理器
-        "$mod, R, exec, rofi -show drun" # Super + R 启动 Rofi
-        "$mod, M, exec, wlogout" # Super + M 启动 wlogout
-        "$mod, delete, exec, hyprlock" # Super + Delete 锁屏
-        #切换浮动窗口
-        "$mod, F, togglefloating," # 切换当前窗口的浮动状态
-        #工作区设置
-        # 浮动窗口鼠标操作 (拖动和调整大小)
-        "$mod, mouse:272, movewindow" # Super + 鼠标左键拖动窗口
-        "$mod, mouse:273, resizewindow" # Super + 鼠标右键调整窗口大小
-
-        "$mod, 1, workspace, 1" # 切换到工作区 1
-        "$mod, 2, workspace, 2" # 切换到工作区 2
-        # ... (1 到 10 或更多)
-
-        "$mod SHIFT, 1, movetoworkspace, 1" # 将当前窗口移动到工作区 1
-        "$mod SHIFT, 2, movetoworkspace, 2" # 将当前窗口移动到工作区 2
-        # ... (1 到 10 或更多)
-
-        "$mod, mouse_down, workspace, e+1" # 鼠标滚轮向下切换到下一个工作区
-        "$mod, mouse_up, workspace, e-1" # 鼠标滚轮向上切换到上一个工作区
-      ];
-
-      # 默认自启动应用程序
-      exec-once = [
-        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" # Wayland 环境必备
-        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" # Wayland 环境必备
-        "swww init &" # Swww 壁纸服务
-        "swww img ~/.config/hypr/wallpapers/default.jpg" # 设置壁纸 (确保路径存在)
-        "waybar &" # 启动 Waybar
-        "nm-applet --indicator &" # 启动网络管理器图标
-        "kdeconnect-indicator &" # 启动 KDE Connect 指示器
-        "hyprnotificationcenter &" # 启动通知中心 (如果你的通知中心是 hyprnotificationcenter)
-        # "polkit-kde-authentication-agent-1 &" # 确保 polkit 代理运行
-      ];
-
-      # 其他 Hyprland 设置 (布局, 动画等)
-      # 例如：
-      layout.master.new_is_master = true;
-      general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
-        layout = "dwindle";
-      };
-      decoration = {
-        rounding = 5;
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-        };
-      };
-    };
+    systemdIntegration = true;
     extraConfig = ''
-      plugin:hyprbars:bar_height = 20
+
+          # Monitor
+          monitor=DP-1,2560x1440@60,0x0,1,transform,1
+          monitor=DP-2,2560x1440@200,2160x0,1
+
+      # 为显示器分配工作区
+      workspace = 1, monitor:DP-1
+      workspace = 2, monitor:DP-1
+      workspace = 3, monitor:DP-1
+      workspace = 4, monitor:DP-2
+      workspace = 5, monitor:DP-2
+      workspace = 6, monitor:DP-2
+          # Fix slow startup
+          exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+
+          # Autostart
+
+          exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+          exec-once = dunst
+
+          source = /home/enzo/.config/hypr/colors
+          exec = pkill waybar & sleep 0.5 && waybar
+          exec-once = swww init & sleep 0.5 && exec wallpaper_random
+          # exec-once = wallpaper_random
+
+          # Set en layout at startup
+
+          # Input config
+          input {
+              kb_layout = us
+              kb_variant =
+              kb_model =
+              kb_options =
+              kb_rules =
+
+              follow_mouse = 1
+
+              touchpad {
+                  natural_scroll = false
+              }
+
+              sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+          }
+
+          general {
+
+              gaps_in = 5
+              gaps_out = 20
+              border_size = 2
+              col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+              col.inactive_border = rgba(595959aa)
+
+              layout = dwindle
+          }
+
+          decoration {
+
+              rounding = 10
+              blur = true
+              blur_size = 3
+              blur_passes = 1
+              blur_new_optimizations = true
+
+              drop_shadow = true
+              shadow_range = 4
+              shadow_render_power = 3
+              col.shadow = rgba(1a1a1aee)
+          }
+
+          animations {
+              enabled = yes
+
+              bezier = ease,0.4,0.02,0.21,1
+
+              animation = windows, 1, 3.5, ease, slide
+              animation = windowsOut, 1, 3.5, ease, slide
+              animation = border, 1, 6, default
+              animation = fade, 1, 3, ease
+              animation = workspaces, 1, 3.5, ease
+          }
+
+          dwindle {
+              pseudotile = yes
+              preserve_split = yes
+          }
+
+          master {
+              new_is_master = yes
+          }
+
+          gestures {
+              workspace_swipe = false
+          }
+
+          # Example windowrule v1
+          # windowrule = float, ^(kitty)$
+          # Example windowrule v2
+          # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+
+          windowrule=float,^(kitty)$
+          windowrule=float,^(pavucontrol)$
+          windowrule=center,^(kitty)$
+          windowrule=float,^(blueman-manager)$
+          windowrule=size 600 500,^(kitty)$
+          windowrule=size 934 525,^(mpv)$
+          windowrule=float,^(mpv)$
+          windowrule=center,^(mpv)$
+          #windowrule=pin,^(firefox)$
+
+          $mainMod = SUPER
+          bind = $mainMod, G, fullscreen,
+
+
+          #bind = $mainMod, RETURN, exec, cool-retro-term-zsh
+          bind = $mainMod, RETURN, exec, kitty
+          bind = $mainMod, B, exec, opera --no-sandbox
+          bind = $mainMod, F, exec, firefox 
+          bind = $mainMod, Q, killactive,
+          bind = $mainMod, M, exit,
+          bind = $mainMod, V, togglefloating,
+          bind = $mainMod, w, exec, wofi --show drun
+          bind = $mainMod, R, exec, rofi
+          bind = $mainMod, P, pseudo, # dwindle
+          bind = $mainMod, J, togglesplit, # dwindle
+
+          # Switch Keyboard Layouts
+          bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
+
+          bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
+          bind = SHIFT, Print, exec, grim -g "$(slurp)"
+
+          # Functional keybinds
+          bind =,XF86AudioMicMute,exec,pamixer --default-source -t
+          bind =,XF86MonBrightnessDown,exec,light -U 20
+          bind =,XF86MonBrightnessUp,exec,light -A 20
+          bind =,XF86AudioMute,exec,pamixer -t
+          bind =,XF86AudioLowerVolume,exec,pamixer -d 10
+          bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
+          bind =,XF86AudioPlay,exec,playerctl play-pause
+          bind =,XF86AudioPause,exec,playerctl play-pause
+
+          # to switch between windows in a floating workspace
+          bind = SUPER,Tab,cyclenext,
+          bind = SUPER,Tab,bringactivetotop,
+
+          # Move focus with mainMod + arrow keys
+          bind = $mainMod, left, movefocus, l
+          bind = $mainMod, right, movefocus, r
+          bind = $mainMod, up, movefocus, u
+          bind = $mainMod, down, movefocus, d
+
+          # Switch workspaces with mainMod + [0-9]
+          bind = $mainMod, 1, workspace, 1
+          bind = $mainMod, 2, workspace, 2
+          bind = $mainMod, 3, workspace, 3
+          bind = $mainMod, 4, workspace, 4
+          bind = $mainMod, 5, workspace, 5
+          bind = $mainMod, 6, workspace, 6
+          bind = $mainMod, 7, workspace, 7
+          bind = $mainMod, 8, workspace, 8
+          bind = $mainMod, 9, workspace, 9
+          bind = $mainMod, 0, workspace, 10
+
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          bind = $mainMod SHIFT, 1, movetoworkspace, 1
+          bind = $mainMod SHIFT, 2, movetoworkspace, 2
+          bind = $mainMod SHIFT, 3, movetoworkspace, 3
+          bind = $mainMod SHIFT, 4, movetoworkspace, 4
+          bind = $mainMod SHIFT, 5, movetoworkspace, 5
+          bind = $mainMod SHIFT, 6, movetoworkspace, 6
+          bind = $mainMod SHIFT, 7, movetoworkspace, 7
+          bind = $mainMod SHIFT, 8, movetoworkspace, 8
+          bind = $mainMod SHIFT, 9, movetoworkspace, 9
+          bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+          # Scroll through existing workspaces with mainMod + scroll
+          bind = $mainMod, mouse_down, workspace, e+1
+          bind = $mainMod, mouse_up, workspace, e-1
+
+          # Move/resize windows with mainMod + LMB/RMB and dragging
+          bindm = $mainMod, mouse:272, movewindow
+          bindm = $mainMod, mouse:273, resizewindow
+          bindm = ALT, mouse:272, resizewindow
     '';
   };
-  # home.file."~/.config/hypr/hyprland.conf".source = ./hyprland.conf;
+
+  home.file.".config/hypr/colors".text = ''
+    $background = rgba(1d192bee)
+    $foreground = rgba(c3dde7ee)
+
+    $color0 = rgba(1d192bee)
+    $color1 = rgba(465EA7ee)
+    $color2 = rgba(5A89B6ee)
+    $color3 = rgba(6296CAee)
+    $color4 = rgba(73B3D4ee)
+    $color5 = rgba(7BC7DDee)
+    $color6 = rgba(9CB4E3ee)
+    $color7 = rgba(c3dde7ee)
+    $color8 = rgba(889aa1ee)
+    $color9 = rgba(465EA7ee)
+    $color10 = rgba(5A89B6ee)
+    $color11 = rgba(6296CAee)
+    $color12 = rgba(73B3D4ee)
+    $color13 = rgba(7BC7DDee)
+    $color14 = rgba(9CB4E3ee)
+    $color15 = rgba(c3dde7ee)
+  '';
 }
