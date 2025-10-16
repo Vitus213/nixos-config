@@ -14,10 +14,10 @@
     defaultUserShell = pkgs.zsh;
 
   };
-    nix.settings.trusted-users = [username];
-      nix.settings = {
+  nix.settings.trusted-users = [ username ];
+  nix.settings = {
     # enable flakes globally
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [ "nix-command" "flakes" ];
 
     substituters = [
       # cache mirror located in China
@@ -28,20 +28,20 @@
       "https://cache.nixos.org"
       "https://hyprland.cachix.org"
     ];
-  # Configure console keymap
-  console.keyMap = "uk";
-  #桌面默认使用wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    # # Configure console keymap
+    # console.keyMap = "uk";
+
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     builders-use-substitutes = true;
 
-  access-tokens =
-    "github.com=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";
+    access-tokens =
+      "github.com=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";
   };
-
+  #桌面默认使用wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   time.timeZone = "Asia/Shanghai";
 
   i18n = {
@@ -74,7 +74,7 @@
       pulse.enable = true;
     };
   };
-    # Services to start
+  # Services to start
   services = {
     xserver = {
       enable = true;
@@ -92,6 +92,7 @@
       wayland.enable = true; # 支持 Wayland 会话
       theme = "breeze"; # Plasma 默认主题
     };
+  };
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -134,7 +135,7 @@
       vista-fonts-chs
     ];
   };
-   # Select internationalisation properties.
+  # Select internationalisation properties.
   services.logind = {
     lidSwitch = "ignore";
     lidSwitchDocked = "ignore";

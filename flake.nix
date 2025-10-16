@@ -11,6 +11,10 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin-bat = {
+      url = "github:catppuccin/bat";
+      flake = false;
+    };
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -33,14 +37,16 @@
       };
 
     in {
-      nixosConfigurations.Vitus5600 = let username = "vitus";
-      in nixpkgs.lib.nixosSystem {
+      nixosConfigurations.Vitus5600 = let
+        username = "vitus";
         specialArgs = {
           inherit system;
           inherit inputs;
           inherit unstable;
           inherit username;
         };
+      in nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
         modules = [
           ./hosts/Vitus5600
           # inputs.distro-grub-themes.nixosModules.${system}.default
@@ -49,6 +55,7 @@
           #./modules/system/portals.nix # portal
           # ./modules/system/theme.nix # Set dark theme
           ./modules/system/nvidia.nix
+          ./users/${username}/nixos.nix
           #配置pkgs
           {
             nixpkgs = {
@@ -64,7 +71,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users.${username} = import ./users/${username}/home.nix;
-              extraSpecialArgs = { inherit unstable username; };
+              extraSpecialArgs = inputs // specialArgs;
               backupFileExtension = "backup";
             };
           })

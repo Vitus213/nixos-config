@@ -2,10 +2,8 @@
 
 # terminals
 
-let
-  font = "JetBrainsMono Nerd Font";
-in
-{
+let font = "JetBrainsMono Nerd Font";
+in {
   programs.alacritty = {
     enable = true;
     settings = {

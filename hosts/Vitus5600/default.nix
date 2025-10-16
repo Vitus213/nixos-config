@@ -8,7 +8,6 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # 导入自定义的通用系统模块
-    ./../../modules/system/desktop.nix # 桌面环境相关
     ./../../modules/system/nvidia.nix # Nvidia 驱动
     #./../../modules/system/services.nix  # 其他系统服务
     ./../../modules/system/system.nix
@@ -29,6 +28,6 @@
   networking.networkmanager.enable = true;
 
   networking.firewall.enable = false;
- 
+
   system.stateVersion = "25.05"; # Did you read the comment?
 }

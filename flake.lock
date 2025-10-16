@@ -33,6 +33,22 @@
         "type": "github"
       }
     },
+    "catppuccin-bat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1751237777,
+        "narHash": "sha256-lJapSgRVENTrbmpVyn+UQabC9fpV1G1e+CdlJ090uvg=",
+        "owner": "catppuccin",
+        "repo": "bat",
+        "rev": "6810349b28055dce54076712fc05fc68da4b8ec0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "bat",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -506,6 +522,7 @@
     },
     "root": {
       "inputs": {
+        "catppuccin-bat": "catppuccin-bat",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",

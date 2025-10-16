@@ -1,14 +1,10 @@
-{config, ...}: let
+{ config, ... }:
+let
   d = config.xdg.dataHome;
   c = config.xdg.configHome;
   cache = config.xdg.cacheHome;
 in {
-  imports = [
-    ./nushell
-    ./common.nix
-    ./starship.nix
-    ./terminals.nix
-  ];
+  imports = [ ./nushell ./common.nix ./starship.nix ./terminals.nix ];
 
   # add environment variables
   home.sessionVariables = {
@@ -28,7 +24,5 @@ in {
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
   };
 
-  home.shellAliases = {
-    k = "kubectl";
-  };
+  home.shellAliases = { k = "kubectl"; };
 }
