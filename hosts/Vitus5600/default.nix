@@ -13,9 +13,7 @@
     #./../../modules/system/services.nix  # 其他系统服务
     ./../../modules/system/system.nix
   ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.access-tokens =
-    "github.com=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";
+
   boot = {
     kernel.sysctl = {
       "net.ipv4.ip_forwarding" = 1;
@@ -26,42 +24,11 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-  # Select internationalisation properties.
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
-    extraConfig = ''
-      IdleAction=ignore
-      HandlePowerKey=ignore
-      HandleSuspendKey=ignore
-    '';
-  };
+  networking.hostName = "Vitus5600"; # Define your hostname.
   # Enable networking
   networking.networkmanager.enable = true;
+
   networking.firewall.enable = false;
-  #open ssh
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no";
-      PasswordAuthentication = true;
-    };
-    openFirewall = false;
-  };
-
-  networking.hostName = "Vitus5600"; # Define your hostname.
-
-  #virtualization开启docker支持
-  virtualisation.docker.enable = true;
-  users.extraGroups.vboxusers.members = [ "vitus" ];
-
-  security.rtkit.enable = true;
-  #使用dbus
-  services.dbus = {
-    implementation = "broker";
-    packages = [ pkgs.haskellPackages.dbus-app-launcher ];
-  };
+ 
   system.stateVersion = "25.05"; # Did you read the comment?
 }

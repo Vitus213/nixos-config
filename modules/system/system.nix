@@ -14,6 +14,34 @@
     defaultUserShell = pkgs.zsh;
 
   };
+    nix.settings.trusted-users = [username];
+      nix.settings = {
+    # enable flakes globally
+    experimental-features = ["nix-command" "flakes"];
+
+    substituters = [
+      # cache mirror located in China
+      # status: https://mirror.sjtu.edu.cn/
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
+      # status: https://mirrors.ustc.edu.cn/status/
+      # "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://cache.nixos.org"
+      "https://hyprland.cachix.org"
+    ];
+  # Configure console keymap
+  console.keyMap = "uk";
+  #桌面默认使用wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+    builders-use-substitutes = true;
+
+  access-tokens =
+    "github.com=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";
+  };
+
   time.timeZone = "Asia/Shanghai";
 
   i18n = {
@@ -46,6 +74,24 @@
       pulse.enable = true;
     };
   };
+    # Services to start
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+    desktopManager.plasma6.enable = true;
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true; # 支持 Wayland 会话
+      theme = "breeze"; # Plasma 默认主题
+    };
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -87,5 +133,38 @@
       nerd-fonts.dejavu-sans-mono
       vista-fonts-chs
     ];
+  };
+   # Select internationalisation properties.
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+    extraConfig = ''
+      IdleAction=ignore
+      HandlePowerKey=ignore
+      HandleSuspendKey=ignore
+    '';
+  };
+
+  #open ssh
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+    openFirewall = false;
+  };
+
+  #virtualization开启docker支持
+  virtualisation.docker.enable = true;
+  users.extraGroups.vboxusers.members = [ "vitus" ];
+
+  security.rtkit.enable = true;
+  #使用dbus
+  services.dbus = {
+    implementation = "broker";
+    packages = [ pkgs.haskellPackages.dbus-app-launcher ];
   };
 }
