@@ -38,6 +38,9 @@
 
     cmake # 跨平台构建系统生成器。
     obsidian
+
+    #hyprland stuff
+    wlogout
   ];
 
   programs = {

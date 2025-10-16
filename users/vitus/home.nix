@@ -9,7 +9,7 @@
     ./../../home/rofi
     ./../../home/shell
     ./../../modules/home/programs/zsh.nix # 确保这个路径相对于 home.nix 是正确的
-    ./../../modules/home/programs/hyprland.nix
+    ./../../home/hyprland
 
   ];
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
