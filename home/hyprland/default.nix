@@ -6,18 +6,10 @@
     enable = true;
     systemdIntegration = true;
     extraConfig = ''
-
           # Monitor
           monitor=DP-1,2560x1440@60,0x0,1,transform,1
           monitor=DP-2,2560x1440@200,2160x0,1
 
-      # 为显示器分配工作区
-      workspace = 1, monitor:DP-1
-      workspace = 2, monitor:DP-1
-      workspace = 3, monitor:DP-1
-      workspace = 4, monitor:DP-2
-      workspace = 5, monitor:DP-2
-      workspace = 6, monitor:DP-2
           # Fix slow startup
           exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
@@ -26,8 +18,9 @@
 
           exec-once = hyprctl setcursor Bibata-Modern-Classic 24
           exec-once = dunst
+          enec-once = clash-verge
 
-          source = /home/enzo/.config/hypr/colors
+          source = /home/vitus/.config/hypr/colors
           exec = pkill waybar & sleep 0.5 && waybar
           exec-once = swww init & sleep 0.5 && exec wallpaper_random
           # exec-once = wallpaper_random
@@ -158,6 +151,28 @@
           bind = $mainMod, up, movefocus, u
           bind = $mainMod, down, movefocus, d
 
+        
+      # 为显示器分配工作区
+      workspace = 1, monitor:DP-1
+      workspace = 2, monitor:DP-1
+      workspace = 3, monitor:DP-1
+            workspace = 4, monitor:DP-1
+      workspace = 5, monitor:DP-1
+      workspace = 6, monitor:DP-1
+      workspace = 7, monitor:DP-1
+      workspace = 8, monitor:DP-1
+      workspace = 9, monitor:DP-1
+            workspace = 0, monitor:DP-1
+      workspace = 1, monitor:DP-2
+      workspace = 2, monitor:DP-2
+      workspace = 3, monitor:DP-2
+            workspace = 4, monitor:DP-2
+      workspace = 5, monitor:DP-2
+      workspace = 6, monitor:DP-2
+      workspace = 7, monitor:DP-2
+      workspace = 8, monitor:DP-2
+      workspace = 9, monitor:DP-2
+            workspace = 0, monitor:DP-2
           # Switch workspaces with mainMod + [0-9]
           bind = $mainMod, 1, workspace, 1
           bind = $mainMod, 2, workspace, 2
