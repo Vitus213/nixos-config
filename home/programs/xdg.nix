@@ -17,7 +17,6 @@ let
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
-
     "audio/*" = [ "mpv.desktop" ];
     "video/*" = [ "mpv.desktop" ];
     "image/*" = [ "imv.desktop" ];

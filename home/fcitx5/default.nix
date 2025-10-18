@@ -21,7 +21,7 @@
       fcitx5
       fcitx5-gtk
       fcitx5-configtool
-     # fcitx5-chinese-addons
+      # fcitx5-chinese-addons
     ];
   };
 }

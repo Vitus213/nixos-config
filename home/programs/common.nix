@@ -43,6 +43,9 @@
     wlogout
     swww
     grim
+    slurp
+    swappy
+    wl-clipboard
   ];
 
   programs = {
