@@ -38,10 +38,13 @@
     ];
 
   };
+                hardware.bluetooth.enable = true;
+            hardware.bluetooth.powerOnBoot = true;
+                       services.tailscale.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-
+    tailscale
     # 工具 (Tools)
     appimage-run # 运行 AppImage 格式应用程序的工具。
 

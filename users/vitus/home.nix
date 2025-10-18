@@ -1,5 +1,4 @@
 { username, inputs, config, pkgs, unstable, ... }: {
-
   # 导入公共 home-manager 模块
   imports = [
     ./../../home/core.nix
@@ -7,8 +6,8 @@
     ./../../home/programs
     ./../../home/rofi
     ./../../home/shell
-    ./../../home/hyprland
     ./../../home/themes
+    ./../../home/hyprland
 
   ];
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
@@ -54,7 +53,6 @@
   #     }];
   #   };
   # };
-
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -67,7 +65,6 @@
     enable = true;
     enableZshIntegration = true;
   };
-
   programs.vscode = {
     enable = true;
     package = unstable.vscode;
@@ -75,3 +72,4 @@
 
   services.kdeconnect.enable = true;
 }
+

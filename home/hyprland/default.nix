@@ -1,21 +1,27 @@
-{ inputs, config, pkgs, ... }: {
-  imports = [ ./waybar.nix ./dunst.nix ./hyprland-environment.nix ];
+{ hostname,inputs, config ,pkgs, ... }: 
+let 
+hostSpecificHyprlandConfig = 
+    if hostname == "Vitus5600" then
+      import ./../../home/hyprland/5600.nix
+    else if hostname == "Vitus8500" then
+      import ./../../home/hyprland/8500.nix
+    else
+      {};
+in
+{
+  imports = [ ./waybar.nix ./dunst.nix ./hyprland-environment.nix   hostSpecificHyprlandConfig];
 
   home.packages = with pkgs; [ waybar swww ];
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     extraConfig = ''
-          # Monitor
-          monitor=DP-1,2560x1440@60,0x0,1,transform,1
-          monitor=DP-2,2560x1440@200,2160x0,1
-
+            # 通用配置
           # Fix slow startup
           exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
           # Autostart
-
           exec-once = hyprctl setcursor Bibata-Modern-Classic 24
           exec-once = dunst
           enec-once = clash-verge
@@ -24,8 +30,6 @@
           exec = pkill waybar & sleep 0.5 && waybar
           exec-once = swww init & sleep 0.5 && exec wallpaper_random
           # exec-once = wallpaper_random
-
-          # Set en layout at startup
 
           # Input config
           input {
@@ -45,7 +49,6 @@
           }
 
           general {
-
               gaps_in = 5
               gaps_out = 20
               border_size = 2
@@ -56,7 +59,6 @@
           }
 
           decoration {
-
               rounding = 10
               blur = true
               blur_size = 3
@@ -71,9 +73,7 @@
 
           animations {
               enabled = yes
-
               bezier = ease,0.4,0.02,0.21,1
-
               animation = windows, 1, 3.5, ease, slide
               animation = windowsOut, 1, 3.5, ease, slide
               animation = border, 1, 6, default
@@ -94,11 +94,7 @@
               workspace_swipe = false
           }
 
-          # Example windowrule v1
-          # windowrule = float, ^(kitty)$
-          # Example windowrule v2
-          # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-
+          # 窗口规则
           windowrule=float,^(kitty)$
           windowrule=float,^(pavucontrol)$
           windowrule=center,^(kitty)$
@@ -107,16 +103,12 @@
           windowrule=size 934 525,^(mpv)$
           windowrule=float,^(mpv)$
           windowrule=center,^(mpv)$
-          #windowrule=pin,^(firefox)$
 
           $mainMod = SUPER
           bind = $mainMod, G, fullscreen,
-
-
-          #bind = $mainMod, RETURN, exec, cool-retro-term-zsh
           bind = $mainMod, RETURN, exec, kitty
           bind = $mainMod, B, exec, opera --no-sandbox
-          bind = $mainMod, F, exec, firefox 
+          bind = $mainMod, F, exec, firefox
           bind = $mainMod, Q, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, V, togglefloating,
@@ -151,28 +143,6 @@
           bind = $mainMod, up, movefocus, u
           bind = $mainMod, down, movefocus, d
 
-        
-      # 为显示器分配工作区
-      workspace = 1, monitor:DP-1
-      workspace = 2, monitor:DP-1
-      workspace = 3, monitor:DP-1
-            workspace = 4, monitor:DP-1
-      workspace = 5, monitor:DP-1
-      workspace = 6, monitor:DP-1
-      workspace = 7, monitor:DP-1
-      workspace = 8, monitor:DP-1
-      workspace = 9, monitor:DP-1
-            workspace = 0, monitor:DP-1
-      workspace = 1, monitor:DP-2
-      workspace = 2, monitor:DP-2
-      workspace = 3, monitor:DP-2
-            workspace = 4, monitor:DP-2
-      workspace = 5, monitor:DP-2
-      workspace = 6, monitor:DP-2
-      workspace = 7, monitor:DP-2
-      workspace = 8, monitor:DP-2
-      workspace = 9, monitor:DP-2
-            workspace = 0, monitor:DP-2
           # Switch workspaces with mainMod + [0-9]
           bind = $mainMod, 1, workspace, 1
           bind = $mainMod, 2, workspace, 2
@@ -205,6 +175,7 @@
           bindm = $mainMod, mouse:272, movewindow
           bindm = $mainMod, mouse:273, resizewindow
           bindm = ALT, mouse:272, resizewindow
+    
     '';
   };
 
