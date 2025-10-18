@@ -16,6 +16,13 @@
           ];
         };
       };
-    in with pkgs; [ fcitx5-rime fcitx5-configtool fcitx5-chinese-addons ];
+    in with pkgs; [
+      fcitx5-rime
+      fcitx5
+      fcitx5-gtk
+      fcitx5-configtool
+     # fcitx5-chinese-addons
+    ];
   };
 }
+

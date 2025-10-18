@@ -27,15 +27,18 @@
     };
 
     initContent = ''
-        alias ls="ls --color=auto"
-        alias la="ls -a"
-        alias ll="ls -l"
-         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-              # 正确设置环境变量的方式
-        export http_proxy="http://127.0.0.1:7897" # 注意：这里通常需要协议，如 http:// 或 socks5://
-        export https_proxy="http://127.0.0.1:7897" # HTTPS 代理也需要设置
-        export all_proxy="socks5://127.0.0.1:7897" # 通用代理，如果你的代理支持 SOCKS5
+      alias ls="ls --color=auto"
+      alias la="ls -a"
+      alias ll="ls -l"
+       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+            # 正确设置环境变量的方式
+      export http_proxy="http://127.0.0.1:7897" # 注意：这里通常需要协议，如 http:// 或 socks5://
+      export https_proxy="http://127.0.0.1:7897" # HTTPS 代理也需要设置
+      export all_proxy="socks5://127.0.0.1:7897" # 通用代理，如果你的代理支持 SOCKS5
       export no_proxy="localhost,127.0.0.1,::1"
+      export GTK_IM_MODULE=fcitx
+      export QT_IM_MODULE=fcitx
+      export XMODIFIERS="@im=fcitx"
     '';
   };
 

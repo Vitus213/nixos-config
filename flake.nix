@@ -39,7 +39,7 @@
     in {
       nixosConfigurations.Vitus5600 = let
         username = "vitus";
-        hostname="Vitus5600";
+        hostname = "Vitus5600";
         specialArgs = {
           inherit system;
           inherit inputs;
@@ -80,7 +80,7 @@
 
       nixosConfigurations.Vitus8500 = let
         username = "vitus";
-        hostname="Vitus8500";
+        hostname = "Vitus8500";
         specialArgs = {
           inherit system;
           inherit inputs;

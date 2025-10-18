@@ -38,9 +38,9 @@
     ];
 
   };
-                hardware.bluetooth.enable = true;
-            hardware.bluetooth.powerOnBoot = true;
-                       services.tailscale.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.tailscale.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
