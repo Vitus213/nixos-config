@@ -14,24 +14,23 @@ in
   home.packages = with pkgs; [ waybar swww ];
   wayland.windowManager.hyprland = {
     enable = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     extraConfig = ''
-            # 通用配置
+            # 通用配置这两行是为了修复 Wayland 应用程序启动缓慢的问题，确保 systemd 正确导入和更新环境变量。
           # Fix slow startup
           exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
           # Autostart
-          exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+          exec-once = hyprctl setcursor Bibata-Modern-Classic 24#光标主题
           exec-once = dunst
-          enec-once = clash-verge
-
-          source = /home/vitus/.config/hypr/colors
+          exec-once = clash-verge
           exec = pkill waybar & sleep 0.5 && waybar
           exec-once = swww init & sleep 0.5 && exec wallpaper_random
-          # exec-once = wallpaper_random
-
-          # Input config
+          exec-once = wlogout
+          exec-once = swww.daemon
+          source = /home/vitus/.config/hypr/colors
+          # Input configgr
           input {
               kb_layout = us
               kb_variant =
@@ -44,7 +43,6 @@ in
               touchpad {
                   natural_scroll = false
               }
-
               sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
           }
 
@@ -54,7 +52,6 @@ in
               border_size = 2
               col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
               col.inactive_border = rgba(595959aa)
-
               layout = dwindle
           }
 
@@ -65,7 +62,7 @@ in
               blur_passes = 1
               blur_new_optimizations = true
 
-              drop_shadow = true
+              drop_shadow = true 
               shadow_range = 4
               shadow_render_power = 3
               col.shadow = rgba(1a1a1aee)
@@ -96,8 +93,8 @@ in
 
           # 窗口规则
           windowrule=float,^(kitty)$
-          windowrule=float,^(pavucontrol)$
           windowrule=center,^(kitty)$
+          windowrule=float,^(pavucontrol)$
           windowrule=float,^(blueman-manager)$
           windowrule=size 600 500,^(kitty)$
           windowrule=size 934 525,^(mpv)$
@@ -105,33 +102,31 @@ in
           windowrule=center,^(mpv)$
 
           $mainMod = SUPER
+          #启动应用
           bind = $mainMod, G, fullscreen,
           bind = $mainMod, RETURN, exec, kitty
-          bind = $mainMod, B, exec, opera --no-sandbox
           bind = $mainMod, F, exec, firefox
-          bind = $mainMod, Q, killactive,
+          bind = $mainMod, V, exec, code
+          bind = $mainMod, R, exec, rofi -show run
+          bind = $mainMod, Delete, exec, wlogout
+          bind = $mainMod, L,exec,hyprlock
           bind = $mainMod, M, exit,
-          bind = $mainMod, V, togglefloating,
-          bind = $mainMod, w, exec, wofi --show drun
-          bind = $mainMod, R, exec, rofi
+
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
-
-          # Switch Keyboard Layouts
-          bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
 
           bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
           bind = SHIFT, Print, exec, grim -g "$(slurp)"
 
-          # Functional keybinds
-          bind =,XF86AudioMicMute,exec,pamixer --default-source -t
-          bind =,XF86MonBrightnessDown,exec,light -U 20
-          bind =,XF86MonBrightnessUp,exec,light -A 20
-          bind =,XF86AudioMute,exec,pamixer -t
-          bind =,XF86AudioLowerVolume,exec,pamixer -d 10
-          bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
-          bind =,XF86AudioPlay,exec,playerctl play-pause
-          bind =,XF86AudioPause,exec,playerctl play-pause
+          # # Functional keybinds 
+          # bind =,XF86AudioMicMute,exec,pamixer --default-source -t
+          # bind =,XF86MonBrightnessDown,exec,light -U 20
+          # bind =,XF86MonBrightnessUp,exec,light -A 20
+          # bind =,XF86AudioMute,exec,pamixer -t
+          # bind =,XF86AudioLowerVolume,exec,pamixer -d 10
+          # bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
+          # bind =,XF86AudioPlay,exec,playerctl play-pause
+          # bind =,XF86AudioPause,exec,playerctl play-pause
 
           # to switch between windows in a floating workspace
           bind = SUPER,Tab,cyclenext,

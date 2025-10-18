@@ -41,6 +41,8 @@
 
     #hyprland stuff
     wlogout
+    swww
+    grim
   ];
 
   programs = {
