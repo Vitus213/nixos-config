@@ -3,7 +3,7 @@
   wayland.windowManager.hyprland.extraConfig = ''
     # Monitor for Host 1
     monitor=DP-1,2560x1440@60,0x0,1,transform,1
-    monitor=DP-2,2560x1440@200,2160x0,1
+    monitor=DP-2,2560x1440@200,1440x230,1,transform,0
 
     # 为显示器分配工作区 for Host 1
     workspace = 1, monitor:DP-1
