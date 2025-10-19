@@ -28,8 +28,7 @@ in {
              exec-once = hyprctl setcursor Bibata-Modern-Classic 24#光标主题
              exec-once = dunst
              exec-once = clash-verge
-             exec =   waybar
-             exec-once = wlogout
+             exec = pkill waybar & sleep 0.5 && waybar
              exec-once = swww-daemon
              exec-once =  fcitx5 --replace -d
              # Input configgr
@@ -110,7 +109,7 @@ in {
              bind = $mainMod, F, exec, firefox
              bind = $mainMod, V, exec, code
              bind = $mainMod, Delete, exec, wlogout
-             bind = $mainMod, L,exec,hyprlock,
+             bind = $mainMod, L,exec,hyprlock
              bind = $mainMod, space, togglefloating, #float window
              bind = $mainMod, N, nmtui,
              bind = ALT, SPACE, exec, rofi -show drun
