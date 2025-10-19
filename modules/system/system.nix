@@ -87,11 +87,14 @@
 
     # Enable CUPS to print documents.
     printing.enable = true;
-    displayManager.sddm = {
+    displayManager.ly = {
       enable = true;
-      wayland.enable = true; # 支持 Wayland 会话
-      theme = "breeze"; # Plasma 默认主题
+      settings = {
+        default_user = "vitus";
+        default_session = "hyprland";
+      };
     };
+
   };
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [

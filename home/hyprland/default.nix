@@ -33,7 +33,6 @@ in {
              exec-once = wlogout
              exec-once = swww.daemon
              exec-once =  fcitx5 --replace -d
-             #source = /home/vitus/.config/hypr/colors
              # Input configgr
              input {
                  kb_layout = us
@@ -111,13 +110,14 @@ in {
              bind = $mainMod, RETURN, exec, kitty
              bind = $mainMod, F, exec, firefox
              bind = $mainMod, V, exec, code
-             bind = $mainMod, tab exec, rofi -show drun
              bind = $mainMod, Delete, exec, wlogout
-             bind = $mainMod, L,exec,hyprlock
+             bind = $mainMod, L,exec,hyprlock,
              bind = $mainMod, space, togglefloating, #float window
-                #截屏
-            bind = SHIFT,Print,exec,grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png  
-            bind = , Print, exec, grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy
+             bind = $mainMod, N, nmtui,
+             bind = ALT, SPACE, exec, rofi -show drun
+            #截屏
+             bind = SHIFT,Print,exec,grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png  
+             bind = , Print, exec, grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy
              bind = $mainMod, Print, exec, grim -g "$(slurp)" - | swappy -f ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png -o | wl-copy
              bind = $mainMod ,q,killactive
 
@@ -173,26 +173,4 @@ in {
 
     '';
   };
-
-  home.file.".config/hypr/colors".text = ''
-    $background = rgba(1d192bee)
-    $foreground = rgba(c3dde7ee)
-
-    $color0 = rgba(1d192bee)
-    $color1 = rgba(465EA7ee)
-    $color2 = rgba(5A89B6ee)
-    $color3 = rgba(6296CAee)[]
-    $color4 = rgba(73B3D4ee)
-    $color5 = rgba(7BC7DDee)
-    $color6 = rgba(9CB4E3ee)
-    $color7 = rgba(c3dde7ee)
-    $color8 = rgba(889aa1ee)
-    $color9 = rgba(465EA7ee)
-    $color10 = rgba(5A89B6ee)
-    $color11 = rgba(6296CAee)
-    $color12 = rgba(73B3D4ee)
-    $color13 = rgba(7BC7DDee)
-    $color14 = rgba(9CB4E3ee)
-    $color15 = rgba(c3dde7ee)
-  '';
 }
