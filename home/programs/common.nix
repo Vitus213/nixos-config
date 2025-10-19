@@ -46,6 +46,7 @@
     slurp
     swappy
     wl-clipboard
+    pamixer
   ];
 
   programs = {
