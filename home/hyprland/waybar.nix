@@ -153,7 +153,7 @@
       ];
       "custom/launcher" = {
         "format" = " ";
-        "on-click" = "pkill rofi || rofi2";
+        "on-click" = "thunar";
         "on-click-middle" = "exec default_wall";
         "on-click-right" = "exec wallpaper_random";
         "tooltip" = false;
@@ -209,11 +209,11 @@
         "format-wifi" = "󰖩 {essid}";
         "interval" = 1;
         "tooltip" = false;
+        "on-click" = "kitty -e nmtui";
       };
       "custom/powermenu" = {
         "format" = "";
-        "on-click" =
-          "pkill rofi || ~/.config/rofi/powermenu/type-3/powermenu.sh";
+        "on-click" ="wlogout";
         "tooltip" = false;
       };
       "tray" = {

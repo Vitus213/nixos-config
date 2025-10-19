@@ -28,10 +28,9 @@ in {
              exec-once = hyprctl setcursor Bibata-Modern-Classic 24#光标主题
              exec-once = dunst
              exec-once = clash-verge
-             exec = pkill waybar & sleep 0.5 && waybar
-             exec-once = swww init & sleep 0.5 && exec wallpaper_random
+             exec =   waybar
              exec-once = wlogout
-             exec-once = swww.daemon
+             exec-once = swww-daemon
              exec-once =  fcitx5 --replace -d
              # Input configgr
              input {

@@ -47,6 +47,13 @@
     swappy
     wl-clipboard
     pamixer
+    mpc
+    mpd
+    ncmpcpp
+    cava 
+    calendar-cli
+    xfce.thunar
+    
   ];
 
   programs = {
