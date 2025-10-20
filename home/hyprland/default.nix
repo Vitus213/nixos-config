@@ -113,14 +113,11 @@ in {
              bind = $mainMod, space, togglefloating, #float window
              bind = $mainMod, N, nmtui,
              bind = ALT, SPACE, exec, rofi -show drun
-            #截屏
+             #截屏
              bind = SHIFT,Print,exec,grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png  
              bind = , Print, exec, grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy
              bind = $mainMod, Print, exec, grim -g "$(slurp)" - | swappy -f ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png -o | wl-copy
-             bind = $mainMod ,q,killactive
-
-
-
+             bind = Ctrl ,w,killactive
              bind = $mainMod, P, pseudo, # dwindle
              bind = $mainMod, J, togglesplit, # dwindle切换布局
 
