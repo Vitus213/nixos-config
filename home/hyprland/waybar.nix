@@ -213,7 +213,7 @@
       };
       "custom/powermenu" = {
         "format" = "";
-        "on-click" ="wlogout";
+        "on-click" = "wlogout";
         "tooltip" = false;
       };
       "tray" = {
