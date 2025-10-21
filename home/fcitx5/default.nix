@@ -1,28 +1,47 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: # 模块的入口，config 是当前配置，pkgs 是 nixpkgs 库
 
+# let
+#   # 1. 定义你的自定义 rime-data derivation
+#   myRimeDataVitus = pkgs.stdenv.mkDerivation {
+#     pname = "rime-data-vitus"; # 包的名称，用于显示和标识
+#     version = "1.0";          # 包的版本，也是标识
+#     src = pkgs.lib.cleanSource ./rime-data-vitus; # 源文件！
+
+#     # 定义构建步骤
+#     installPhase = ''
+#       mkdir -p $out/share/rime-data
+#       cp -r $src/. $out/share/rime-data/
+#     '';
+#   };
+
+#   # 2. 覆写 fcitx5-rime 包以使用你的自定义数据
+#   fcitx5RimeCustom = pkgs.fcitx5-rime.overrideAttrs (oldAttrs: {
+#     # 覆写 fcitx5-rime 包的 rimeDataPkgs 属性
+#     rimeDataPkgs = [ myRimeDataVitus ];
+#   });
+
+# in
+# {
+#   i18n.inputMethod = {
+#     enable = true;
+#     type = "fcitx5";
+#     fcitx5.addons = with pkgs; [
+#       fcitx5RimeCustom # <-- 在这里使用你修改后的 fcitx5-rime 包
+#       fcitx5
+#       fcitx5-gtk
+#       fcitx5-configtool
+#     ];
+#   };
+# }
 {
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = let
-      # 为了不使用默认的 rime-data，改用我自定义的小鹤音形数据，这里需要 override
-      # 参考 https://github.com/NixOS/nixpkgs/blob/e4246ae1e7f78b7087dce9c9da10d28d3725025f/pkgs/tools/inputmethods/fcitx5/fcitx5-rime.nix
-      config.packageOverrides = pkgs: {
-        fcitx5-rime = pkgs.fcitx5-rime.override {
-          rimeDataPkgs = [
-            # 小鹤音形配置，配置来自 flypy.com 官方网盘的鼠须管配置压缩包「小鹤音形“鼠须管”for macOS.zip」
-            # 我仅修改了 default.yaml 文件，将其中的半角括号改为了直角括号「 与 」。
-            ./rime-data-vitus
-          ];
-        };
-      };
-    in with pkgs; [
-      fcitx5-rime
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime # <-- 在这里使用你修改后的 fcitx5-rime 包
       fcitx5
       fcitx5-gtk
       fcitx5-configtool
-      # fcitx5-chinese-addons
     ];
   };
 }
-

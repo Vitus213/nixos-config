@@ -30,6 +30,7 @@ in {
              exec-once = clash-verge
              exec = pkill waybar & sleep 0.5 && waybar
              exec-once = swww-daemon
+             exec-once = swww img ./../wallpaper/1.jpg
              exec-once =  fcitx5 --replace -d
              # Input configgr
              input {
@@ -117,7 +118,7 @@ in {
              bind = SHIFT,Print,exec,grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png  
              bind = , Print, exec, grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy
              bind = $mainMod, Print, exec, grim -g "$(slurp)" - | swappy -f ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png -o | wl-copy
-             bind = Ctrl ,w,killactive
+             bind = $CTRL ,Q,killactive
              bind = $mainMod, P, pseudo, # dwindle
              bind = $mainMod, J, togglesplit, # dwindle切换布局
 
@@ -127,13 +128,13 @@ in {
              bind =,XF86AudioMute,exec,pamixer -t
              bind =,XF86AudioLowerVolume,exec,pamixer -d 10
              bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
-            #焦点改变
+             #焦点改变
              # Move focus with mainMod + arrow keys
              bind = $mainMod, left, movefocus, l
              bind = $mainMod, right, movefocus, r
              bind = $mainMod, up, movefocus, u
              bind = $mainMod, down, movefocus, d
-      #工作区设置
+             #工作区设置
              # Switch workspaces with mainMod + [0-9]
              bind = $mainMod, 1, workspace, 1
              bind = $mainMod, 2, workspace, 2
@@ -159,8 +160,8 @@ in {
              bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
              # Scroll through existing workspaces with mainMod + scroll
-             bind = $mainMod, mouse_down, workspace, e+1
-             bind = $mainMod, mouse_up, workspace, e-1
+             bind = $mainMod, mouse_down, workspace, e-1
+             bind = $mainMod, mouse_up, workspace, e+1
 
              # 鼠标
              bindm = $mainMod, mouse:272, movewindow
