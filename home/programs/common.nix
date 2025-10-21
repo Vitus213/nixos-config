@@ -50,10 +50,10 @@
     mpc
     mpd
     ncmpcpp
-    cava 
+    cava
     calendar-cli
     xfce.thunar
-    
+
   ];
 
   programs = {
