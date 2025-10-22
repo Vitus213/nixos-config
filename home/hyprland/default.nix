@@ -6,8 +6,8 @@ let
     import ./../../home/hyprland/8500.nix
   else
     { };
-  wallpaperpath= "${./../wallpaper}";
-  
+  wallpaperpath = "${./../wallpaper}";
+
 in {
   imports = [
     ./waybar.nix
@@ -28,12 +28,13 @@ in {
       exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
       # Autostart
+      exec-once = hyprlock
       exec-once = hyprctl setcursor Bibata-Modern-Classic 24#光标主题
       exec-once = dunst
       exec-once = clash-verge
       exec = pkill waybar & sleep 0.5 && waybar
       exec-once = swww-daemon
-      exec-once = swww img ${wallpaperpath}/1.jpg --transition-type fade --transition-duration 3
+      exec-once = swww img ${wallpaperpath}/2.jpg --transition-type fade --transition-duration 3
       exec-once =  fcitx5 --replace -d
       # Input configgr
       input {
