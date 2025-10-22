@@ -10,8 +10,8 @@
     # unlock_cmd = notify-send "unlock!"      # 解锁命令，通常不需要手动设置  # 系统进入睡眠前执行的命令
     before_sleep_cmd = "hyprlock"; # 系统进入睡眠前执行的命令
     after_sleep_cmd = "hyprctl dispatch dpms on"; # 系统从睡眠唤醒后执行的命令
-    ignore_dbus_inhibit = true;
-    ignore_systemd_inhibit = true;
+    ignore_dbus_inhibit = false;
+    ignore_systemd_inhibit = false;
 };
 
 listener = [
