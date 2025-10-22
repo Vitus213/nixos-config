@@ -139,9 +139,14 @@
     settings = [{
       "layer" = "top";
       "position" = "top";
-      modules-left =
-        [ "custom/launcher" "temperature" "mpd" "custom/cava-internal" ];
-      modules-center = [ "clock" ];
+      modules-left = [
+        "custom/launcher"
+        "temperature"
+        "mpd"
+        "custom/cava-internal"
+        "hyprland/workspaces"
+      ];
+      modules-center = [ "clock" "wlr/taskbar" ];
       modules-right = [
         "pulseaudio"
         "backlight"
@@ -217,8 +222,33 @@
         "tooltip" = false;
       };
       "tray" = {
-        "icon-size" = 15;
-        "spacing" = 5;
+        "icon-size" = 20;
+        "spacing" = 10;
+      };
+      "hyprland/workspaces" = {
+        "format" = "{name} = {icon}";
+        "format-icons" = {
+          "1" = "";
+          "2" = "";
+          "3" = "";
+          "4" = "";
+          "5" = "";
+          "6" = "";
+          "7" = "";
+          "8" = "";
+          "9" = "";
+          "10" = "";
+          "active" = "";
+          "default" = "";
+        };
+      };
+      "wlr/taskbar" = {
+        "format" = "{icon}";
+        "tooltip" = true;
+        "tooltip-format" = "{title}";
+        "on-click" = "activate";
+        "on-click-middle" = "close";
+        "active-first" = true;
       };
     }];
   };
