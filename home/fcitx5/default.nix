@@ -37,11 +37,14 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime # <-- 在这里使用你修改后的 fcitx5-rime 包
-      fcitx5
-      fcitx5-gtk
-      fcitx5-configtool
-    ];
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        fcitx5-rime # <-- 在这里使用你修改后的 fcitx5-rime 包
+        fcitx5
+        fcitx5-gtk
+        fcitx5-configtool
+      ];
+    };
   };
 }
