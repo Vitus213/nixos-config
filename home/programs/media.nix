@@ -9,6 +9,7 @@
     pavucontrol
     playerctl
     pulsemixer
+    wemeet
     # images
     imv
   ];
