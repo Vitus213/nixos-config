@@ -119,7 +119,7 @@
     # Ascii delimiters. In ascii format each bar and frame is separated by a delimiters.
     # Use decimal value in ascii table (i.e. 59 = ';' and 10 = '\n' (line feed)).
     ; bar_delimiter = 59
-    ; frame_delimiter = 10
+    ; frame_delimiter = 10     
 
     # sdl window size and position. -1,-1 is centered.
     ; sdl_width = 1000

@@ -28,6 +28,7 @@ in {
     ./dunst # 导入 Dunst (通知守护进程) 的配置。
     ./hyprland-environment.nix # 导入 Hyprland 相关的环境变量设置。
     ./hyprlock # 导入 hyprlock (锁屏程序) 的配置。
+    ./hypridle
     hostSpecificHyprlandConfig # 导入上面 let 块中定义的、特定于主机的配置。
   ];
 
@@ -66,6 +67,7 @@ in {
       exec-once = swww-daemon # 启动 swww 壁纸守护进程。
       exec-once = swww img ${wallpaperpath}/2.jpg --transition-type fade --transition-duration 3 # 设置壁纸，并指定渐变过渡效果。
       exec-once = fcitx5 --replace -d # 启动 fcitx5 输入法框架。
+      exec-once = hypridle # 启动 hypridle 屏幕锁定和节能管理服务。
 
       #=================================================================#
       # 输入设备 (Input)                                                #
