@@ -55,6 +55,8 @@
     xfce.thunar
     pavucontrol
     blueman
+    #给gui的polkit认证代理
+    hyprpolkitagent
   ];
 
   programs = {

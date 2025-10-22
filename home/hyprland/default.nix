@@ -28,7 +28,7 @@ in {
       exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
       # Autostart
-      exec-once = hyprlock
+      exec-once = systemctl --user start hyprpolkitagent
       exec-once = hyprctl setcursor Bibata-Modern-Classic 24#光标主题
       exec-once = dunst
       exec-once = clash-verge
