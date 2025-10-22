@@ -110,6 +110,7 @@
       dejavu_fonts
       fira-code
       fira-code-symbols
+      fira-code-nerdfont
       font-awesome
       hackgen-nf-font
       ibm-plex
@@ -137,6 +138,16 @@
       nerd-fonts.dejavu-sans-mono
       vista-fonts-chs
     ];
+    fontconfig = {
+    antialias = true;
+    hinting.enable = true;
+    defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+      monospace = [ "FiraCode Nerd Font" ];
+      sansSerif = [ "Noto Sans CJK SC" ];
+      serif = [ "Noto Serif CJK SC" ];
+    };
+  };
   };
   # Select internationalisation properties.
   services.logind = {
