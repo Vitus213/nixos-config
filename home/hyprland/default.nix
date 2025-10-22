@@ -6,11 +6,14 @@ let
     import ./../../home/hyprland/8500.nix
   else
     { };
+  wallpaperpath= "${./../wallpaper}";
+  
 in {
   imports = [
     ./waybar.nix
     ./dunst.nix
     ./hyprland-environment.nix
+    ./hyprlock
     hostSpecificHyprlandConfig
   ];
 
@@ -30,7 +33,7 @@ in {
       exec-once = clash-verge
       exec = pkill waybar & sleep 0.5 && waybar
       exec-once = swww-daemon
-      exec-once = swww img ./../wallpaper/1.jpg
+      exec-once = swww img ${wallpaperpath}/1.jpg --transition-type fade --transition-duration 3
       exec-once =  fcitx5 --replace -d
       # Input configgr
       input {

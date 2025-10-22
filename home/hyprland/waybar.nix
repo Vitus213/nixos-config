@@ -74,7 +74,7 @@
                padding-right: 6px;
                color: #7ebae4;
              }
-       #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
+       #mode, #clock, #memory,#cpu,#mpd, #custom-wall,  #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
                padding-left: 10px;
                padding-right: 10px;
              }
@@ -98,9 +98,6 @@
        #custom-wall {
                color: #33ccff;
           }
-       #temperature {
-               color: rgb(150, 205, 251);
-             }
        #backlight {
                color: rgb(248, 189, 150);
              }
@@ -141,12 +138,11 @@
       "position" = "top";
       modules-left = [
         "custom/launcher"
-        "temperature"
         "mpd"
         "custom/cava-internal"
         "hyprland/workspaces"
       ];
-      modules-center = [ "clock" "wlr/taskbar" ];
+      modules-center = [ "wlr/taskbar" ];
       modules-right = [
         "pulseaudio"
         "backlight"
@@ -155,6 +151,7 @@
         "network"
         "custom/powermenu"
         "tray"
+        "clock"
       ];
       "custom/launcher" = {
         "format" = " ";
@@ -173,6 +170,7 @@
         "format-muted" = "󰖁 Muted";
         "format-icons" = { "default" = [ "" "" "" ]; };
         "on-click" = "pamixer -t";
+        "on-click-middle" = "pavucontrol";
         "tooltip" = false;
       };
       "clock" = {
@@ -208,8 +206,8 @@
           "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
       };
       "network" = {
-        "format-disconnected" = "󰯡 Disconnected";
-        "format-ethernet" = "󰒢 Connected!";
+        "format-disconnected" = "󰯡 ";
+        "format-ethernet" = "󰒢 ";
         "format-linked" = "󰖪 {essid} (No IP)";
         "format-wifi" = "󰖩 {essid}";
         "interval" = 1;

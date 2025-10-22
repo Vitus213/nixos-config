@@ -53,7 +53,8 @@
     cava
     calendar-cli
     xfce.thunar
-
+    pavucontrol
+    blueman
   ];
 
   programs = {
