@@ -5,7 +5,7 @@
       homeMode = "755";
       isNormalUser = true;
       description = "Vitus213";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
       # define user packages here
       packages = with pkgs; [ ];
       openssh.authorizedKeys.keys = [ "~/.ssh/authorized_keys" ];
