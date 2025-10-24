@@ -75,6 +75,7 @@
             };
           })
           vscode-server.nixosModules.default
+          ({ config, pkgs, ... }: { services.vscode-server.enable = true; })
         ];
       };
 
@@ -115,6 +116,7 @@
             };
           })
           vscode-server.nixosModules.default
+          ({ config, pkgs, ... }: { services.vscode-server.enable = true; })
         ];
       };
     };

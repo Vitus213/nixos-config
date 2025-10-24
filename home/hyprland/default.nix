@@ -61,6 +61,7 @@ in {
       exec-once = hyprctl setcursor Bibata-Modern-Classic 24 # 设置光标主题和大小。
       exec-once = dunst # 启动 dunst 通知守护进程。
       exec-once = clash-verge # 启动 Clash Verge 代理客户端。
+      exec-once = aw-qt
       # 'exec' 命令每次重载配置时都会执行。
       # 这是一个重启 waybar 的技巧：先杀死所有 waybar 进程，暂停0.5秒确保完全退出，然后再启动新的 waybar 实例。
       exec = pkill waybar & sleep 0.5 && waybar
