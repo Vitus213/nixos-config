@@ -8,6 +8,7 @@
     ./../../home/shell
     ./../../home/themes
     ./../../home/hyprland
+    ./../../home/linux/gui/base
 
   ];
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
@@ -64,10 +65,6 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-  };
-  programs.vscode = {
-    enable = true;
-    package = unstable.vscode;
   };
 
   services.kdeconnect.enable = true;
