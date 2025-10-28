@@ -35,7 +35,7 @@
     rustup # Rust 工具链安装程序。
     llvmPackages_latest.libcxxClang # Clang 的 C++ 标准库。
     llvmPackages_latest.clang-tools # Clang 相关的开发工具 (如 linter, formatter)。
-
+    openjdk8-bootstrap
     cmake # 跨平台构建系统生成器。
     obsidian
 
@@ -57,6 +57,13 @@
     #给gui的polkit认证代理
     hyprpolkitagent
     libnotify
+    libsForQt5.qt5.qtwayland
+    kdePackages.qtwayland
+    hyprshot
+    hyprpicker
+    hyprcursor
+    xwayland
+    pyprland
   ];
 
   programs = {
