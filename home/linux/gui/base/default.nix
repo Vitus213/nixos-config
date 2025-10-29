@@ -2,4 +2,5 @@
 # {
 #   imports = mylib.scanPaths ./.;
 # }
-{ imports = [ ./wayland-apps.nix ./xdg.nix ]; }
+{
+  imports = [  ./wayland-apps.nix ./xdg.nix ./desktop ];

@@ -7,10 +7,12 @@
     ./../../home/rofi
     ./../../home/shell
     ./../../home/themes
-    ./../../home/hyprland
+    #./../../home/hyprland
     ./../../home/linux/gui/base
+    ./../../home/linux/gui/hyprland
 
   ];
+  modules.desktop.hyprland.enable = true;
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {

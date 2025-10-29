@@ -25,9 +25,18 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # anyrun - a wayland launcher
+    anyrun = {
+      url = "github:/anyrun-org/anyrun/v25.9.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server
-    , rust-overlay, ... }@inputs:
+    , rust-overlay, anyrun, catppuccin, ... }@inputs:
     let
       system = "x86_64-linux";
       overlays = [ (import rust-overlay) ];
