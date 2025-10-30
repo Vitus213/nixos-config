@@ -24,28 +24,19 @@ in {
   # --- 模块导入 ---
   # 导入其他 Nix 配置文件。这是组织和模块化配置的主要方式。
   imports = [
-    ./waybar # 导入 Waybar (状态栏) 的配置。
     ./dunst # 导入 Dunst (通知守护进程) 的配置。
     ./hyprland-environment.nix # 导入 Hyprland 相关的环境变量设置。
     ./hyprlock # 导入 hyprlock (锁屏程序) 的配置。
     ./hypridle
     hostSpecificHyprlandConfig # 导入上面 let 块中定义的、特定于主机的配置。
   ];
-  # xdg.configFile=
-  #   let mkSymlink =config.lib.file.mkOutOfStoreSymlink;
-  #   confPath ="${config.home.homeDirectory}/nixos-config/home/hyprland/conf";
-  #   in {
-  #     "waybar".source =mkSymlink "${confPath}/waybar";
-  #   };
-  # home.file=
-  # let mkSymlink =config.lib.file.mkOutOfStoreSymlink;
-  # confPath ="${config.home.homeDirectory}/nixos-config/home/hyprland/conf";
-  # in {
-  #   ".config/waybar/".source = mkSymlink "${confPath}/waybar";
-  # };
+  xdg.configFile = let
+    mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+    confPath = "${config.home.homeDirectory}/nixos-config/home/hyprland/conf";
+  in { "waybar".source = mkSymlink "${confPath}/waybar"; };
   # --- 安装软件包 ---
   # home.packages 用于为用户安装指定的软件包。
-  home.packages = with pkgs; [    
+  home.packages = with pkgs; [
     swww # 高效的 Wayland 壁纸程序
     #hyprland stuff
     wlogout
@@ -73,6 +64,10 @@ in {
     xwayland
     pyprland
   ];
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+  };
   # --- Hyprland 窗口管理器配置 ---
   wayland.windowManager.hyprland = {
     # 启用 Hyprland 窗口管理器。
@@ -97,7 +92,7 @@ in {
       exec-once = clash-verge & # 启动 Clash Verge 代理客户端。
       exec-once = aw-qt
       # 'exec' 命令每次重载配置时都会执行。
-      # # 这是一个重启 waybar 的技巧：先杀死所有 waybar 进程，暂停0.5秒确保完全退出，然后再启动新的 waybar 实例。
+      #这是一个重启 waybar 的技巧：先杀死所有 waybar 进程，暂停0.5秒确保完全退出，然后再启动新的 waybar 实例。
       exec = pkill waybar & sleep 0.5 && waybar
       exec-once = swww-daemon # 启动 swww 壁纸守护进程。
       exec-once = swww img ${wallpaperpath}/2.jpg --transition-type fade --transition-duration 3 # 设置壁纸，并指定渐变过渡效果。
