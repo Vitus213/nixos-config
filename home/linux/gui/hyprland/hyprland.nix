@@ -2,11 +2,13 @@
 let package = pkgs.hyprland;
 in {
   xdg.configFile = let
+    repoConf = ./conf;
     mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-    confPath =
-      "${config.home.homeDirectory}/nix-config/home/linux/gui/hyprland/conf";
-  in { "hypr/configs".source = mkSymlink confPath; };
+  in { "hypr/configs".source = mkSymlink repoConf; };
 
+  # xdg.configFile ={
+  #   "hypr/configs".source = config.lib.file.mkOutOfStoreSymlink repoConf;
+  # };
   # NOTE:
   # We have to enable hyprland/i3's systemd user service in home-manager,
   # so that gammastep/wallpaper-switcher's user service can be start correctly!

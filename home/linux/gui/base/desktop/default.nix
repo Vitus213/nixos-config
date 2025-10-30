@@ -1,5 +1,5 @@
 { config, pkgs, catppuccin, ... }: {
-  imports = [ ./anyrun.nix ./nvidia.nix ];
+  imports = [ ./anyrun.nix ./nvidia.nix ./hyprlock ];
 
   # wayland related
   home.sessionVariables = {
@@ -32,15 +32,13 @@
 
   xdg.configFile = let
     mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-    confPath =
-      "${config.home.homeDirectory}/nix-config/home/linux/gui/base/desktop/conf";
+    confPath = ./conf;
   in {
     "mako".source = mkSymlink "${confPath}/mako";
     "waybar".source = mkSymlink "${confPath}/waybar";
     "wlogout".source = mkSymlink "${confPath}/wlogout";
     "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
   };
-
   # status bar
   programs.waybar = {
     enable = true;
@@ -61,5 +59,5 @@
 
   # notification daemon, the same as dunst
   services.mako.enable = true;
-#   catppuccin.mako.enable = false;
+  #   catppuccin.mako.enable = false;
 }

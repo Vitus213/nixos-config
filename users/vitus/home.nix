@@ -4,10 +4,7 @@
     ./../../home/core.nix
     ./../../home/fcitx5
     ./../../home/programs
-    ./../../home/rofi
     ./../../home/shell
-    ./../../home/themes
-    #./../../home/hyprland
     ./../../home/linux/gui/base
     ./../../home/linux/gui/hyprland
 

@@ -1,3 +1,1 @@
-{
-  imports = [  ./wayland-apps.nix ./xdg.nix ./desktop ];
-}
+{ imports = [ ./wayland-apps.nix ./xdg.nix ./desktop ]; }

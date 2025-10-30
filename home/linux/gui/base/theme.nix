@@ -9,9 +9,7 @@
     flavor = "mocha";
     # one of "blue", "flamingo", "green", "lavender", "maroon", "mauve", "peach", "pink", "red", "rosewater", "sapphire", "sky", "teal", "yellow"
     accent = "pink";
-    delta={
-      enable = true;
-    };
-  
+    delta = { enable = true; };
+
   };
 }
