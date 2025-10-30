@@ -1,18 +1,16 @@
-{
-  pkgs,
-  ...
-}:
-{
-  home.packages = with pkgs; [
-    # firefox-wayland
-    # nixpkgs.firefox
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs;
+    [
+      # firefox-wayland
+      # nixpkgs.firefox
+    ];
 
   programs = {
     # source code: https://github.com/nix-community/home-manager/blob/master/modules/programs/chromium.nix
     google-chrome = {
       enable = true;
-      package = if pkgs.stdenv.isAarch64 then pkgs.chromium else pkgs.google-chrome;
+      package =
+        if pkgs.stdenv.isAarch64 then pkgs.chromium else pkgs.google-chrome;
 
       # https://wiki.archlinux.org/title/Chromium#Native_Wayland_support
       commandLineArgs = [

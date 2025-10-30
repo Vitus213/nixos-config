@@ -39,31 +39,6 @@
     cmake # 跨平台构建系统生成器。
     obsidian
 
-    #hyprland stuff
-    wlogout
-    swww
-    grim
-    slurp
-    swappy
-    wl-clipboard
-    pamixer
-    mpc
-    mpd
-    ncmpcpp
-    cava
-    calendar-cli
-    xfce.thunar
-    blueman
-    #给gui的polkit认证代理
-    hyprpolkitagent
-    libnotify
-    libsForQt5.qt5.qtwayland
-    kdePackages.qtwayland
-    hyprshot
-    hyprpicker
-    hyprcursor
-    xwayland
-    pyprland
   ];
 
   programs = {

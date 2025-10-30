@@ -31,14 +31,48 @@ in {
     ./hypridle
     hostSpecificHyprlandConfig # 导入上面 let 块中定义的、特定于主机的配置。
   ];
-
+  # xdg.configFile=
+  #   let mkSymlink =config.lib.file.mkOutOfStoreSymlink;
+  #   confPath ="${config.home.homeDirectory}/nixos-config/home/hyprland/conf";
+  #   in {
+  #     "waybar".source =mkSymlink "${confPath}/waybar";
+  #   };
+  # home.file=
+  # let mkSymlink =config.lib.file.mkOutOfStoreSymlink;
+  # confPath ="${config.home.homeDirectory}/nixos-config/home/hyprland/conf";
+  # in {
+  #   ".config/waybar/".source = mkSymlink "${confPath}/waybar";
+  # };
   # --- 安装软件包 ---
   # home.packages 用于为用户安装指定的软件包。
-  home.packages = with pkgs; [
-    waybar # 状态栏
+  home.packages = with pkgs; [    
     swww # 高效的 Wayland 壁纸程序
+    #hyprland stuff
+    wlogout
+    swww
+    grim
+    slurp
+    swappy
+    wl-clipboard
+    pamixer
+    mpc
+    mpd
+    ncmpcpp
+    cava
+    calendar-cli
+    xfce.thunar
+    blueman
+    #给gui的polkit认证代理
+    hyprpolkitagent
+    libnotify
+    libsForQt5.qt5.qtwayland
+    kdePackages.qtwayland
+    hyprshot
+    hyprpicker
+    hyprcursor
+    xwayland
+    pyprland
   ];
-
   # --- Hyprland 窗口管理器配置 ---
   wayland.windowManager.hyprland = {
     # 启用 Hyprland 窗口管理器。
@@ -60,10 +94,10 @@ in {
       exec-once = systemctl --user start hyprpolkitagent # 启动 Polkit 代理，用于处理需要管理员权限的操作（如磁盘挂载）。
       exec-once = hyprctl setcursor Bibata-Modern-Classic 24 # 设置光标主题和大小。
       exec-once = dunst # 启动 dunst 通知守护进程。
-      exec-once = clash-verge # 启动 Clash Verge 代理客户端。
+      exec-once = clash-verge & # 启动 Clash Verge 代理客户端。
       exec-once = aw-qt
       # 'exec' 命令每次重载配置时都会执行。
-      # 这是一个重启 waybar 的技巧：先杀死所有 waybar 进程，暂停0.5秒确保完全退出，然后再启动新的 waybar 实例。
+      # # 这是一个重启 waybar 的技巧：先杀死所有 waybar 进程，暂停0.5秒确保完全退出，然后再启动新的 waybar 实例。
       exec = pkill waybar & sleep 0.5 && waybar
       exec-once = swww-daemon # 启动 swww 壁纸守护进程。
       exec-once = swww img ${wallpaperpath}/2.jpg --transition-type fade --transition-duration 3 # 设置壁纸，并指定渐变过渡效果。

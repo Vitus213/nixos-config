@@ -13,8 +13,6 @@
     };
     zsh.enable = true;
     firefox.enable = true;
-    #在home-manager中启用waybar
-    #waybar.enable = true;
     hyprlock.enable = true;
     dconf.enable = true;
     fuse.userAllowOther = true;
