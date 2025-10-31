@@ -8,7 +8,7 @@
     vlc # 流行的跨平台媒体播放器。
     activitywatch # 自动时间追踪器。
     qbittorrent-enhanced # qBittorrent 增强版。
-
+    unzip
     # 网络 (Net)
     clash-verge-rev # Clash Verge 的复刻版本，代理客户端。
     flclash # 可能与 Clash 相关的工具。
