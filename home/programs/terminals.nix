@@ -1,11 +1,8 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     kitty
     wezterm
 
   ];
-  programs={
-        tmux.enable = true;
-  }
+  programs = { tmux.enable = true; };
 }
