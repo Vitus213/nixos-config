@@ -9,7 +9,6 @@
     ./hardware-configuration.nix
     # 导入自定义的通用系统模块
     ./../../modules/system/nvidia.nix # Nvidia 驱动
-    #./../../modules/system/services.nix  # 其他系统服务
     ./../../modules/system/system.nix
   ];
 

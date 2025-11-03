@@ -52,7 +52,6 @@
     ncmpcpp
     cava
     calendar-cli
-    xfce.thunar
     blueman
     #给gui的polkit认证代理
     hyprpolkitagent
@@ -82,7 +81,6 @@
       };
     };
 
-    btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     jq.enable = true; # A lightweight and flexible command-line JSON processor
     ssh = {
@@ -114,6 +112,14 @@
         "--exact"
       ];
     };
+        thunar.enable = true;
+    thunar.plugins = with pkgs.xfce; [
+      exo
+      mousepad
+      thunar-archive-plugin
+      thunar-volman
+      tumbler
+    ];
   };
 
   services = {

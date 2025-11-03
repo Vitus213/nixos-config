@@ -7,9 +7,6 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # 导入自定义的通用系统模块
-    #./../../modules/system/services.nix  # 其他系统服务
-
   ];
 
   boot = {
