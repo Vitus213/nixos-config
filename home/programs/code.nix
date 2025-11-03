@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     uv
     python314
+    code-cursor
   ];
 
 }
