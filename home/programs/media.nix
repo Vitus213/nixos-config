@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib,... }:
 # media - control and enjoy audio/video
 {
   # imports = [
