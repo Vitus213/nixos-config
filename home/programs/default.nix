@@ -1,1 +1,1 @@
-{ imports = [ ./browsers.nix ./common.nix ./git.nix ./media.nix ./code.nix ]; }
+{ imports = [ ./browsers.nix ./common.nix ./git.nix ./media.nix ./code.nix ./note-taking.nix ]; }

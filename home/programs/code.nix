@@ -3,6 +3,7 @@
     uv
     python314
     code-cursor
+    zed-editor
   ];
 
 }
