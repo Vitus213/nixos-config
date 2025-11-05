@@ -64,13 +64,6 @@
           ./modules/system/system.nix
           ./modules/system/nvidia.nix # Nvidia 驱动
           ./users/${username}/nixos.nix
-          #配置pkgs
-          {
-            nixpkgs = {
-              overlays = overlays;
-              config = { allowUnfree = true; };
-            };
-          }
           #将home-manager模块添加到NixOS配置中
           #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
@@ -105,13 +98,6 @@
           ./modules/system/packages.nix # Software packages
           ./modules/system/system.nix
           ./users/${username}/nixos.nix
-          #配置pkgs
-          {
-            nixpkgs = {
-              overlays = overlays;
-              config = { allowUnfree = true; };
-            };
-          }
           #将home-manager模块添加到NixOS配置中
           #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
