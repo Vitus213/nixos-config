@@ -13,6 +13,17 @@
   ];
 
   boot = {
+    # loader.grub = {
+    #         enable = true;
+    #         device = "nodev";
+    #         efiSupport = true;
+    #         extraEntries = ''
+    #             menuentry "Windows" {
+    #                 search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+    #                 chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+    #             }
+    #         '';
+    #     };
     kernel.sysctl = {
       "net.ipv4.ip_forwarding" = 1;
       "net.ipv6.conf.all.forwarding" = 1;
@@ -20,6 +31,7 @@
     # Bootloader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    loader.efi.efiSysMountPoint = "/boot";
   };
 
   networking.hostName = "Vitus5600"; # Define your hostname.
