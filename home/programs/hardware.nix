@@ -7,5 +7,6 @@
     light
     lm_sensors
     lshw
+    inetutils
   ];
 }
