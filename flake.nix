@@ -59,6 +59,7 @@
       in nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules = [
+          ./overlays
           ./hosts/Vitus5600
           ./modules/system/packages.nix # Software packages
           ./modules/system/system.nix
