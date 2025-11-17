@@ -110,7 +110,7 @@
       dejavu_fonts
       fira-code
       fira-code-symbols
-      fira-code-nerdfont
+      nerd-fonts.fira-code
       font-awesome
       hackgen-nf-font
       ibm-plex

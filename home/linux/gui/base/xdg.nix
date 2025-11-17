@@ -28,11 +28,7 @@
       enable = true;
       # let `xdg-open` to open the url with the correct application.
       defaultApplications = let
-        browser = [
-          "microsoft=edge.desktop"
-          "firefox.desktop"
-          "google-chrome.desktop"
-        ];
+        browser = [ "microsoft=edge.desktop" "firefox.desktop" ];
         editor = [
           "nvim.desktop"
           "Helix.desktop"
