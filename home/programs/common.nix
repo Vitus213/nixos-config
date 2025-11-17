@@ -19,6 +19,7 @@
     # 办公与官方工具 (Office & Official Tools)
     typora # Markdown 编辑器。
     wpsoffice-cn # 金山 WPS Office 中文版。
+    libreoffice-qt6-fresh
 
     # Web 开发相关
     nodejs_24 # Node.js 运行时 (版本 24)。
