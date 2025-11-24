@@ -35,6 +35,8 @@
       export http_proxy="http://127.0.0.1:7897" # 注意：这里通常需要协议，如 http:// 或 socks5://
       export https_proxy="http://127.0.0.1:7897" # HTTPS 代理也需要设置
       export all_proxy="socks5://127.0.0.1:7897" # 通用代理，如果你的代理支持 SOCKS5
+      export ANTHROPIC_AUTH_TOKEN=sk-jYRZIe8JFq4Y3VesvYnAnwbtLj4Q2R7q0J0Tyw6ivxE0KVBN 
+      export ANTHROPIC_BASE_URL=https://anyrouter.top
       export no_proxy="localhost,127.0.0.1,::1"
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
