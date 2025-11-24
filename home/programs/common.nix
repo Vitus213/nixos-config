@@ -1,6 +1,7 @@
 { lib, pkgs, catppuccin-bat, ... }: {
   home.packages = with pkgs; [
     # 媒体与图像应用程序 (Media)
+    go-musicfox
     loupe # GNOME 图像查看器 (现代化替代品)。
     eog # GNOME 图像查看器 (Eye of GNOME)。
     feh # 轻量级图像查看器，也可作为壁纸设置工具 (常用于 X11，但在 Wayland 下也可查看图像)。
