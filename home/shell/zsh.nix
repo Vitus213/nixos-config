@@ -31,6 +31,8 @@
       alias la="ls -a"
       alias ll="ls -l"
        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      export ANTHROPIC_AUTH_TOKEN=sk-jYRZIe8JFq4Y3VesvYnAnwbtLj4Q2R7q0J0Tyw6ivxE0KVBN 
+      export ANTHROPIC_BASE_URL=https://anyrouter.top
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
       export XMODIFIERS="@im=fcitx"
