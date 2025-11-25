@@ -1,0 +1,8 @@
+keys:
+  - &vitus F34CAAD44D2A409BC0FEAF03F09D691B034268B8
+
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - pgp:
+          - *vitus

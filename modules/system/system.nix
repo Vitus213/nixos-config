@@ -1,4 +1,13 @@
-{ pkgs, lib, username, ... }: {
+{ pkgs, lib, username, config, ... }: {
+  # sops configuration
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  
+  # Define secrets
+  sops.secrets.github_token = {
+    owner = username;
+  };
+
   users = {
     mutableUsers = true;
     users."${username}" = {
@@ -37,11 +46,14 @@
     ];
     builders-use-substitutes = true;
 
-    access-tokens =
-      "github.com=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";
+    access-tokens = lib.mkIf (config.sops.secrets.github_token.path != null) 
+      "github.com=$(cat ${config.sops.secrets.github_token.path})";
   };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  
+  # 配置Go代理以解决sops-nix构建问题
+  environment.sessionVariables.GOPROXY = "https://goproxy.cn,https://goproxy.io,direct";
   time.timeZone = "Asia/Shanghai";
 
   i18n = {
@@ -104,6 +116,8 @@
     git
     neofetch
     htop
+    gnupg
+    sops
   ];
   fonts = {
     packages = with pkgs; [
