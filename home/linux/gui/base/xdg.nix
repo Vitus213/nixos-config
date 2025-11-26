@@ -53,7 +53,6 @@
         "application/x-extension-xht" = browser;
         "application/x-extension-xhtml" = browser;
         "application/x-wine-extension-ini" = editor;
-
         # define default applications for some url schemes.
         "x-scheme-handler/about" = browser; # open `about:` url with `browser`
         "x-scheme-handler/ftp" = browser; # open `ftp:` url with `browser`
