@@ -1,6 +1,7 @@
 { lib, pkgs, catppuccin-bat, ... }: {
   home.packages = with pkgs; [
     # 媒体与图像应用程序 (Media)
+    go-musicfox
     loupe # GNOME 图像查看器 (现代化替代品)。
     eog # GNOME 图像查看器 (Eye of GNOME)。
     feh # 轻量级图像查看器，也可作为壁纸设置工具 (常用于 X11，但在 Wayland 下也可查看图像)。
@@ -8,7 +9,7 @@
     vlc # 流行的跨平台媒体播放器。
     activitywatch # 自动时间追踪器。
     qbittorrent-enhanced # qBittorrent 增强版。
-
+    unzip
     # 网络 (Net)
     clash-verge-rev # Clash Verge 的复刻版本，代理客户端。
     flclash # 可能与 Clash 相关的工具。
@@ -19,6 +20,7 @@
     # 办公与官方工具 (Office & Official Tools)
     typora # Markdown 编辑器。
     wpsoffice-cn # 金山 WPS Office 中文版。
+    libreoffice-qt6-fresh
 
     # Web 开发相关
     nodejs_24 # Node.js 运行时 (版本 24)。
@@ -39,6 +41,30 @@
     cmake # 跨平台构建系统生成器。
     obsidian
 
+    #hyprland stuff
+    wlogout
+    swww
+    grim
+    slurp
+    swappy
+    wl-clipboard
+    pamixer
+    mpc
+    mpd
+    ncmpcpp
+    cava
+    calendar-cli
+    blueman
+    #给gui的polkit认证代理
+    hyprpolkitagent
+    libnotify
+    libsForQt5.qt5.qtwayland
+    kdePackages.qtwayland
+    hyprshot
+    hyprpicker
+    hyprcursor
+    xwayland
+    pyprland
   ];
 
   programs = {
@@ -55,31 +81,33 @@
         pager = "less -FR";
         theme = "catppuccin-mocha";
       };
-      themes = {
-        # https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme
-        catppuccin-mocha = {
-          src = catppuccin-bat;
-          file = "Catppuccin-mocha.tmTheme";
-        };
-      };
     };
 
-    btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     jq.enable = true; # A lightweight and flexible command-line JSON processor
     ssh = {
       enable = true;
-      extraConfig = ''
-        Host 5600
-          User vitus
-          HostName 100.64.0.47
-        Host Vitus8500
-          User vitus
-          HostName 100.64.0.41
-        Host Vitus5600
-          User vitus
-          HostName 100.64.0.30
-      '';
+      matchBlocks = {
+        "5600Server" = { # 这里的键就是 Host 别名
+          hostname = "100.64.0.32";
+          user = "vitus";
+          # 你也可以在这里添加其他针对 5600 的设置
+          # identityFile = "~/.ssh/id_rsa_5600";
+        };
+        # 你的 "Host 5600" 配置
+        "Vitus5600" = { # 这里的键就是 Host 别名
+          hostname = "100.64.0.30";
+          user = "vitus";
+          # 你也可以在这里添加其他针对 5600 的设置
+          # identityFile = "~/.ssh/id_rsa_5600";
+        };
+
+        # 你的 "Host Nixos" 配置
+        "Vitus8500" = {
+          hostname = "100.64.0.41";
+          user = "vitus";
+        };
+      };
     };
     aria2.enable = true;
 
@@ -92,6 +120,7 @@
         "--exact"
       ];
     };
+
   };
 
   services = {

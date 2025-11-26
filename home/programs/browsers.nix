@@ -8,5 +8,8 @@
         # {id = "";}  // extension id, query from chrome web store
       ];
     };
+    firefox.enable = true;
   };
+  home.packages = with pkgs; [ microsoft-edge ];
 }
+

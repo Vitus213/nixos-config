@@ -4,13 +4,12 @@
     ./../../home/core.nix
     ./../../home/fcitx5
     ./../../home/programs
-    ./../../home/rofi
     ./../../home/shell
-    ./../../home/themes
-    ./../../home/hyprland
     ./../../home/linux/gui/base
+    ./../../home/linux/gui/hyprland
 
   ];
+  modules.desktop.hyprland.enable = true;
   home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {
@@ -38,22 +37,6 @@
       line_break.disabled = false;
     };
   };
-
-  # programs.alacritty = {
-  #   enable = true;
-  #   settings = {
-  #     env.TERM = "xterm-256color";
-  #     font = { size = 12; };
-  #     scrolling.multiplier = 5;
-  #     selection.save_to_clipboard = true;
-  #     window.opacity = 0.9;
-  #     keyboard.bindings = [{
-  #       key = "Q";
-  #       mods = "Control|Shift";
-  #       action = "Quit";
-  #     }];
-  #   };
-  # };
   programs.bash = {
     enable = true;
     enableCompletion = true;

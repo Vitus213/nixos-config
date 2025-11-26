@@ -28,7 +28,7 @@
       enable = true;
       # let `xdg-open` to open the url with the correct application.
       defaultApplications = let
-        browser = [ "google-chrome.desktop" "firefox.desktop" ];
+        browser = [ "microsoft=edge.desktop" "firefox.desktop" ];
         editor = [
           "nvim.desktop"
           "Helix.desktop"
@@ -53,7 +53,6 @@
         "application/x-extension-xht" = browser;
         "application/x-extension-xhtml" = browser;
         "application/x-wine-extension-ini" = editor;
-
         # define default applications for some url schemes.
         "x-scheme-handler/about" = browser; # open `about:` url with `browser`
         "x-scheme-handler/ftp" = browser; # open `ftp:` url with `browser`
