@@ -1,13 +1,19 @@
 { pkgs, lib, username, config, ... }: {
   # sops configuration
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  
-  # Define secrets
-  sops.secrets.github_token = {
-    owner = username;
-  };
 
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.sshKeyPaths = [ "/home/${username}/.ssh/id_rsa" ];
+    # Define secrets
+    secrets.github_token = { owner = username; };
+    # 定义密钥
+    secrets.anthropic_auth_token = {
+      owner = username; # 确保你的用户有权读取！
+    };
+    secrets.anthropic_base_url = { owner = username; };
+  };
   users = {
     mutableUsers = true;
     users."${username}" = {
@@ -45,15 +51,15 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     builders-use-substitutes = true;
-
-    access-tokens = lib.mkIf (config.sops.secrets.github_token.path != null) 
+    access-tokens = lib.mkIf (config.sops.secrets.github_token.path != null)
       "github.com=$(cat ${config.sops.secrets.github_token.path})";
   };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  
+
   # 配置Go代理以解决sops-nix构建问题
-  environment.sessionVariables.GOPROXY = "https://goproxy.cn,https://goproxy.io,direct";
+  environment.sessionVariables.GOPROXY =
+    "https://goproxy.cn,https://goproxy.io,direct";
   time.timeZone = "Asia/Shanghai";
 
   i18n = {
@@ -72,7 +78,7 @@
 
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  environment.variables.EDITOR = "neovim";
+  environment.variables.EDITOR = "nvim";
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -116,7 +122,7 @@
     git
     neofetch
     htop
-    gnupg
+    age
     sops
   ];
   fonts = {

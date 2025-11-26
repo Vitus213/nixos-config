@@ -1,8 +1,7 @@
-keys:
-  - &vitus F34CAAD44D2A409BC0FEAF03F09D691B034268B8
-
 creation_rules:
   - path_regex: secrets/.*\.yaml$
     key_groups:
-      - pgp:
-          - *vitus
+    - age:
+      - "age1rpxxn0dpeda320mxsgyzrswv754tguz3h8m0p9s8sd5wxup9f9us7p28xq" 
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCSOQbuKtfJ9Tbgtran8VQEiF9595l9DiGxevVAN0q8vVi0cm9WmDafCm2mJTvYKt+M/yzLeR/GKJq/TY9EUZcFgUF8s+DOk/WjMFRiF82k//DHxzNgcE6RXJOMDt0bDnymND3NIPeXNfEiRbDpb1ReotuRHX2cBARUYVqViCj1sChJOejitq/EhYSH6ORb9awrUIorBmBLMWJVxqR8rWn66D8h9+Id2jwRWvZDYrOcg7r5V3f5ksxoyhHcmcHKfNYsV1kT7UAGhxalmVc7t2NC/NyBW1x62rr65AljxjGhE1A4nA57bSkqIN37ThBPQVdJrtrVZMo70oATRdRimgIQ8M8tqdC3lxdIYebwnASuPZMWbi+cypnlM81P/r+I7SykfdiL30X8dESrfIYvCfyQ82geXu2Gdk5ofD6fo4ZmmsRiz8tl+R6Do0Y39pr4jedKvb1WUb5nefptnvnxSA1WlqA5dC93m1m6zqAMv1DTJdNAu1vhfYfdcF9PsVoJLPc= Vitus5600"
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDf7xHuNr7DO+kzfewN42/hkQKHprRVU5OTYYeYPnPeN7JVzW1xQ/lTsgwOPID2pR6xlFMqEx7Vgld8RSpnb7FZRAz03Hy7KKR6XrIM3VjOVm1lIRiGY0FS9cXV1c3wEHQxLPueENxvt6zpSIdyEQFXhWJLKEZsp4WjS/lxofu7XX0AZ1vM6AI55tWdy/CDU4W8DgxqKr+i/yiHDOZAM/ufQ7m9QdnKHR5nyjMylvVEAcDO4Cz1ba7fGcXPXwpgUzAISJBptZHiGvayHHACTXPrGOBCM9TC4nk6RlFdhl/DFvsy4DYKxBmy7z3TOIEIBvi1vZxfEfpMRd8WNS8jU/4jPgIPcyNKCtsYo7XKQcSfXVzh2WIiAkQUj01LX/xuQ3mFvcZXa/xXni68FAaT+dT7ImT4sVImFzQlQ3Paa1ZhqIkJ5D1cHwQ0pesQ7QpYDJ4XntSq990kbFK7oDsBWitxv/qqrQwVlPKvUF0XPCvD3QqiDfdGCrYM7MIcl7IVZpU= vitus@VitusApolloZhangdeMacBook-Air.local"
