@@ -48,10 +48,9 @@
     };
     initContent = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-              if [ -f "/run/secrets/anthropic_token" ]; then
+      if [ -f "/run/secrets/anthropic_auth_token" ]; then
         export ANTHROPIC_AUTH_TOKEN="$(cat /run/secrets/anthropic_auth_token)"
       fi
-
       if [ -f "/run/secrets/anthropic_base_url" ]; then
         export ANTHROPIC_BASE_URL="$(cat /run/secrets/anthropic_base_url)"
       fi
