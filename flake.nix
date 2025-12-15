@@ -50,6 +50,9 @@
       };
 
     in {
+      # ========== NixOS 主机配置 ==========
+      # 使用: sudo nixos-rebuild switch --flake .#主机名
+
       nixosConfigurations.Vitus5600 = let
         username = "vitus";
         hostname = "Vitus5600";
@@ -120,6 +123,103 @@
           vscode-server.nixosModules.default
           ({ config, pkgs, ... }: { services.vscode-server.enable = true; })
         ];
+      };
+
+      # ========== 非 NixOS 系统配置 (Ubuntu, WSL, Debian 等) ==========
+      # 使用: home-manager switch --flake .#vitus@ubuntu
+      # 或:   home-manager switch --flake .#vitus@wsl
+
+      homeConfigurations = let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
+        # 共享的核心模块 (CLI 环境)
+        coreModules = [
+          ./home/core.nix
+          ./home/shell
+          ./home/programs/shell-tools.nix
+          ./home/programs/git.nix
+        ];
+      in {
+        # Ubuntu / Debian / 通用 Linux (仅 CLI)
+        "vitus@ubuntu" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit inputs unstable;
+            username = "vitus";
+            hostname = "ubuntu";
+          };
+          modules = coreModules ++ [
+            {
+              home.username = "vitus";
+              home.homeDirectory = "/home/vitus";
+              home.stateVersion = "25.05";
+              programs.home-manager.enable = true;
+
+              # Nix 配置 (非 NixOS 系统需要)
+              nix = {
+                package = pkgs.nix;
+                settings.experimental-features = [ "nix-command" "flakes" ];
+              };
+
+              # Git 配置
+              programs.git = {
+                enable = true;
+                userName = "Vitus";
+                userEmail = "zhzvitus@gmail.com";
+                extraConfig.init.defaultBranch = "main";
+              };
+
+              # Bash 配置
+              programs.bash = {
+                enable = true;
+                enableCompletion = true;
+              };
+            }
+          ];
+        };
+
+        # WSL 专用配置
+        "vitus@wsl" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit inputs unstable;
+            username = "vitus";
+            hostname = "wsl";
+          };
+          modules = coreModules ++ [
+            {
+              home.username = "vitus";
+              home.homeDirectory = "/home/vitus";
+              home.stateVersion = "25.05";
+              programs.home-manager.enable = true;
+
+              nix = {
+                package = pkgs.nix;
+                settings.experimental-features = [ "nix-command" "flakes" ];
+              };
+
+              programs.git = {
+                enable = true;
+                userName = "Vitus";
+                userEmail = "zhzvitus@gmail.com";
+                extraConfig.init.defaultBranch = "main";
+              };
+
+              programs.bash = {
+                enable = true;
+                enableCompletion = true;
+              };
+
+              # WSL 特定设置
+              home.sessionVariables = {
+                BROWSER = "wslview";
+              };
+            }
+          ];
+        };
       };
     };
 }

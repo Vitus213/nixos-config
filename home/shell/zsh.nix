@@ -33,6 +33,9 @@
       ls = "ls --color=auto";
       la = "ls -a";
       ll = "ls -l";
+      # Claude Code 快捷命令
+      cf = "claude --dangerously-skip-permissions";
+      cfc = "claude --dangerously-skip-permissions -c";
     };
     sessionVariables = {
       http_proxy = "http://127.0.0.1:7897";
@@ -48,11 +51,28 @@
     };
     initContent = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+      # Cargo/Rust 环境
+      [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+      # 交叉编译工具链 PATH
+      PATH="$HOME/.cargo/bin:$PATH"
+      PATH="$PATH:$HOME/opt/x86_64-linux-musl-cross-gcc-9.4.0/bin"
+      PATH="$PATH:$HOME/opt/riscv64-linux-musl-cross-gcc-9.4.0/bin"
+      PATH="$PATH:$HOME/opt/loongarch64-cross-14.2.0/bin"
+      export PATH
+
+      # SOPS 密钥加载 (NixOS)
       if [ -f "/run/secrets/anthropic_auth_token" ]; then
         export ANTHROPIC_AUTH_TOKEN="$(cat /run/secrets/anthropic_auth_token)"
       fi
       if [ -f "/run/secrets/anthropic_base_url" ]; then
         export ANTHROPIC_BASE_URL="$(cat /run/secrets/anthropic_base_url)"
+      fi
+
+      # 非 NixOS 系统: 从本地文件加载密钥
+      if [ -f "$HOME/.secrets.env" ]; then
+        source "$HOME/.secrets.env"
       fi
     '';
   };
