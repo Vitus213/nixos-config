@@ -51,7 +51,8 @@
 
     in {
       # ========== NixOS 主机配置 ==========
-      # 使用: sudo nixos-rebuild switch --flake .#主机名
+      # 使用: sudo nixos-rebuild switch (如果已链接到 /etc/nixos)
+      # 或:   sudo nixos-rebuild switch --flake ~/.config/home-manager#Vitus5600
 
       nixosConfigurations.Vitus5600 = let
         username = "vitus";
