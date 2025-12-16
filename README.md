@@ -117,6 +117,24 @@ home-manager switch --flake ~/.config/home-manager#vitus@wsl     # WSL
 - `github_token`
 
 ### 非 NixOS 系统
+#### 完善代理 
+nix是用client-server的模式，命令行的代理不是nix-daemon的代理
+nix-daemon 代理设置 ：
+```
+# 1. 创建配置文件夹（如果不存在）
+sudo mkdir -p /etc/systemd/system/nix-daemon.service.d/
+
+# 2. 直接写入代理配置
+printf "[Service]
+Environment=\"http_proxy=http://127.0.0.1:7897\"
+Environment=\"https_proxy=http://127.0.0.1:7897\"
+Environment=\"all_proxy=http://127.0.0.1:7897\"
+" | sudo tee /etc/systemd/system/nix-daemon.service.d/override.conf
+
+# 3. 重新加载配置并重启 Nix 服务
+sudo systemctl daemon-reload
+sudo systemctl restart nix-daemon
+```
 
 创建 `~/.secrets.env` 文件（不要提交到 Git）：
 
