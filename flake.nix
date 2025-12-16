@@ -1,12 +1,22 @@
 {
-  description = "Vitus's NixOS configuration";
+  description = "Vitus's NixOS and nix-darwin configuration";
   inputs = {
+    # ========== 通用 inputs ==========
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # ========== NixOS 专用 inputs ==========
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,14 +28,13 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland"; # import plugin
+      inputs.hyprland.follows = "hyprland";
     };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # anyrun - a wayland launcher
     anyrun = {
       url = "github:/anyrun-org/anyrun/v25.9.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,31 +43,41 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+    # ========== Darwin 专用 inputs ==========
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
-  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, vscode-server
-    , rust-overlay, anyrun, catppuccin, sops-nix, ... }@inputs:
+
+  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, nixpkgs-unstable
+    , vscode-server, rust-overlay, anyrun, catppuccin, sops-nix, nix-darwin, ... }@inputs:
     let
-      system = "x86_64-linux";
+      # ========== Linux 系统变量 ==========
+      linuxSystem = "x86_64-linux";
       overlays = [ (import rust-overlay) ];
       unstable = import nixpkgs-unstable {
-        inherit system;
+        system = linuxSystem;
+        config.allowUnfree = true;
+      };
+
+      # ========== Darwin 系统变量 ==========
+      darwinSystem = "aarch64-darwin";
+      unstableDarwin = import nixpkgs-unstable {
+        system = darwinSystem;
         config.allowUnfree = true;
       };
 
     in {
       # ========== NixOS 主机配置 ==========
-      # 使用: sudo nixos-rebuild switch (如果已链接到 /etc/nixos)
-      # 或:   sudo nixos-rebuild switch --flake ~/.config/home-manager#Vitus5600
+      # 使用: sudo nixos-rebuild switch --flake .#Vitus5600
 
       nixosConfigurations.Vitus5600 = let
         username = "vitus";
         hostname = "Vitus5600";
         specialArgs = {
-          inherit system;
+          system = linuxSystem;
           inherit inputs;
           inherit unstable;
           inherit username;
@@ -69,13 +88,11 @@
         modules = [
           ./overlays
           ./hosts/Vitus5600
-          ./modules/system/packages.nix # Software packages
+          ./modules/system/packages.nix
           ./modules/system/system.nix
-          ./modules/system/nvidia.nix # Nvidia 驱动
+          ./modules/system/nvidia.nix
           ./users/${username}/nixos.nix
           sops-nix.nixosModules.sops
-          #将home-manager模块添加到NixOS配置中
-          #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
           ({ username, unstable, ... }: {
             home-manager = {
@@ -95,7 +112,7 @@
         username = "vitus";
         hostname = "Vitus8500";
         specialArgs = {
-          inherit system;
+          system = linuxSystem;
           inherit inputs;
           inherit unstable;
           inherit username;
@@ -105,12 +122,10 @@
         inherit specialArgs;
         modules = [
           ./hosts/Vitus8500
-          ./modules/system/packages.nix # Software packages
+          ./modules/system/packages.nix
           ./modules/system/system.nix
           ./users/${username}/nixos.nix
           sops-nix.nixosModules.sops
-          #将home-manager模块添加到NixOS配置中
-          #这样在nixos-rebuild switch 时，home-manager的配置也会被应用
           home-manager.nixosModules.home-manager
           ({ username, unstable, ... }: {
             home-manager = {
@@ -126,13 +141,34 @@
         ];
       };
 
+      # ========== Darwin (macOS) 主机配置 ==========
+      # 使用: darwin-rebuild switch --flake .#VitusMac
+
+      darwinConfigurations.VitusMac = let
+        username = "vitus";
+        hostname = "VitusMac";
+        specialArgs = inputs // {
+          inherit username hostname;
+          unstable = unstableDarwin;
+        };
+      in nix-darwin.lib.darwinSystem {
+        system = darwinSystem;
+        inherit specialArgs;
+        modules = [
+          ./hosts/darwin
+          ./modules/darwin
+          ./modules/darwin/home-manager.nix
+          sops-nix.darwinModules.sops
+        ];
+      };
+
       # ========== 非 NixOS 系统配置 (Ubuntu, WSL, Debian 等) ==========
       # 使用: home-manager switch --flake .#vitus@ubuntu
       # 或:   home-manager switch --flake .#vitus@wsl
 
       homeConfigurations = let
         pkgs = import nixpkgs {
-          inherit system;
+          system = linuxSystem;
           config.allowUnfree = true;
         };
 
@@ -159,13 +195,11 @@
               home.stateVersion = "25.05";
               programs.home-manager.enable = true;
 
-              # Nix 配置 (非 NixOS 系统需要)
               nix = {
                 package = pkgs.nix;
                 settings.experimental-features = [ "nix-command" "flakes" ];
               };
 
-              # Git 配置
               programs.git = {
                 enable = true;
                 userName = "Vitus";
@@ -173,7 +207,6 @@
                 extraConfig.init.defaultBranch = "main";
               };
 
-              # Bash 配置
               programs.bash = {
                 enable = true;
                 enableCompletion = true;
@@ -214,7 +247,6 @@
                 enableCompletion = true;
               };
 
-              # WSL 特定设置
               home.sessionVariables = {
                 BROWSER = "wslview";
               };
@@ -222,5 +254,9 @@
           ];
         };
       };
+
+      # ========== 格式化工具 ==========
+      formatter.${linuxSystem} = nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
+      formatter.${darwinSystem} = nixpkgs-darwin.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
     };
 }
