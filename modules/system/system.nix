@@ -6,13 +6,7 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     age.sshKeyPaths = [ "/home/${username}/.ssh/id_rsa" ];
-    # Define secrets
     secrets.github_token = { owner = username; };
-    # 定义密钥
-    secrets.anthropic_auth_token = {
-      owner = username; # 确保你的用户有权读取！
-    };
-    secrets.anthropic_base_url = { owner = username; };
   };
   users = {
     mutableUsers = true;

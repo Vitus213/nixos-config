@@ -61,18 +61,13 @@
       PATH="$PATH:$HOME/opt/riscv64-linux-musl-cross-gcc-9.4.0/bin"
       PATH="$PATH:$HOME/opt/loongarch64-cross-14.2.0/bin"
       export PATH
-
+      export SOPS_AGE_SSH_PRIVATE_KEY_FILE="$HOME/.ssh/id_rsa"
       # SOPS 密钥加载 (NixOS)
       if [ -f "/run/secrets/anthropic_auth_token" ]; then
         export ANTHROPIC_AUTH_TOKEN="$(cat /run/secrets/anthropic_auth_token)"
       fi
       if [ -f "/run/secrets/anthropic_base_url" ]; then
         export ANTHROPIC_BASE_URL="$(cat /run/secrets/anthropic_base_url)"
-      fi
-
-      # 非 NixOS 系统: 从本地文件加载密钥
-      if [ -f "$HOME/.secrets.env" ]; then
-        source "$HOME/.secrets.env"
       fi
     '';
   };
