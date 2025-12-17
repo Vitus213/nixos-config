@@ -1,5 +1,12 @@
 # home.nix 或你的 common-home.nix
-{ config, pkgs, inputs,username, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
+{
 
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
@@ -8,9 +15,9 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     # 【重要】这里不需要写 owner = ...，因为 Home Manager 跑在用户态
-    secrets.github_token = {};
-    secrets.anthropic_auth_token = {};
-    secrets.anthropic_base_url = {};
+    secrets.github_token = { };
+    secrets.anthropic_auth_token = { };
+    secrets.anthropic_base_url = { };
 
     # 这里加上刚才说的模板，自动生成 source 文件
     templates."my-env".content = ''

@@ -1,11 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   xdg.portal = {
     enable = true;
 
     config = {
       common = {
         # Use xdg-desktop-portal-gtk for every portal interface...
-        default = [ "gtk" "hyprland" ];
+        default = [
+          "gtk"
+          "hyprland"
+        ];
         # except for the secret portal, which is handled by gnome-keyring
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };

@@ -1,5 +1,10 @@
 # Darwin (macOS) 主机配置
-{ pkgs, hostname, username, ... }:
+{
+  pkgs,
+  hostname,
+  username,
+  ...
+}:
 
 {
   # 网络配置

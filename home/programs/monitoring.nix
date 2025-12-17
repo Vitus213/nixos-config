@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     fastfetch
     nvtopPackages.full
-    atop
     hyfetch
     ipfetch
     neofetch

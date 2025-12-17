@@ -6,7 +6,9 @@
     enableCompletion = true;
     autocd = true;
 
-    autosuggestion = { enable = true; };
+    autosuggestion = {
+      enable = true;
+    };
 
     antidote = {
       enable = true;
@@ -28,8 +30,7 @@
 
     shellAliases = {
       np = "unset http_proxy https_proxy all_proxy";
-      p =
-        "export http_proxy=http://127.0.0.1:7897 https_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897";
+      p = "export http_proxy=http://127.0.0.1:7897 https_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897";
       ls = "ls --color=auto";
       la = "ls -a";
       ll = "ls -l";

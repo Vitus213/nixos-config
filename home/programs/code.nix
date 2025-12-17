@@ -1,4 +1,10 @@
-{ lib, pkgs, catppuccin-bat, ... }: {
+{
+  lib,
+  pkgs,
+  catppuccin-bat,
+  ...
+}:
+{
   home.packages = with pkgs; [
     uv
     python314

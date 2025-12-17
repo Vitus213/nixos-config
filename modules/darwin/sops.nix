@@ -1,5 +1,10 @@
 # Darwin SOPS 配置
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   # 安装 sops 和 age

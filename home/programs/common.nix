@@ -1,4 +1,10 @@
-{ lib, pkgs, catppuccin-bat, ... }: {
+{
+  lib,
+  pkgs,
+  catppuccin-bat,
+  ...
+}:
+{
   home.packages = with pkgs; [
     # 媒体与图像应用程序 (Media)
     go-musicfox
@@ -88,14 +94,16 @@
     ssh = {
       enable = true;
       matchBlocks = {
-        "5600Server" = { # 这里的键就是 Host 别名
+        "5600Server" = {
+          # 这里的键就是 Host 别名
           hostname = "100.64.0.32";
           user = "vitus";
           # 你也可以在这里添加其他针对 5600 的设置
           # identityFile = "~/.ssh/id_rsa_5600";
         };
         # 你的 "Host 5600" 配置
-        "Vitus5600" = { # 这里的键就是 Host 别名
+        "Vitus5600" = {
+          # 这里的键就是 Host 别名
           hostname = "100.64.0.30";
           user = "vitus";
           # 你也可以在这里添加其他针对 5600 的设置

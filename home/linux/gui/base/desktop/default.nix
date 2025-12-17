@@ -1,10 +1,19 @@
-{ config, pkgs, catppuccin, ... }: {
-  imports = [ ./anyrun.nix ./nvidia.nix ./hyprlock ];
+{
+  config,
+  pkgs,
+  catppuccin,
+  ...
+}:
+{
+  imports = [
+    ./anyrun.nix
+    ./nvidia.nix
+    ./hyprlock
+  ];
 
   # wayland related
   home.sessionVariables = {
-    "NIXOS_OZONE_WL" =
-      "1"; # for any ozone-based browser & electron apps to run on wayland
+    "NIXOS_OZONE_WL" = "1"; # for any ozone-based browser & electron apps to run on wayland
     "MOZ_ENABLE_WAYLAND" = "1"; # for firefox to run on wayland
     "MOZ_WEBRENDER" = "1";
     # enable native Wayland support for most Electron apps
@@ -30,15 +39,17 @@
     networkmanagerapplet # provide GUI app: nm-connection-editor
   ];
 
-  xdg.configFile = let
-    mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-    confPath = ./conf;
-  in {
-    "mako".source = mkSymlink "${confPath}/mako";
-    "waybar".source = mkSymlink "${confPath}/waybar";
-    "wlogout".source = mkSymlink "${confPath}/wlogout";
-    "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
-  };
+  xdg.configFile =
+    let
+      mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+      confPath = ./conf;
+    in
+    {
+      "mako".source = mkSymlink "${confPath}/mako";
+      "waybar".source = mkSymlink "${confPath}/waybar";
+      "wlogout".source = mkSymlink "${confPath}/wlogout";
+      "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
+    };
   # status bar
   programs.waybar = {
     enable = true;

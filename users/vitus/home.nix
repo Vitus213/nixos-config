@@ -1,4 +1,12 @@
-{ username, inputs, config, pkgs, unstable, ... }: {
+{
+  username,
+  inputs,
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
+{
   # 导入公共 home-manager 模块
   imports = [
     ./../../home/core.nix
@@ -10,7 +18,11 @@
 
   ];
   modules.desktop.hyprland.enable = true;
-  home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
+  home.packages = with pkgs; [
+    unstable.wechat-uos
+    feishu
+    qq
+  ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.git = {
     enable = true;
@@ -52,4 +64,3 @@
 
   services.kdeconnect.enable = true;
 }
-
