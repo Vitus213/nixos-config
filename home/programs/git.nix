@@ -3,8 +3,11 @@
   home.packages = [ pkgs.gh ];
 
   programs.git = {
-    enable = true;
-
-    # ... Other options ...
-  };
+        enable = true;
+        userName = "Vitus213";
+        userEmail = "zhzvitus@gmail.com";
+        extraConfig = {
+          init.defaultBranch = "main";
+        };
+      };
 }
