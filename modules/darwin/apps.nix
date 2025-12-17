@@ -20,6 +20,8 @@
     jq
     tldr
     direnv
+    sops
+    age
   ];
 
   # Homebrew configuration

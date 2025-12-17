@@ -46,8 +46,9 @@
 
     # ========== Darwin 专用 inputs ==========
     nix-darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

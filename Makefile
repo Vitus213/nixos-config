@@ -54,14 +54,11 @@ nixos-test: ## 测试配置 (不持久化)
 	sudo nixos-rebuild test --flake .#$(shell hostname)
 
 # ========== Darwin (macOS) 部署 ==========
-
-darwin: ## 部署到 VitusMac (macOS)
-	darwin-rebuild switch --flake .#VitusMac
-
-build-darwin: ## 构建 Darwin 配置
+mac:
 	nix build .#darwinConfigurations.VitusMac.system \
-		--extra-experimental-features 'nix-command flakes'
+	   --extra-experimental-features 'nix-command flakes'
 
+	sudo -E ./result/sw/bin/darwin-rebuild switch --flake .#VitusMac
 # ========== Home Manager 部署 ==========
 
 home-ubuntu: ## 部署 Ubuntu/Debian CLI 环境
