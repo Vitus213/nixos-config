@@ -47,7 +47,7 @@
     # ========== Darwin 专用 inputs ==========
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
-      
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -194,7 +194,7 @@
           modules = [
             ./hosts/darwin
             ./modules/darwin
-            ./modules/darwin/home-manager.nix
+            ./home/home-darwin.nix
             sops-nix.darwinModules.sops
           ];
         };
@@ -240,13 +240,6 @@
                   ];
                 };
 
-                programs.git = {
-                  enable = true;
-                  userName = "Vitus";
-                  userEmail = "zhzvitus@gmail.com";
-                  extraConfig.init.defaultBranch = "main";
-                };
-
                 programs.bash = {
                   enable = true;
                   enableCompletion = true;
@@ -277,14 +270,6 @@
                     "flakes"
                   ];
                 };
-
-                programs.git = {
-                  enable = true;
-                  userName = "Vitus";
-                  userEmail = "zhzvitus@gmail.com";
-                  extraConfig.init.defaultBranch = "main";
-                };
-
                 programs.bash = {
                   enable = true;
                   enableCompletion = true;

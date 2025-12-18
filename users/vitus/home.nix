@@ -24,15 +24,6 @@
     qq
   ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
-  programs.git = {
-    enable = true;
-    userName = "Vitus";
-    userEmail = "zhzvitus@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-      safe.directory = "etc/nixos";
-    };
-  };
 
   # 启用 starship，这是一个漂亮的 shell 提示符,
   #zsh的p10k会覆盖starship，但是bash会用上
