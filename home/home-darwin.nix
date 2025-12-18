@@ -4,6 +4,7 @@
   pkgs,
   lib,
   username,
+  inputs,
   home-manager,
   ...
 }:
@@ -12,15 +13,15 @@
   # Import home-manager darwin module
   imports = [
     home-manager.darwinModules.home-manager
-  ];  # Configure home-manager
+  ]; # Configure home-manager
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
-    extraSpecialArgs= {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
     users.${username} = import ../users/${username}/common.nix;
-    sharedModules  =[
+    sharedModules = [
       ./shell
-    ]  
+    ];
   };
 }
