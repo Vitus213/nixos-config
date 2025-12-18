@@ -194,7 +194,19 @@
           modules = [
             ./hosts/darwin
             ./modules/darwin
-            ./home/home-darwin.nix
+            home-manager.darwinModules.home-manager
+            (
+              {username,inputs, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  backupFileExtension = "backup";
+                  users.${username} = import ./users/${username}/darwin.nix;
+                  extraSpecialArgs = { inherit inputs username; };
+                };
+              }
+            )
             sops-nix.darwinModules.sops
           ];
         };
