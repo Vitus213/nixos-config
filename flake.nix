@@ -184,7 +184,7 @@
           username = "vitus";
           hostname = "VitusMac";
           specialArgs = inputs // {
-            inherit username hostname;
+            inherit inputs username hostname;
             unstable = unstableDarwin;
           };
         in
