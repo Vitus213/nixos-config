@@ -2,10 +2,15 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   username,
   ...
 }:
+let
+  # 根据平台选择正确的 home 目录
+  homeDir = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+in
 {
 
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
@@ -13,7 +18,7 @@
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml; # 注意相对路径可能要调整
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
     # 【重要】这里不需要写 owner = ...，因为 Home Manager 跑在用户态
     secrets.github_token = { };
     secrets.anthropic_auth_token = { };
