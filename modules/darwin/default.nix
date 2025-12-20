@@ -3,9 +3,5 @@
 { ... }:
 
 {
-  imports = [
-    ./nix-core.nix
-    ./system.nix
-    ./apps.nix
-  ];
+  imports = [ ./nix-core.nix ./system.nix ./apps.nix ];
 }

@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  username,
-  config,
-  ...
-}:
-{
+{ pkgs, lib, username, config, ... }: {
   # sops configuration
 
   sops = {
@@ -13,9 +6,7 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     age.sshKeyPaths = [ "/home/${username}/.ssh/id_rsa" ];
-    secrets.github_token = {
-      owner = username;
-    };
+    secrets.github_token = { owner = username; };
   };
   users = {
     mutableUsers = true;
@@ -23,11 +14,7 @@
       homeMode = "755";
       isNormalUser = true;
       description = "Vitus213";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "docker"
-      ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
       # define user packages here
       packages = with pkgs; [ ];
       openssh.authorizedKeys.keys = [ "~/.ssh/authorized_keys" ];
@@ -39,10 +26,7 @@
   nix.settings.trusted-users = [ username ];
   nix.settings = {
     # enable flakes globally
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
 
     substituters = [
       # cache mirror located in China
@@ -61,15 +45,15 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     builders-use-substitutes = true;
-    access-tokens = lib.mkIf (
-      config.sops.secrets.github_token.path != null
-    ) "github.com=$(cat ${config.sops.secrets.github_token.path})";
+    access-tokens = lib.mkIf (config.sops.secrets.github_token.path != null)
+      "github.com=$(cat ${config.sops.secrets.github_token.path})";
   };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # 配置Go代理以解决sops-nix构建问题
-  environment.sessionVariables.GOPROXY = "https://goproxy.cn,https://goproxy.io,direct";
+  environment.sessionVariables.GOPROXY =
+    "https://goproxy.cn,https://goproxy.io,direct";
   time.timeZone = "Asia/Shanghai";
 
   i18n = {

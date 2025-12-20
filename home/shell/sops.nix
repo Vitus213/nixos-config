@@ -1,17 +1,10 @@
 # home.nix 或你的 common-home.nix
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  username,
-  ...
-}:
+{ config, pkgs, lib, inputs, username, ... }:
 let
   # 根据平台选择正确的 home 目录
-  homeDir = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
-in
-{
+  homeDir =
+    if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+in {
 
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 

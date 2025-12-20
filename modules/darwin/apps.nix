@@ -20,8 +20,6 @@
     jq
     tldr
     direnv
-    sops
-    age
   ];
 
   # Homebrew configuration
@@ -35,21 +33,13 @@
       # cleanup = "zap";
     };
 
-    taps = [
-      "homebrew/services"
-    ];
+    taps = [ "homebrew/services" ];
 
     # `brew install`
-    brews = [
-      "aria2"
-    ];
+    brews = [ "aria2" ];
 
     # `brew install --cask`
-    casks = [
-      "microsoft-edge"
-      "claude-code"
-      "notion"
-    ];
+    casks = [ "microsoft-edge" "notion" "obsidian" ];
   };
 
   # Configure programs that integrate with zsh

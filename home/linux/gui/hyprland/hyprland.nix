@@ -1,21 +1,10 @@
-{
-  pkgs,
-  config,
-  hostname,
-  ...
-}:
-let
-  package = pkgs.hyprland;
-in
-{
-  xdg.configFile =
-    let
-      repoConf = ./conf;
-      mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-    in
-    {
-      "hypr/configs".source = mkSymlink repoConf;
-    };
+{ pkgs, config, hostname, ... }:
+let package = pkgs.hyprland;
+in {
+  xdg.configFile = let
+    repoConf = ./conf;
+    mkSymlink = config.lib.file.mkOutOfStoreSymlink;
+  in { "hypr/configs".source = mkSymlink repoConf; };
 
   # xdg.configFile ={
   #   "hypr/configs".source = config.lib.file.mkOutOfStoreSymlink repoConf;
@@ -28,28 +17,25 @@ in
     inherit package;
     enable = true;
     settings = {
-      source =
-        let
-          configPath = "${config.home.homeDirectory}/.config/hypr/configs";
-          hostSpecificHyprlandConfig =
-            if hostname == "Vitus5600" then
-              # 如果主机名是 "Vitus5600"，就导入 5600.nix 文件。
-              "${configPath}/5600.conf"
-            else if hostname == "Vitus8500" then
-              # 如果主机名是 "Vitus8500"，就导入 8500.nix 文件。
-              "${configPath}/8500.conf"
-            else
-              # 如果主机名不匹配任何已知的主机，则返回一个空配置集，不应用任何特定配置。
-              { };
-        in
-        [
-          hostSpecificHyprlandConfig
-          "${configPath}/exec.conf"
-          "${configPath}/fcitx5.conf"
-          "${configPath}/keybindings.conf"
-          "${configPath}/settings.conf"
-          "${configPath}/windowrules.conf"
-        ];
+      source = let
+        configPath = "${config.home.homeDirectory}/.config/hypr/configs";
+        hostSpecificHyprlandConfig = if hostname == "Vitus5600" then
+        # 如果主机名是 "Vitus5600"，就导入 5600.nix 文件。
+          "${configPath}/5600.conf"
+        else if hostname == "Vitus8500" then
+        # 如果主机名是 "Vitus8500"，就导入 8500.nix 文件。
+          "${configPath}/8500.conf"
+        else
+        # 如果主机名不匹配任何已知的主机，则返回一个空配置集，不应用任何特定配置。
+          { };
+      in [
+        hostSpecificHyprlandConfig
+        "${configPath}/exec.conf"
+        "${configPath}/fcitx5.conf"
+        "${configPath}/keybindings.conf"
+        "${configPath}/settings.conf"
+        "${configPath}/windowrules.conf"
+      ];
       env = [
 
       ];

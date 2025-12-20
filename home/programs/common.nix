@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  catppuccin-bat,
-  ...
-}:
-{
+{ lib, pkgs, catppuccin-bat, ... }: {
   home.packages = with pkgs; [
     # 媒体与图像应用程序 (Media)
     go-musicfox
@@ -32,21 +26,8 @@
     nodejs_24 # Node.js 运行时 (版本 24)。
     pnpm # 快速、磁盘效率高的 Node.js 包管理器。
 
-    # 排版 (Typst)
-    typst # 新一代科学排版语言和编译器。
-    tinymist # Typst 的 LSP 服务器。
-    vscode-extensions.myriad-dreamin.tinymist # VSCode Typst 扩展。
     pandoc # 通用文档转换器。
-    nixfmt-classic
-
-    # 开发工具 (Development Tools)
-    rustup # Rust 工具链安装程序。
-    llvmPackages_latest.libcxxClang # Clang 的 C++ 标准库。
-    llvmPackages_latest.clang-tools # Clang 相关的开发工具 (如 linter, formatter)。
-    openjdk8-bootstrap
-    cmake # 跨平台构建系统生成器。
     obsidian
-
     #hyprland stuff
     wlogout
     swww
