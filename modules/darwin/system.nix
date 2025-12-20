@@ -5,7 +5,9 @@
   system = {
     stateVersion = 6;
 
-    defaults = { menuExtraClock.Show24Hour = true; };
+    defaults = {
+      menuExtraClock.Show24Hour = true;
+    };
   };
 
   # Add ability to use TouchID for sudo authentication

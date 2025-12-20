@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 # media - control and enjoy audio/video
 {
   # imports = [
@@ -23,7 +28,8 @@
     # live streaming
     obs-studio = {
       enable = pkgs.stdenv.isx86_64;
-      plugins = with pkgs.obs-studio-plugins;
+      plugins =
+        with pkgs.obs-studio-plugins;
         [
           # screen capture
           wlrobs
@@ -47,9 +53,15 @@
           obs-backgroundremoval
           # advanced-scene-switcher
           obs-pipewire-audio-capture
-        ] ++ (lib.optionals pkgs.stdenv.isx86_64 [ obs-vaapi obs-3d-effect ]);
+        ]
+        ++ (lib.optionals pkgs.stdenv.isx86_64 [
+          obs-vaapi
+          obs-3d-effect
+        ]);
     };
   };
 
-  services = { playerctld.enable = true; };
+  services = {
+    playerctld.enable = true;
+  };
 }

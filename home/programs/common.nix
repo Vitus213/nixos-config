@@ -1,4 +1,10 @@
-{ lib, pkgs, catppuccin-bat, ... }: {
+{
+  lib,
+  pkgs,
+  catppuccin-bat,
+  ...
+}:
+{
   home.packages = with pkgs; [
     # 媒体与图像应用程序 (Media)
     go-musicfox

@@ -1,4 +1,5 @@
-{ config, inputs, ... }: {
+{ config, inputs, ... }:
+{
   imports = [
     ./code.nix
     ./monitoring.nix

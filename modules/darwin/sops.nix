@@ -1,9 +1,18 @@
 # Darwin SOPS 配置
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   # 安装 sops 和 age
-  environment.systemPackages = with pkgs; [ sops age ssh-to-age ];
+  environment.systemPackages = with pkgs; [
+    sops
+    age
+    ssh-to-age
+  ];
 
   # SOPS 配置
   sops = {

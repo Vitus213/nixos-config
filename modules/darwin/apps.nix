@@ -39,7 +39,11 @@
     brews = [ "aria2" ];
 
     # `brew install --cask`
-    casks = [ "microsoft-edge" "notion" "obsidian" ];
+    casks = [
+      "microsoft-edge"
+      "notion"
+      "obsidian"
+    ];
   };
 
   # Configure programs that integrate with zsh

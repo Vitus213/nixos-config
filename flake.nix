@@ -52,8 +52,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, nixpkgs-unstable
-    , vscode-server, rust-overlay, anyrun, catppuccin, sops-nix, nix-darwin, ...
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-darwin,
+      home-manager,
+      nixpkgs-unstable,
+      vscode-server,
+      rust-overlay,
+      anyrun,
+      catppuccin,
+      sops-nix,
+      nix-darwin,
+      ...
     }@inputs:
     let
       # ========== Linux 系统变量 ==========
@@ -71,179 +83,220 @@
         config.allowUnfree = true;
       };
 
-    in {
+    in
+    {
       # ========== NixOS 主机配置 ==========
       # 使用: sudo nixos-rebuild switch --flake .#Vitus5600
 
-      nixosConfigurations.Vitus5600 = let
-        username = "vitus";
-        hostname = "Vitus5600";
-        specialArgs = {
-          system = linuxSystem;
-          inherit inputs;
-          inherit unstable;
-          inherit username;
-          inherit hostname;
+      nixosConfigurations.Vitus5600 =
+        let
+          username = "vitus";
+          hostname = "Vitus5600";
+          specialArgs = {
+            system = linuxSystem;
+            inherit inputs;
+            inherit unstable;
+            inherit username;
+            inherit hostname;
+          };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./overlays
+            ./hosts/Vitus5600
+            ./modules/system/packages.nix
+            ./modules/system/system.nix
+            ./modules/system/nvidia.nix
+            ./users/${username}/nixos.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            (
+              { username, unstable, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = import ./users/${username}/home.nix;
+                  extraSpecialArgs = inputs // specialArgs;
+                  backupFileExtension = "backup";
+                };
+              }
+            )
+            vscode-server.nixosModules.default
+            (
+              { config, pkgs, ... }:
+              {
+                services.vscode-server.enable = true;
+              }
+            )
+          ];
         };
-      in nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./overlays
-          ./hosts/Vitus5600
-          ./modules/system/packages.nix
-          ./modules/system/system.nix
-          ./modules/system/nvidia.nix
-          ./users/${username}/nixos.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          ({ username, unstable, ... }: {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${username} = import ./users/${username}/home.nix;
-              extraSpecialArgs = inputs // specialArgs;
-              backupFileExtension = "backup";
-            };
-          })
-          vscode-server.nixosModules.default
-          ({ config, pkgs, ... }: { services.vscode-server.enable = true; })
-        ];
-      };
 
-      nixosConfigurations.Vitus8500 = let
-        username = "vitus";
-        hostname = "Vitus8500";
-        specialArgs = {
-          system = linuxSystem;
-          inherit inputs;
-          inherit unstable;
-          inherit username;
-          inherit hostname;
+      nixosConfigurations.Vitus8500 =
+        let
+          username = "vitus";
+          hostname = "Vitus8500";
+          specialArgs = {
+            system = linuxSystem;
+            inherit inputs;
+            inherit unstable;
+            inherit username;
+            inherit hostname;
+          };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            ./hosts/Vitus8500
+            ./modules/system/packages.nix
+            ./modules/system/system.nix
+            ./users/${username}/nixos.nix
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            (
+              { username, unstable, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = import ./users/${username}/home.nix;
+                  extraSpecialArgs = inputs // specialArgs;
+                  backupFileExtension = "backup";
+                };
+              }
+            )
+            vscode-server.nixosModules.default
+            (
+              { config, pkgs, ... }:
+              {
+                services.vscode-server.enable = true;
+              }
+            )
+          ];
         };
-      in nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-        modules = [
-          ./hosts/Vitus8500
-          ./modules/system/packages.nix
-          ./modules/system/system.nix
-          ./users/${username}/nixos.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          ({ username, unstable, ... }: {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${username} = import ./users/${username}/home.nix;
-              extraSpecialArgs = inputs // specialArgs;
-              backupFileExtension = "backup";
-            };
-          })
-          vscode-server.nixosModules.default
-          ({ config, pkgs, ... }: { services.vscode-server.enable = true; })
-        ];
-      };
 
       # ========== Darwin (macOS) 主机配置 ==========
       # 使用: darwin-rebuild switch --flake .#VitusMac
 
-      darwinConfigurations.VitusMac = let
-        username = "vitus";
-        hostname = "VitusMac";
-        specialArgs = inputs // {
-          inherit inputs username hostname;
-          unstable = unstableDarwin;
+      darwinConfigurations.VitusMac =
+        let
+          username = "vitus";
+          hostname = "VitusMac";
+          specialArgs = inputs // {
+            inherit inputs username hostname;
+            unstable = unstableDarwin;
+          };
+        in
+        nix-darwin.lib.darwinSystem {
+          system = darwinSystem;
+          inherit specialArgs;
+          modules = [
+            ./hosts/darwin
+            ./modules/darwin
+            home-manager.darwinModules.home-manager
+            (
+              { username, inputs, ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  backupFileExtension = "backup";
+                  users.${username} = import ./users/${username}/darwin.nix;
+                  extraSpecialArgs = { inherit inputs username; };
+                };
+              }
+            )
+            sops-nix.darwinModules.sops
+          ];
         };
-      in nix-darwin.lib.darwinSystem {
-        system = darwinSystem;
-        inherit specialArgs;
-        modules = [
-          ./hosts/darwin
-          ./modules/darwin
-          home-manager.darwinModules.home-manager
-          ({ username, inputs, ... }: {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              users.${username} = import ./users/${username}/darwin.nix;
-              extraSpecialArgs = { inherit inputs username; };
-            };
-          })
-          sops-nix.darwinModules.sops
-        ];
-      };
 
       # ========== 非 NixOS 系统配置 (Ubuntu, WSL, Debian 等) ==========
       # 使用: home-manager switch --flake .#vitus@ubuntu
       # 或:   home-manager switch --flake .#vitus@wsl
 
-      homeConfigurations = let
-        pkgs = import nixpkgs {
-          system = linuxSystem;
-          config.allowUnfree = true;
-        };
-
-        # 共享的核心模块 (CLI 环境)
-        coreModules = [ ./home/core.nix ./home/programs/server.nix ];
-      in {
-        # Ubuntu / Debian / 通用 Linux (仅 CLI)
-        "vitus@ubuntu" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs unstable;
-            username = "vitus";
-            hostname = "ubuntu";
+      homeConfigurations =
+        let
+          pkgs = import nixpkgs {
+            system = linuxSystem;
+            config.allowUnfree = true;
           };
-          modules = coreModules ++ [{
-            home.username = "vitus";
-            home.homeDirectory = "/home/vitus";
-            home.stateVersion = "25.05";
-            programs.home-manager.enable = true;
 
-            nix = {
-              package = pkgs.nix;
-              settings.experimental-features = [ "nix-command" "flakes" ];
+          # 共享的核心模块 (CLI 环境)
+          coreModules = [
+            ./home/core.nix
+            ./home/programs/server.nix
+          ];
+        in
+        {
+          # Ubuntu / Debian / 通用 Linux (仅 CLI)
+          "vitus@ubuntu" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit inputs unstable;
+              username = "vitus";
+              hostname = "ubuntu";
             };
+            modules = coreModules ++ [
+              {
+                home.username = "vitus";
+                home.homeDirectory = "/home/vitus";
+                home.stateVersion = "25.05";
+                programs.home-manager.enable = true;
 
-            programs.bash = {
-              enable = true;
-              enableCompletion = true;
-            };
-          }];
-        };
+                nix = {
+                  package = pkgs.nix;
+                  settings.experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                };
 
-        # WSL 专用配置
-        "vitus@wsl" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs unstable;
-            username = "vitus";
-            hostname = "wsl";
+                programs.bash = {
+                  enable = true;
+                  enableCompletion = true;
+                };
+              }
+            ];
           };
-          modules = coreModules ++ [{
-            home.username = "vitus";
-            home.homeDirectory = "/home/vitus";
-            home.stateVersion = "25.05";
-            programs.home-manager.enable = true;
 
-            nix = {
-              package = pkgs.nix;
-              settings.experimental-features = [ "nix-command" "flakes" ];
+          # WSL 专用配置
+          "vitus@wsl" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit inputs unstable;
+              username = "vitus";
+              hostname = "wsl";
             };
-            programs.bash = {
-              enable = true;
-              enableCompletion = true;
-            };
+            modules = coreModules ++ [
+              {
+                home.username = "vitus";
+                home.homeDirectory = "/home/vitus";
+                home.stateVersion = "25.05";
+                programs.home-manager.enable = true;
 
-            home.sessionVariables = { BROWSER = "wslview"; };
-          }];
+                nix = {
+                  package = pkgs.nix;
+                  settings.experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                };
+                programs.bash = {
+                  enable = true;
+                  enableCompletion = true;
+                };
+
+                home.sessionVariables = {
+                  BROWSER = "wslview";
+                };
+              }
+            ];
+          };
         };
-      };
 
       # ========== 格式化工具 ==========
-      formatter.${linuxSystem} =
-        nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
-      formatter.${darwinSystem} =
-        nixpkgs-darwin.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
+      formatter.${linuxSystem} = nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
+      formatter.${darwinSystem} = nixpkgs-darwin.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
     };
 }

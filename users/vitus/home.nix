@@ -1,4 +1,12 @@
-{ username, inputs, config, pkgs, unstable, ... }: {
+{
+  username,
+  inputs,
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
+{
   # 导入公共 home-manager 模块
   imports = [
     ./../../home/core.nix
@@ -10,7 +18,11 @@
 
   ];
   modules.desktop.hyprland.enable = true;
-  home.packages = with pkgs; [ unstable.wechat-uos feishu qq ];
+  home.packages = with pkgs; [
+    unstable.wechat-uos
+    feishu
+    qq
+  ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符,

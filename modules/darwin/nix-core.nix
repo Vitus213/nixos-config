@@ -15,7 +15,10 @@
 
     settings = {
       # enable flakes globally
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
       # substituers that will be considered before the official ones(https://cache.nixos.org)
       substituters = [

@@ -1,6 +1,9 @@
 # Makefile for NixOS and nix-darwin configurations
 # ================================================
 
+# 使用 zsh 作为 shell
+SHELL := /bin/zsh
+
 .PHONY: help nixos-5600 nixos-8500 darwin home-ubuntu home-wsl update clean fmt check test build-darwin sops-edit sops-decrypt
 
 # 默认目标
@@ -85,7 +88,9 @@ clean-old: ## 清理超过 7 天的 generations
 	nix-collect-garbage --delete-older-than 7d
 
 fmt: ## 格式化所有 nix 文件
-	nix fmt
+	@echo "$(CYAN)格式化所有 .nix 文件...$(RESET)"
+	@source ~/.zshrc && find . -name "*.nix" -type f -not -path "./.git/*" -exec nixfmt {} +
+	@echo "$(GREEN)格式化完成$(RESET)"
 
 check: ## 检查 flake 配置
 	nix flake check
