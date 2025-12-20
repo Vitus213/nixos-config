@@ -1,13 +1,11 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    cpufetch
-    cpuid
-    cpu-x
-    smartmontools
-    light
-    lm_sensors
-    lshw
-    inetutils
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs;
+    [ cpufetch smartmontools inetutils ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+      cpuid
+      cpu-x
+      light
+      lm_sensors
+      lshw
+    ];
 }

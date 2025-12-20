@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     fastfetch
     nvtopPackages.full
@@ -11,8 +10,9 @@
   programs.btop = {
     enable = true;
     package = pkgs.btop.override {
-      cudaSupport = true;
-      rocmSupport = true;
+      cudaSupport = pkgs.stdenv.isLinux;
+      rocmSupport = pkgs.stdenv.isLinux;
     };
   };
+
 }
