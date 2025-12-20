@@ -2,6 +2,9 @@
 { pkgs, lib, ... }:
 
 {
+  # 允许 unfree 软件包
+  nixpkgs.config.allowUnfree = true;
+
   nix = {
     # Determinate uses its own daemon to manage the Nix installation that
     # conflicts with nix-darwin's native Nix management.
@@ -12,15 +15,13 @@
 
     settings = {
       # enable flakes globally
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
 
       # substituers that will be considered before the official ones(https://cache.nixos.org)
       substituters = [
-        "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://nix-community.cachix.org"
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
