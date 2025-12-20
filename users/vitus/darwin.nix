@@ -1,8 +1,5 @@
-{ pkgs, username, inputs, ... }:
-{
-  imports=[
-    ./../../home/shell
-  ];
+{ pkgs, username, inputs, ... }: {
+  imports = [ ./../../home/shell ./../../home/programs/darwin.nix ];
 
   home.stateVersion = "25.05";
   home.username = username;
