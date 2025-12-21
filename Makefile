@@ -89,7 +89,7 @@ clean-old: ## 清理超过 7 天的 generations
 
 fmt: ## 格式化所有 nix 文件
 	@echo "$(CYAN)格式化所有 .nix 文件...$(RESET)"
-	@source ~/.zshrc && find . -name "*.nix" -type f -not -path "./.git/*" -exec nixfmt {} +
+	@find . -name "*.nix" -type f -not -path "./.git/*" | xargs nix fmt
 	@echo "$(GREEN)格式化完成$(RESET)"
 
 check: ## 检查 flake 配置
