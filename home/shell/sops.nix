@@ -30,6 +30,14 @@ in
         export ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets.anthropic_auth_token.path})"
         export ANTHROPIC_BASE_URL="$(cat ${config.sops.secrets.anthropic_base_url.path})"
     '';
+
+    # gh cli 认证配置
+    templates."gh-hosts".content = ''
+      github.com:
+        user: Vitus213
+        oauth_token: ${config.sops.placeholder.github_token}
+        git_protocol: ssh
+    '';
   };
   # 让 shell 自动读取
   programs.zsh.initContent = ''
