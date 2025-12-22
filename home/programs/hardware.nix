@@ -6,6 +6,7 @@
       cpufetch
       smartmontools
       inetutils
+      android-tools
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       cpuid
