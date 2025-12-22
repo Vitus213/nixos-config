@@ -11,5 +11,7 @@
     ./shell-tools.nix
     ./hardware.nix
     ./terminals.nix
+    ./fonts.nix
+    ./custom-fonts.nix
   ];
 }

@@ -42,6 +42,9 @@
       # Claude Code 快捷命令
       cf = "claude --dangerously-skip-permissions";
       cfc = "claude --dangerously-skip-permissions -c";
+      # API 切换命令 (默认使用 AnyRouter)
+      use-anyrouter = "export ANTHROPIC_AUTH_TOKEN=\"\${ANYROUTER_AUTH_TOKEN:-\$ANTHROPIC_AUTH_TOKEN}\" ANTHROPIC_BASE_URL=\"\${ANYROUTER_BASE_URL:-\$ANTHROPIC_BASE_URL}\" && echo 'Switched to AnyRouter API'";
+      use-agent = "export ANTHROPIC_AUTH_TOKEN=\"\$AGENT_AUTH_TOKEN\" ANTHROPIC_BASE_URL=\"\$AGENT_BASE_URL\" && echo 'Switched to Agent API'";
     };
     sessionVariables = {
       http_proxy = "http://127.0.0.1:7897";
@@ -74,11 +77,13 @@
       export PATH
       export SOPS_AGE_SSH_PRIVATE_KEY_FILE="$HOME/.ssh/id_rsa"
       # SOPS 密钥加载 (NixOS)
-      if [ -f "/run/secrets/anthropic_auth_token" ]; then
-        export ANTHROPIC_AUTH_TOKEN="$(cat /run/secrets/anthropic_auth_token)"
+      if [ -f "/run/secrets/anyrouter_auth_token" ]; then
+        export ANYROUTER_AUTH_TOKEN="$(cat /run/secrets/anyrouter_auth_token)"
+        export ANTHROPIC_AUTH_TOKEN="$ANYROUTER_AUTH_TOKEN"
       fi
-      if [ -f "/run/secrets/anthropic_base_url" ]; then
-        export ANTHROPIC_BASE_URL="$(cat /run/secrets/anthropic_base_url)"
+      if [ -f "/run/secrets/anyrouter_base_url" ]; then
+        export ANYROUTER_BASE_URL="$(cat /run/secrets/anyrouter_base_url)"
+        export ANTHROPIC_BASE_URL="$ANYROUTER_BASE_URL"
       fi
     '';
   };

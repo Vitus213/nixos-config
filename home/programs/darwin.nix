@@ -7,6 +7,7 @@
     ./terminals.nix
     ./shell-tools.nix
     ./git.nix
-
+    ./fonts.nix
+    ./custom-fonts.nix
   ];
 }
