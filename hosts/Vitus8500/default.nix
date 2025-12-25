@@ -14,7 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/desktop/kde.nix
+    ../../modules/desktop/kde.nix  # Disabled to use ly with Hyprland
   ];
 
   boot = {
@@ -27,7 +27,7 @@
     loader.efi.canTouchEfiVariables = true;
   };
   # Enable KDE Plasma desktop
-  modules.desktop.kde.enable = true;
+  modules.desktop.kde.enable = false;  # Disabled to use ly with Hyprland
 
   networking.hostName = "Vitus8500"; # Define your hostname.
   # Enable networking

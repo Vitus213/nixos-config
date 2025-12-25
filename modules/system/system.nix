@@ -106,13 +106,13 @@
 
     # Enable CUPS to print documents.
     printing.enable = true;
-    # displayManager.ly = {
-    #   enable = true;
-    #   settings = {
-    #     default_user = "vitus";
-    #     default_session = "hyprland";
-    #   };
-    # };
+    displayManager.ly = {
+      enable = true;
+      settings = {
+        default_user = "vitus";
+        default_session = "hyprland";
+      };
+    };
 
   };
   environment.shells = with pkgs; [ zsh ];
