@@ -8,12 +8,23 @@
   ...
 }:
 let
+  cfg = config.modules.secrets;
   # 根据平台选择正确的 home 目录
   homeDir = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+  
+
 in
 {
-
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
+  options.modules.secrets={
+    enable = lib.mkOption{
+      type = lib.types.bool;
+      default =false;
+      description = "Enable sops secret management.";
+    };
+  };
+
+config = lib.mkIf cfg.enable {
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml; # 注意相对路径可能要调整
@@ -52,4 +63,6 @@ in
         source "${config.xdg.configHome}/sops-nix/secrets/rendered/my-env"
       fi
   '';
+};
+  
 }

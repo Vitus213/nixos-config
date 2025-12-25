@@ -6,17 +6,8 @@
   ...
 }:
 {
-  # sops configuration
-
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-    age.sshKeyPaths = [ "/home/${username}/.ssh/id_rsa" ];
-    secrets.github_token = {
-      owner = username;
-    };
-  };
+  imports = [ ./sops.nix ];
+  modules.systemsecrets.enable = false;
   users = {
     mutableUsers = true;
     users."${username}" = {
@@ -61,9 +52,10 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
     builders-use-substitutes = true;
-    access-tokens = lib.mkIf (
-      config.sops.secrets.github_token.path != null
-    ) "github.com=$(cat ${config.sops.secrets.github_token.path})";
+    # access-tokens = lib.mkIf (
+    #   config.sops.secrets.github_token.path != null
+    # ) "github.com=$(cat ${config.sops.secrets.github_token.path})";
+    access-tokens= "github.com=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";
   };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -111,17 +103,16 @@
         variant = "";
       };
     };
-    desktopManager.plasma6.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
-    displayManager.ly = {
-      enable = true;
-      settings = {
-        default_user = "vitus";
-        default_session = "hyprland";
-      };
-    };
+    # displayManager.ly = {
+    #   enable = true;
+    #   settings = {
+    #     default_user = "vitus";
+    #     default_session = "hyprland";
+    #   };
+    # };
 
   };
   environment.shells = with pkgs; [ zsh ];

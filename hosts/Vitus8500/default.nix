@@ -14,6 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/desktop/kde.nix
   ];
 
   boot = {
@@ -21,10 +22,12 @@
       "net.ipv4.ip_forwarding" = 1;
       "net.ipv6.conf.all.forwarding" = 1;
     };
-    # Bootloader.
+    # Bootloader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
+  # Enable KDE Plasma desktop
+  modules.desktop.kde.enable = true;
 
   networking.hostName = "Vitus8500"; # Define your hostname.
   # Enable networking

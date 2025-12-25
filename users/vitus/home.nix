@@ -17,7 +17,8 @@
     ./../../home/linux/gui/hyprland
 
   ];
-  modules.desktop.hyprland.enable = true;
+  modules.secrets.enable = false;
+  modules.desktop.hyprland.enable = false;
   home.packages = with pkgs; [
     unstable.wechat-uos
     feishu
