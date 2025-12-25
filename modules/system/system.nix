@@ -110,7 +110,8 @@
       enable = true;
       settings = {
         default_user = "vitus";
-        default_session = "hyprland";
+        # Use capital H for Hyprland session
+        default_session = "Hyprland";
       };
     };
 

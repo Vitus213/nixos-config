@@ -18,7 +18,7 @@
 
   ];
   modules.secrets.enable = false;
-  modules.desktop.hyprland.enable = false;
+  modules.desktop.hyprland.enable = true;  # Enable Hyprland
   home.packages = with pkgs; [
     unstable.wechat-uos
     feishu
