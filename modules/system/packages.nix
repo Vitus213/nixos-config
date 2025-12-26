@@ -15,7 +15,7 @@ in
   programs = {
     hyprland = {
       enable = true;
-      withUWSM = false;  # uwsm 与当前 Hyprland 版本不兼容 (--watchdog-fd 未支持)
+      withUWSM = false; # uwsm 与当前 Hyprland 版本不兼容 (--watchdog-fd 未支持)
       package = hyprlandPackage;
       # make sure to also set the portal package, so that they are in sync
       portalPackage =

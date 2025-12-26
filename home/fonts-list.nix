@@ -1,6 +1,7 @@
 { pkgs }:
 # 公共字体列表，可以在系统级和 home-manager 中共享
-with pkgs; [
+with pkgs;
+[
   dejavu_fonts
   fira-code
   fira-code-symbols

@@ -1,8 +1,8 @@
 # Makefile for NixOS and nix-darwin configurations
 # ================================================
 
-# 使用 zsh 作为 shell
-SHELL := /bin/zsh
+# 使用系统默认 shell (兼容 NixOS)
+SHELL := /bin/sh
 
 .PHONY: help nixos-5600 nixos-8500 darwin home-ubuntu home-wsl update clean fmt check test build-darwin sops-edit sops-decrypt
 

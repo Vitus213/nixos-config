@@ -51,13 +51,15 @@ in
           "${configPath}/windowrules.conf"
         ];
       env = [
-
+        # 鼠标主题
+        "XCURSOR_THEME,Bibata-Modern-Classic"
+        "XCURSOR_SIZE,24"
       ];
     };
     # 注意：不要让home-manager生成session文件，以避免与系统级session冲突
     # gammastep/wallpaper-switcher的systemd集成已由系统级hyprland提供
     systemd = {
-      enable = false;  # 禁用以避免与ly显示管理器冲突
+      enable = false; # 禁用以避免与ly显示管理器冲突
       variables = [ "--all" ];
     };
   };

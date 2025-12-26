@@ -112,13 +112,13 @@
         default_session = "Hyprland";
       };
     };
-#     displayManager.sddm={
-#     enable = true;
-#     settings.Autologin={
-#  User = "vitus";
-#       Session="hyprland";
-#     };
-#     };
+    #     displayManager.sddm={
+    #     enable = true;
+    #     settings.Autologin={
+    #  User = "vitus";
+    #       Session="hyprland";
+    #     };
+    #     };
   };
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [

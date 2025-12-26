@@ -17,8 +17,8 @@
     ./../../home/linux/gui/hyprland
 
   ];
-  modules.secrets.enable = true;  # 启用用户级sops以渲染环境变量和gh配置
-  modules.desktop.hyprland.enable = true;  # Enable Hyprland
+  modules.secrets.enable = true; # 启用用户级sops以渲染环境变量和gh配置
+  modules.desktop.hyprland.enable = true; # Enable Hyprland
   home.packages = with pkgs; [
     unstable.wechat-uos
     feishu

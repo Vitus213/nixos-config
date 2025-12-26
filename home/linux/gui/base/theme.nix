@@ -1,4 +1,4 @@
-{ catppuccin, ... }:
+{ catppuccin, pkgs, ... }:
 {
   # https://github.com/catppuccin/nix
   imports = [ catppuccin.homeModules.catppuccin ];
@@ -13,6 +13,14 @@
     delta = {
       enable = true;
     };
+  };
 
+  # 鼠标主题 - Bibata 简洁小箭头
+  home.pointerCursor = {
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
   };
 }

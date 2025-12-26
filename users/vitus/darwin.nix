@@ -9,7 +9,7 @@
     ./../../home/shell
     ./../../home/programs/darwin.nix
   ];
-  modules.secrets.enable=true;
+  modules.secrets.enable = true;
   home.stateVersion = "25.11";
   home.username = username;
   home.homeDirectory = "/Users/${username}";
