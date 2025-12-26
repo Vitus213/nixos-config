@@ -22,6 +22,7 @@
       openjdk # 使用默认的 OpenJDK，支持 ARM64
       cmake # 跨平台构建系统生成器。
       nixfmt-rfc-style
+      gnumake42
     ];
     # ++ lib.optionals (!pkgs.stdenv.isAarch64) [
     #   # 这些包在 ARM64 macOS 上不下载，先跳过，用自带的

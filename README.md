@@ -89,7 +89,7 @@ mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 
 # 3. 安装 Home-Manager
-nix run home-manager/release-25.05 -- init
+nix run home-manager/release-25.11 -- init
 
 # 4. 部署配置
 home-manager switch --flake ~/.config/home-manager#vitus@ubuntu  # Ubuntu/Debian

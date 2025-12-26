@@ -7,7 +7,7 @@
 }:
 {
   imports = [ ./sops.nix ];
-  modules.systemsecrets.enable = false;
+  modules.systemsecrets.enable = true;
   users = {
     mutableUsers = true;
     users."${username}" = {
@@ -55,7 +55,6 @@
     # access-tokens = lib.mkIf (
     #   config.sops.secrets.github_token.path != null
     # ) "github.com=$(cat ${config.sops.secrets.github_token.path})";
-    access-tokens= "github.com=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";
   };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -110,11 +109,16 @@
       enable = true;
       settings = {
         default_user = "vitus";
-        # Use capital H for Hyprland session
         default_session = "Hyprland";
       };
     };
-
+#     displayManager.sddm={
+#     enable = true;
+#     settings.Autologin={
+#  User = "vitus";
+#       Session="hyprland";
+#     };
+#     };
   };
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
@@ -141,15 +145,15 @@
     };
   };
   # Select internationalisation properties.
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
-    extraConfig = ''
-      IdleAction=ignore
-      HandlePowerKey=ignore
-      HandleSuspendKey=ignore
-    '';
+  services.logind.settings = {
+    Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      IdleAction = "ignore";
+      HandlePowerKey = "ignore";
+      HandleSuspendKey = "ignore";
+    };
   };
 
   #open ssh
@@ -171,6 +175,6 @@
   #使用dbus
   services.dbus = {
     implementation = "broker";
-    packages = [ pkgs.haskellPackages.dbus-app-launcher ];
+    # packages = [ pkgs.haskellPackages.dbus-app-launcher ];
   };
 }

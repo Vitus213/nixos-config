@@ -2,12 +2,12 @@
   description = "Vitus's NixOS and nix-darwin configuration";
   inputs = {
     # ========== 通用 inputs ==========
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,7 +46,7 @@
 
     # ========== Darwin 专用 inputs ==========
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -241,7 +241,7 @@
               {
                 home.username = "vitus";
                 home.homeDirectory = "/home/vitus";
-                home.stateVersion = "25.05";
+                home.stateVersion = "25.11";
                 programs.home-manager.enable = true;
 
                 nix = {
@@ -272,7 +272,7 @@
               {
                 home.username = "vitus";
                 home.homeDirectory = "/home/vitus";
-                home.stateVersion = "25.05";
+                home.stateVersion = "25.11";
                 programs.home-manager.enable = true;
 
                 nix = {

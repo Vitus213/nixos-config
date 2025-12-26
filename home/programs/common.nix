@@ -80,6 +80,7 @@
     jq.enable = true; # A lightweight and flexible command-line JSON processor
     ssh = {
       enable = true;
+      enableDefaultConfig=false;
       matchBlocks = {
         "5600Server" = {
           # 这里的键就是 Host 别名

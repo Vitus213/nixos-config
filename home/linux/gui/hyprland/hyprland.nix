@@ -54,9 +54,10 @@ in
 
       ];
     };
-    # gammastep/wallpaper-switcher need this to be enabled.
+    # 注意：不要让home-manager生成session文件，以避免与系统级session冲突
+    # gammastep/wallpaper-switcher的systemd集成已由系统级hyprland提供
     systemd = {
-      enable = true;
+      enable = false;  # 禁用以避免与ly显示管理器冲突
       variables = [ "--all" ];
     };
   };
