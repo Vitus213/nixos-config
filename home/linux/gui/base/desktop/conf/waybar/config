@@ -4,7 +4,7 @@
       "format": "{:%H:%M  %A %b %d}",
       "interval": 1,
       "tooltip": true,
-      "tooltip-format": "{=%A; %d %B %Y}\n<tt>{calendar}</tt>"
+      "tooltip-format": "{:%A; %d %B %Y}\n<tt>{calendar}</tt>"
     },
     "cpu": {
       "format": "󰍛 {usage}%",
