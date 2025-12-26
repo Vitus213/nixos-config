@@ -58,10 +58,10 @@ in
         "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
       ];
     };
-    # 注意：不要让home-manager生成session文件，以避免与系统级session冲突
-    # gammastep/wallpaper-switcher的systemd集成已由系统级hyprland提供
+    # 启用 systemd 集成以正确设置会话环境变量
+    # ly 显示管理器需要这些来正确启动 Hyprland 会话
     systemd = {
-      enable = false; # 禁用以避免与ly显示管理器冲突
+      enable = true;
       variables = [ "--all" ];
     };
   };
