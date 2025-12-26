@@ -68,14 +68,6 @@
       extraConfig = "mouse on";
     };
 
-    bat = {
-      enable = true;
-      config = {
-        pager = "less -FR";
-        theme = "catppuccin-mocha";
-      };
-    };
-
     eza.enable = true; # A modern replacement for ‘ls’
     jq.enable = true; # A lightweight and flexible command-line JSON processor
     ssh = {

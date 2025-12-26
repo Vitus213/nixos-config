@@ -51,9 +51,11 @@ in
           "${configPath}/windowrules.conf"
         ];
       env = [
-        # 鼠标主题
-        "XCURSOR_THEME,Bibata-Modern-Classic"
-        "XCURSOR_SIZE,24"
+        # 鼠标主题 - 由 catppuccin.cursors 设置
+        "XCURSOR_SIZE,${toString config.home.pointerCursor.size}"
+        "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
+        "XCURSOR_THEME,${config.home.pointerCursor.name}"
+        "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
       ];
     };
     # 注意：不要让home-manager生成session文件，以避免与系统级session冲突

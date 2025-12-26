@@ -153,6 +153,7 @@
             ./modules/system/system.nix
             ./users/${username}/nixos.nix
             sops-nix.nixosModules.sops
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             (
               { username, unstable, ... }:

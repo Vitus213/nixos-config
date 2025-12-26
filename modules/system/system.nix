@@ -174,7 +174,7 @@
   security.rtkit.enable = true;
   #使用dbus
   services.dbus = {
-    enable=true;
+    enable = true;
     # implementation = "broker";
     # packages = [ pkgs.haskellPackages.dbus-app-launcher ];
   };
