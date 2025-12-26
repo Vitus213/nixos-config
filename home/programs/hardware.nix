@@ -7,6 +7,7 @@
       smartmontools
       inetutils
       android-tools
+      bat
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       cpuid

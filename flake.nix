@@ -105,32 +105,10 @@
           modules = [
             ./overlays
             ./hosts/Vitus5600
-            ./modules/system/packages.nix
-            ./modules/system/system.nix
+            ./modules/system
             ./modules/system/nvidia.nix
             ./users/${username}/nixos.nix
-            sops-nix.nixosModules.sops
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            (
-              { username, unstable, ... }:
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = import ./users/${username}/home.nix;
-                  extraSpecialArgs = inputs // specialArgs;
-                  backupFileExtension = "backup";
-                };
-              }
-            )
-            vscode-server.nixosModules.default
-            (
-              { config, pkgs, ... }:
-              {
-                services.vscode-server.enable = true;
-              }
-            )
+        
           ];
         };
 
@@ -150,31 +128,9 @@
           inherit specialArgs;
           modules = [
             ./hosts/Vitus8500
-            ./modules/system/packages.nix
-            ./modules/system/system.nix
+            ./modules/system
             ./users/${username}/nixos.nix
-            sops-nix.nixosModules.sops
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            (
-              { username, unstable, ... }:
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = import ./users/${username}/home.nix;
-                  extraSpecialArgs = inputs // specialArgs;
-                  backupFileExtension = "backup";
-                };
-              }
-            )
-            vscode-server.nixosModules.default
-            (
-              { config, pkgs, ... }:
-              {
-                services.vscode-server.enable = true;
-              }
-            )
+     
           ];
         };
 

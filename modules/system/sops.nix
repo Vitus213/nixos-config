@@ -11,7 +11,7 @@ let
   cfg = config.modules.systemsecrets;
 in
 {
-
+  imports = [ inputs.sops-nix.nixosModules.sops ];
   options.modules.systemsecrets = {
     enable = lib.mkOption {
       type = lib.types.bool;
