@@ -108,26 +108,6 @@
             ./modules/system
             ./modules/system/nvidia.nix
             ./users/${username}/nixos.nix
-        home-manager.nixosModules.home-manager
-    (
-      { username, unstable, ... }:
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.${username} = import ./users/${username}/home.nix;
-          extraSpecialArgs = inputs // specialArgs;
-          backupFileExtension = "backup";
-        };
-      }
-    )
-    vscode-server.nixosModules.default
-    (
-      { config, pkgs, ... }:
-      {
-        services.vscode-server.enable = true;
-      }
-    )
           ];
         };
 
@@ -149,26 +129,6 @@
             ./hosts/Vitus8500
             ./modules/system
             ./users/${username}/nixos.nix
-     home-manager.nixosModules.home-manager
-    (
-      { username, unstable, ... }:
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.${username} = import ./users/${username}/home.nix;
-          extraSpecialArgs = inputs // specialArgs;
-          backupFileExtension = "backup";
-        };
-      }
-    )
-    vscode-server.nixosModules.default
-    (
-      { config, pkgs, ... }:
-      {
-        services.vscode-server.enable = true;
-      }
-    )
           ];
         };
 
