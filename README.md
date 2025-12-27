@@ -115,7 +115,13 @@ home-manager switch --flake ~/.config/home-manager#vitus@wsl     # WSL
 - `anthropic_auth_token`
 - `anthropic_base_url`
 - `github_token`
-
+#### 完善代理
+比如很多时候你已经配置的access-tokens 失效了，但是你又不能直接去修改nix.conf,你需要重新rebuild才行，但是你又rebuild不了，这个时候我们就可以用诸如此类的命令
+```
+sudo -E nixos-rebuild switch --option access-tokens "github.com=<your github token>"
+-E是负责把https_proxy，http_proxy这些环境变量传递
+--option access-tokens是负责传递github_token
+```
 ### 非 NixOS 系统
 #### 完善代理 
 nix是用client-server的模式，命令行的代理不是nix-daemon的代理
