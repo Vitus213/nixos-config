@@ -26,10 +26,10 @@
       flake = false;
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprland-plugins = {
+    #   url = "github:hyprwm/hyprland-plugins";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";

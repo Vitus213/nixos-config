@@ -7,5 +7,6 @@
     ./nix-core.nix
     ./system.nix
     ./apps.nix
+    ./sops.nix
   ];
 }

@@ -32,4 +32,7 @@
 
   # TouchID 支持 sudo
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  # 启用系统级 sops secrets 管理
+  modules.systemsecrets.enable = true;
 }

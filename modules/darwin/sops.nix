@@ -1,38 +1,47 @@
-# Darwin SOPS 配置
 {
-  config,
+  inputs,
   pkgs,
   username,
+  config,
+  lib,
   ...
+
 }:
-
+let
+  cfg = config.modules.systemsecrets;
+in
 {
-  # 安装 sops 和 age
-  environment.systemPackages = with pkgs; [
-    sops
-    age
-    ssh-to-age
-  ];
-
-  # SOPS 配置
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-
-    # 使用 age 密钥
-    age = {
-      # 密钥文件路径 (需要在 Mac 上手动创建)
-      keyFile = "/Users/${username}/.config/sops/age/keys.txt";
-      # 从 SSH 密钥生成 age 密钥
-      sshKeyPaths = [ "/Users/${username}/.ssh/id_ed25519" ];
-      generateKey = false;
+  imports = [ inputs.sops-nix.darwinModules.sops ];
+  options.modules.systemsecrets = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable system sops secret management.";
     };
-
-    # 定义需要解密的 secrets
-    # 示例:
-    # secrets = {
-    #   "example_key" = {
-    #     owner = username;
-    #   };
-    # };
+  };
+  config = lib.mkIf cfg.enable {
+    sops = {
+      defaultSopsFile = ../../secrets/secrets.yaml;
+      defaultSopsFormat = "yaml";
+      age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+      age.sshKeyPaths = [ ];  # 禁用 SSH 密钥查找
+      secrets.github_token = {
+        owner = "root";
+        group = "wheel";
+        mode = "0400";
+      };
+    };
+    
+    # 在用户配置目录创建 nix.conf 以覆盖系统配置
+    system.activationScripts.extraActivation.text = ''
+      echo "Setting up GitHub access token for nix..."
+      if [ -f /run/secrets/github_token ]; then
+        TOKEN=$(cat /run/secrets/github_token)
+        mkdir -p /Users/${username}/.config/nix
+        echo "access-tokens = github.com=$TOKEN" > /Users/${username}/.config/nix/nix.conf
+        chown -R ${username}:staff /Users/${username}/.config/nix
+        echo "GitHub access token configured in user nix.conf"
+      fi
+    '';
   };
 }
