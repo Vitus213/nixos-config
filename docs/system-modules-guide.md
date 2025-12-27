@@ -156,7 +156,7 @@ environment.extraInit = ''
 **密钥存储位置**：
 - 加密文件：`secrets/secrets.yaml`
 - 运行时解密到：`/run/secrets/github_token`
-- 使用 age 加密，私钥在 `~/.ssh/id_rsa`
+- 使用 age 加密，私钥在 `~/.config/sops/age/keys.txt`
 
 ---
 
