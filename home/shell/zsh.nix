@@ -52,10 +52,13 @@
       all_proxy = "socks5://127.0.0.1:7897";
       no_proxy = "localhost,127.0.0.1,::1";
 
-      # 输入法设置 (如果是 Home Manager 管理，可以在这里设；
-      # 如果是 NixOS 系统级配置，通常在 i18n.inputMethod 中设置会自动生效)
-      GTK_IM_MODULE = "fcitx";
-      QT_IM_MODULE = "fcitx";
+      # 输入法设置
+      # 在 Wayland 下，不应该设置 GTK_IM_MODULE 和 QT_IM_MODULE
+      # GTK3/4 和 Qt 6.7+ 会自动使用 text-input-v3 协议
+      # 设置这些变量会导致候选框位置错误和全屏时消失的问题
+      # 参考: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland
+      #
+      # XMODIFIERS 仍然需要，用于 XWayland 应用的 XIM 协议
       XMODIFIERS = "@im=fcitx";
     };
     initContent = ''
