@@ -2,10 +2,12 @@
   pkgs,
   config,
   hostname,
+  inputs,
   ...
 }:
 let
-  package = pkgs.hyprland;
+  # 使用 flake inputs 中的 hyprland，保持与系统级配置一致
+  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in
 {
   xdg.configFile =
@@ -51,11 +53,6 @@ in
           "${configPath}/windowrules.conf"
         ];
       env = [
-        # 鼠标主题 - 由 catppuccin.cursors 设置
-        "XCURSOR_SIZE,${toString config.home.pointerCursor.size}"
-        "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
-        "XCURSOR_THEME,${config.home.pointerCursor.name}"
-        "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
       ];
     };
     # 启用 systemd 集成以正确设置会话环境变量
