@@ -13,11 +13,11 @@
     ./system.nix
     ./themes.nix
     ./sops.nix
-    
+
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModules.default
   ];
-  
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -27,6 +27,6 @@
     };
     backupFileExtension = "backup";
   };
-  
+
   services.vscode-server.enable = true;
 }

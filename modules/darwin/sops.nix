@@ -24,14 +24,14 @@ in
       defaultSopsFile = ../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
       age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
-      age.sshKeyPaths = [ ];  # 禁用 SSH 密钥查找
+      age.sshKeyPaths = [ ]; # 禁用 SSH 密钥查找
       secrets.github_token = {
         owner = "root";
         group = "wheel";
         mode = "0400";
       };
     };
-    
+
     # 在用户配置目录创建 nix.conf 以覆盖系统配置
     system.activationScripts.extraActivation.text = ''
       echo "Setting up GitHub access token for nix..."
