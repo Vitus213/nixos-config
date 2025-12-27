@@ -22,11 +22,10 @@
     # alacritty as an example, it use xdg-open as default, but you can also custom this behavior
     # and vscode has open like `External Uri Openers`
     xdgOpenUsePortal = true;
-    # ls /etc/profiles/per-user/ryan/share/xdg-desktop-portal/portals
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk # for provides file picker / OpenURI
-      # xdg-desktop-portal-wlr
-      xdg-desktop-portal-hyprland # for Hyprland
+    # xdg-desktop-portal-hyprland 已在系统级 packages.nix 中通过
+    # programs.hyprland.portalPackage 配置，这里只需要 gtk portal
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk # for provides file picker / OpenURI
     ];
   };
 }
