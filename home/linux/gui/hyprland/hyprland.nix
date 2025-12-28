@@ -12,7 +12,7 @@ in
 {
   xdg.configFile =
     let
-      repoConf = ./conf;
+      repoConf = "${config.home.homeDirectory}/nixos-config/home/linux/gui/hyprland/conf";
       mkSymlink = config.lib.file.mkOutOfStoreSymlink;
     in
     {
