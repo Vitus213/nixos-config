@@ -46,15 +46,6 @@
           "--password-store=gnome" # use gnome-keyring as password store
         ];
       };
-      profiles.default.userSettings = {
-        "files.autoSave" = "afterDelay";
-
-        # 如果选择了 "afterDelay"，可以设置延迟时间（单位：毫秒）
-        "files.autoSaveDelay" = 1000;
-
-        # 进阶配合：在自动保存时是否触发格式化（可选）
-        "editor.formatOnSave" = true;
-      };
     };
   };
 }
