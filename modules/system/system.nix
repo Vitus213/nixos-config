@@ -135,6 +135,7 @@
     htop
     age
     sops
+    lazygit
   ];
   fonts = {
     packages = import ../../home/fonts-list.nix { inherit pkgs; };
