@@ -31,7 +31,7 @@
       defaultApplications =
         let
           browser = [
-            "microsoft=edge.desktop"
+            "microsoft-edge.desktop"
             "firefox.desktop"
           ];
           editor = [
