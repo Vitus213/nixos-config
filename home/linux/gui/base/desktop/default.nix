@@ -57,8 +57,6 @@
   # Disable catppuccin to avoid conflict with my non-nix config.
   # catppuccin.waybar.enable = false;
 
-
-
   # Logout Menu
 
   # catppuccin.wlogout.enable = false;

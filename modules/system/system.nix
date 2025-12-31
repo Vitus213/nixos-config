@@ -56,6 +56,11 @@
     #   config.sops.secrets.github_token.path != null
     # ) "github.com=$(cat ${config.sops.secrets.github_token.path})";
   };
+  nix.gc = {
+    automatic = true; # 开启自动清理
+    dates = "weekly"; # 清理频率，可以设为 "daily"
+    options = "--delete-older-than 30d"; # 删除 30 天前的版本
+  };
   #桌面默认使用wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
