@@ -17,8 +17,8 @@
     };
 
     # ========== NixOS 专用 inputs ==========
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+    fenix = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin-bat = {
@@ -60,7 +60,7 @@
       home-manager,
       nixpkgs-unstable,
       vscode-server,
-      rust-overlay,
+      fenix,
       anyrun,
       catppuccin,
       sops-nix,
@@ -70,7 +70,6 @@
     let
       # ========== Linux 系统变量 ==========
       linuxSystem = "x86_64-linux";
-      overlays = [ (import rust-overlay) ];
       unstable = import nixpkgs-unstable {
         system = linuxSystem;
         config.allowUnfree = true;
@@ -103,6 +102,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            { nixpkgs.overlays = [ fenix.overlays.default ]; }
             ./overlays
             ./hosts/Vitus5600
             ./modules/system
@@ -126,6 +126,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
+            { nixpkgs.overlays = [ fenix.overlays.default ]; }
             ./hosts/Vitus8500
             ./modules/system
             ./users/${username}/nixos.nix
@@ -150,6 +151,7 @@
           modules = [
             ./hosts/darwin
             ./modules/darwin
+            { nixpkgs.overlays = [ fenix.overlays.default ]; }
             home-manager.darwinModules.home-manager
             (
               { username, inputs, ... }:
@@ -176,6 +178,7 @@
           pkgs = import nixpkgs {
             system = linuxSystem;
             config.allowUnfree = true;
+            overlays = [ fenix.overlays.default ];
           };
 
           # 共享的核心模块 (CLI 环境)

@@ -16,7 +16,7 @@
     tinymist # Typst 的 LSP 服务器。
     vscode-extensions.myriad-dreamin.tinymist # VSCode Typst 扩展。
     # 开发工具 (Development Tools)
-    rustup # Rust 工具链安装程序。
+    fenix.complete.toolchain # Fenix 提供的完整 Rust 工具链。
     openjdk # 使用默认的 OpenJDK，支持 ARM64
     cmake # 跨平台构建系统生成器。
     nixfmt-rfc-style

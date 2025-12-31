@@ -174,6 +174,20 @@
 
   #virtualization开启docker支持
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    registry-mirrors = [
+      "https://docker.m.daocloud.io"
+      "https://huecker.io"
+      "https://dockerhub.timeweb.cloud"
+    ];
+  };
+  systemd.services.docker.serviceConfig = {
+    Environment = [
+      "HTTP_PROXY=http://127.0.0.1:7897/"
+      "HTTPS_PROXY=http://127.0.0.1:7897/"
+      "NO_PROXY=localhost,127.0.0.1"
+    ];
+  };
   users.extraGroups.vboxusers.members = [ "vitus" ];
 
   security.rtkit.enable = true;
