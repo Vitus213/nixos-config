@@ -36,6 +36,8 @@ in
       secrets.anyrouter_base_url = { };
       secrets.agent_auth_token = { };
       secrets.agent_base_url = { };
+      secrets.glm_auth_token = { };
+      secrets.glm_base_url = { };
 
       # 这里加上刚才说的模板，自动生成 source 文件
       templates."my-env".content = ''
@@ -44,6 +46,8 @@ in
           export ANYROUTER_BASE_URL="$(cat ${config.sops.secrets.anyrouter_base_url.path})"
           export AGENT_AUTH_TOKEN="$(cat ${config.sops.secrets.agent_auth_token.path})"
           export AGENT_BASE_URL="$(cat ${config.sops.secrets.agent_base_url.path})"
+          export GLM_AUTH_TOKEN="$(cat ${config.sops.secrets.glm_auth_token.path})"
+          export GLM_BASE_URL="$(cat ${config.sops.secrets.glm_base_url.path})"
           # 默认使用 AnyRouter
           export ANTHROPIC_AUTH_TOKEN="$ANYROUTER_AUTH_TOKEN"
           export ANTHROPIC_BASE_URL="$ANYROUTER_BASE_URL"

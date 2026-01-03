@@ -45,6 +45,7 @@
       # API 切换命令 (默认使用 AnyRouter)
       use-anyrouter = "export ANTHROPIC_AUTH_TOKEN=\"\${ANYROUTER_AUTH_TOKEN:-\$ANTHROPIC_AUTH_TOKEN}\" ANTHROPIC_BASE_URL=\"\${ANYROUTER_BASE_URL:-\$ANTHROPIC_BASE_URL}\" && echo 'Switched to AnyRouter API'";
       use-agent = "export ANTHROPIC_AUTH_TOKEN=\"\$AGENT_AUTH_TOKEN\" ANTHROPIC_BASE_URL=\"\$AGENT_BASE_URL\" && echo 'Switched to Agent API'";
+      use-glm = "export ANTHROPIC_AUTH_TOKEN=\"\${GLM_AUTH_TOKEN:-\$ANTHROPIC_AUTH_TOKEN}\" ANTHROPIC_BASE_URL=\"\${GLM_BASE_URL:-\$ANTHROPIC_BASE_URL}\" && echo 'Switched to GLM API'";
     };
     sessionVariables = {
       http_proxy = "http://127.0.0.1:7897";
