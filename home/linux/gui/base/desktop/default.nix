@@ -28,6 +28,7 @@
   };
 
   home.packages = with pkgs; [
+    swaylock
     hypridle
     wlogout
     waybar
