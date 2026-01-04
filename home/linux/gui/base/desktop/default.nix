@@ -8,7 +8,6 @@
   imports = [
     ./anyrun.nix
     ./nvidia.nix
-    ./hyprlock
   ];
 
   # wayland related
@@ -55,7 +54,9 @@
       confPath = "${config.home.homeDirectory}/nixos-config/home/linux/gui/base/desktop/conf";
     in
     {
-      "mako".source = mkSymlink "${confPath}/mako";
+      "wallpaper".source = mkSymlink "${confPath}/wallpaper";
+      "mako/config".source = mkSymlink "${confPath}/mako/config";
+      "mako/icons".source = mkSymlink "${confPath}/mako/icons";
       "waybar".source = mkSymlink "${confPath}/waybar";
       "wlogout".source = mkSymlink "${confPath}/wlogout";
       "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";

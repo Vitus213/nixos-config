@@ -402,7 +402,6 @@ sessionVariables = {
 **依赖服务**：
 - `waybar`: 状态栏
 - `hypridle`: 空闲管理（自动锁屏）
-- `hyprlock`: 屏幕锁
 - `xdg-desktop-portal-hyprland`: 截图、屏幕共享
 
 ---
