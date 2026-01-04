@@ -42,6 +42,11 @@
     # audio
     alsa-utils # provides amixer/alsamixer/...
     networkmanagerapplet # provide GUI app: nm-connection-editor
+    # waybar scripts dependencies
+    jq
+    curl
+    oath-toolkit
+    wofi
   ];
 
   xdg.configFile =
@@ -66,6 +71,6 @@
   # services.hypridle.enable = true;
 
   # notification daemon, the same as dunst
-  # services.mako.enable = true;
-  #   catppuccin.mako.enable = false;
+  services.mako.enable = true;
+  # catppuccin.mako.enable = false;
 }

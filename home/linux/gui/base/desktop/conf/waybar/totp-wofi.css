@@ -1,0 +1,67 @@
+/* TOTP Selector Wofi Styling */
+/* Matches waybar theme colors */
+
+* {
+    background-color: rgba(40, 44, 52, 0.9);
+    color: #eceff4;
+    font-family: 'JetBrains Mono', 'Noto Sans CJK SC', monospace;
+    font-size: 14px;
+    border: none;
+}
+
+#window {
+    background-color: rgba(40, 44, 52, 0.95);
+    border: 2px solid rgba(137, 180, 250, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#input {
+    background-color: rgba(137, 180, 250, 0.1);
+    border: 1px solid rgba(137, 180, 250, 0.3);
+    color: #eceff4;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+#input:focus {
+    background-color: rgba(137, 180, 250, 0.2);
+    border-color: rgba(137, 180, 250, 0.5);
+}
+
+#inner-box {
+    background-color: transparent;
+    margin: 5px;
+}
+
+#outer-box {
+    background-color: transparent;
+}
+
+#scroll {
+    background-color: transparent;
+}
+
+#text {
+    color: #eceff4;
+    padding: 10px 15px;
+    font-weight: 500;
+}
+
+#entry {
+    background-color: transparent;
+    margin: 3px 5px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+#entry:selected {
+    background-color: rgba(137, 180, 250, 0.2);
+    color: #89b4fa;
+}
+
+#entry:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

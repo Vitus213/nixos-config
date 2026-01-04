@@ -1,126 +1,181 @@
-[
-  {
-    "clock": {
-      "format": "{:%H:%M  %A %b %d}",
-      "interval": 1,
-      "tooltip": true,
-      "tooltip-format": "{:%A; %d %B %Y}\n<tt>{calendar}</tt>"
-    },
-    "cpu": {
-      "format": "󰍛 {usage}%",
-      "interval": 1
-    },
-    "custom/cava-internal": {
-      "exec": "sleep 1s && cava-internal",
-      "tooltip": false
-    },
-    "custom/launcher": {
-      "format": " ",
-      "on-click": "thunar",
-      "on-click-middle": "exec default_wall",
-      "on-click-right": "exec wallpaper_random",
-      "tooltip": false
-    },
-    "custom/powermenu": {
-      "format": "",
-      "on-click": "wlogout",
-      "tooltip": false
-    },
-    "hyprland/workspaces": {
-      "format": "{name}:{icon}",
-      "format-icons": {
-        "web": "󰖟",     
-        "code": "󰨞",
-        "2": "󰨞",
-        "3": "󰖟", 
-        "9": "󰍡",
-        "social": "󰍡",
-        "10": "",
-        "4": "",
-        "5": "",
-        "6": "",
-        "7": "",
-        "8": "",
-        "default": ""
-      }
-    },
+{
     "layer": "top",
-    "memory": {
-      "format": "󰻠 {percentage}%",
-      "interval": 1,
-      "states": {
-        "warning": 85
-      }
-    },
-    "modules-center": [
-      "wlr/taskbar"
-    ],
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 36,
+    "margin-top": 8,
+    "margin-left": 3,
+    "margin-right": 8,
     "modules-left": [
-      "custom/launcher",
-      "mpd",
-      "custom/cava-internal",
-      "hyprland/workspaces"
+        "custom/power",
+        "tray",
+        "custom/updates",
+        "custom/totp",
+        "custom/pomodoro"
+    ],
+    "modules-center": [
+        "custom/datetime-weather"
     ],
     "modules-right": [
-      "pulseaudio",
-      "backlight",
-      "memory",
-      "cpu",
-      "network",
-      "custom/powermenu",
-      "tray",
-      "clock"
+        "custom/notification",
+        "custom/netspeed",
+        "idle_inhibitor",
+        "pulseaudio",
+        "cpu",
+        "memory",
+        "temperature",
+        "battery"
     ],
-    "mpd": {
-      "format": "<span foreground='#bb9af7'></span> {title}",
-      "format-disconnected": "",
-      "format-paused": " {title}",
-      "format-stopped": "<span foreground='#bb9af7'></span>",
-      "max-length": 25,
-      "on-click": "mpc --quiet toggle",
-      "on-click-middle": "kitty --class='ncmpcpp' ncmpcpp ",
-      "on-click-right": "mpc update; mpc ls | mpc add",
-      "on-scroll-down": "mpc --quiet next",
-      "on-scroll-up": "mpc --quiet prev",
-      "smooth-scrolling-threshold": 5,
-      "tooltip-format": "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})"
+    "custom/power": {
+        "format": "󰐥",
+        "on-click": "wlogout",
+        "on-click-right": "systemctl suspend",
+        "tooltip": "左键: 电源菜单 | 右键: 休眠"
+    },
+    "custom/datetime-weather": {
+        "format": "{}",
+        "exec": "~/.config/waybar/datetime-weather.sh",
+        "interval": 60,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/datetime-weather.sh --calendar",
+        "on-click-right": "kitty --title='Weather Details' -e bash -c '~/.config/waybar/datetime-weather.sh --weather-details; read -p \"Press Enter to close...\"'",
+        "on-click-middle": "~/.config/waybar/datetime-weather.sh --lunar",
+        "tooltip": true
     },
     "network": {
-      "format-disconnected": "󰯡 ",
-      "format-ethernet": "󰒢 ",
-      "format-linked": "󰖪 {essid} (No IP)",
-      "format-wifi": "󰖩 {essid}",
-      "interval": 1,
-      "on-click": "kitty -e nmtui",
-      "tooltip": false
+        "tooltip": true,
+        "format-wifi": "󰤨 ",
+        "format-ethernet": "󰈀 ",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-alt": "<span color='#99ffdd'>󰇚 {bandwidthDownBytes}</span> <span color='#ffcc66'>󰕒 {bandwidthUpBytes}</span>",
+        "interval": 2,
+        "on-click": "nm-connection-editor"
     },
-    "position": "top",
+    "bluetooth": {
+        "format": "󰂯 {status}",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "interval": 30,
+        "on-click": "blueman-manager",
+        "format-no-controller": ""
+    },
     "pulseaudio": {
-      "format": "{icon} {volume}%",
-      "format-icons": {
-        "default": [
-          "",
-          "",
-          ""
-        ]
-      },
-      "format-muted": "󰖁 Muted",
-      "on-click": "pamixer -t",
-      "on-click-middle": "pavucontrol",
-      "scroll-step": 1,
-      "tooltip": false
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": "󰝟 Muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "󰏲",
+            "portable": "󰦢",
+            "car": "󰄋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        }
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 Muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "scroll-step": 5
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰂄 {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "tray": {
-      "icon-size": 20,
-      "spacing": 10
+        "icon-size": 18,
+        "spacing": 10
     },
-    "wlr/taskbar": {
-      "active-first": true,
-      "format": "{icon}",
-      "on-click": "activate",
-      "on-click-middle": "close",
-      "tooltip": true,
-      "tooltip-format": "{title}"
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰒳",
+            "deactivated": "󰒲"
+        }
+    },
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "tooltip": false,
+        "interval": 1
+    },
+    "memory": {
+        "format": "󰾆 {percentage}%",
+        "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G"
+    },
+    "temperature": {
+        "format": "󰔏 {temperatureC}°C",
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input",
+        "input-filename": "temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "󰸁 {temperatureC}°C",
+        "tooltip-format": "CPU Temperature: {temperatureC}°C",
+        "interval": 2
+    },
+    "custom/updates": {
+        "format": "{}",
+        "exec": "~/.config/waybar/updates.sh",
+        "interval": 3600,
+        "on-click": "kitty -e sudo pacman -Syu",
+        "return-type": "json"
+    },
+    "custom/notification": {
+        "format": "{}",
+        "exec": "~/.config/waybar/notification.sh",
+        "interval": 2,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/notification-control.sh left",
+        "on-click-middle": "~/.config/waybar/notification-control.sh middle",
+        "on-click-right": "~/.config/waybar/notification-control.sh right",
+        "signal": 7,
+        "tooltip": true
+    },
+    "custom/netspeed": {
+        "format": "{}",
+        "exec": "~/.config/waybar/netspeed.sh",
+        "interval": 3,
+        "return-type": "json"
+    },
+    "custom/totp": {
+        "format": "{}",
+        "exec": "~/.config/waybar/totp.sh",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/totp-copy.sh",
+        "on-click-right": "~/.config/waybar/totp-selector.sh",
+        "signal": 8,
+        "tooltip": true
+    },
+    "custom/pomodoro": {
+        "format": "{}",
+        "exec": "~/.config/waybar/pomodoro.sh",
+        "interval": 5,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/pomodoro-control.sh left",
+        "on-click-right": "~/.config/waybar/pomodoro-control.sh right",
+        "on-click-middle": "~/.config/waybar/pomodoro-control.sh middle",
+        "signal": 8,
+        "tooltip": true
     }
-  }
-]
+}
