@@ -2,12 +2,12 @@
   description = "Vitus's NixOS and nix-darwin configuration";
   inputs = {
     # ========== 通用 inputs ==========
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -46,7 +46,7 @@
       nixpkgs,
       nixpkgs-darwin,
       home-manager,
-      nixpkgs-unstable,
+      nixpkgs-2511,
       vscode-server,
       fenix,
       anyrun,
@@ -58,14 +58,14 @@
     let
       # ========== Linux 系统变量 ==========
       linuxSystem = "x86_64-linux";
-      unstable = import nixpkgs-unstable {
+      stable = import nixpkgs-2511 {
         system = linuxSystem;
         config.allowUnfree = true;
       };
 
       # ========== Darwin 系统变量 ==========
       darwinSystem = "aarch64-darwin";
-      unstableDarwin = import nixpkgs-unstable {
+      unstableDarwin = import nixpkgs-darwin {
         system = darwinSystem;
         config.allowUnfree = true;
       };
@@ -82,7 +82,7 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
-            inherit unstable;
+            inherit stable;
             inherit username;
             inherit hostname;
           };
@@ -106,7 +106,7 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
-            inherit unstable;
+            inherit stable;
             inherit username;
             inherit hostname;
           };
@@ -180,7 +180,7 @@
           "vitus@ubuntu" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs unstable;
+              inherit inputs stable;
               username = "vitus";
               hostname = "ubuntu";
             };
@@ -211,7 +211,7 @@
           "vitus@wsl" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs unstable;
+              inherit inputs stable;
               username = "vitus";
               hostname = "wsl";
             };

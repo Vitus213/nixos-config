@@ -10,17 +10,17 @@
   # 导入公共 home-manager 模块
   imports = [
     ./../../home/core.nix
-    ./../../home/fcitx5
     ./../../home/programs
     ./../../home/shell
     ./../../home/linux/gui/base
+    ./../../home/fcitx5
     ./../../home/linux/gui/hyprland
 
   ];
   modules.secrets.enable = true; # 启用用户级sops以渲染环境变量和gh配置
   modules.desktop.hyprland.enable = true; # Enable Hyprland
   home.packages = with pkgs; [
-    wechat
+    # wechat  # 暂时禁用，网络下载失败
     feishu
     qq
   ];
