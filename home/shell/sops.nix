@@ -49,8 +49,8 @@ in
           export GLM_AUTH_TOKEN="$(cat ${config.sops.secrets.glm_auth_token.path})"
           export GLM_BASE_URL="$(cat ${config.sops.secrets.glm_base_url.path})"
           # 默认使用 AnyRouter
-          export ANTHROPIC_AUTH_TOKEN="$ANYROUTER_AUTH_TOKEN"
-          export ANTHROPIC_BASE_URL="$ANYROUTER_BASE_URL"
+          export ANTHROPIC_AUTH_TOKEN="$GLM_AUTH_TOKEN"
+          export ANTHROPIC_BASE_URL="$GLM_BASE_URL"
       '';
 
       # gh cli 认证配置
