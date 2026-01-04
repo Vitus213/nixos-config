@@ -10,7 +10,7 @@ WEATHER_CACHE_FILE="/tmp/waybar_weather_cache"
 CITY_CACHE_FILE="/tmp/waybar_city_cache"
 WEATHER_CACHE_DURATION=1800  # 30 minutes
 CITY_CACHE_DURATION=86400    # 24 hours
-MANUAL_CITY=""  # Set your city, leave empty for auto-detect
+MANUAL_CITY="Guangzhou"  # Set your city, leave empty for auto-detect
 
 # Get city name with caching
 get_city() {
