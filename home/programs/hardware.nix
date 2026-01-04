@@ -8,6 +8,7 @@
       inetutils
       android-tools
       bat
+      psmisc
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       cpuid

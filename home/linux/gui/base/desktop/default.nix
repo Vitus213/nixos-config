@@ -55,8 +55,7 @@
     in
     {
       "wallpaper".source = mkSymlink "${confPath}/wallpaper";
-      "mako/config".source = mkSymlink "${confPath}/mako/config";
-      "mako/icons".source = mkSymlink "${confPath}/mako/icons";
+      "mako".source = mkSymlink "${confPath}/mako";
       "waybar".source = mkSymlink "${confPath}/waybar";
       "wlogout".source = mkSymlink "${confPath}/wlogout";
       "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
@@ -72,6 +71,6 @@
   # services.hypridle.enable = true;
 
   # notification daemon, the same as dunst
-  services.mako.enable = true;
+  # services.mako.enable = true;
   # catppuccin.mako.enable = false;
 }
