@@ -9,9 +9,10 @@
 }:
 {
   imports = [
-    ./packages.nix
-    ./system.nix
-    ./themes.nix
+    ./base.nix
+    ./network.nix
+    ./desktop.nix
+    ./hyprland.nix
     ./sops.nix
 
     inputs.home-manager.nixosModules.home-manager

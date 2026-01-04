@@ -21,20 +21,8 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin-bat = {
-      url = "github:catppuccin/bat";
-      flake = false;
-    };
     hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     anyrun = {
       url = "github:/anyrun-org/anyrun/v25.9.0";
       inputs.nixpkgs.follows = "nixpkgs";
