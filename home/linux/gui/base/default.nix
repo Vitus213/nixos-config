@@ -1,6 +1,6 @@
 {
   imports = [
-    ./wayland-apps.nix
+    # ./wayland-apps.nix
     # ./xdg.nix
     ./desktop
     ./theme.nix

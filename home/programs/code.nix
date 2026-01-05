@@ -4,11 +4,30 @@
   ...
 }:
 {
+  imports =[
+    ./vscode.nix
+  ];
+  programs={
+    zed-editor = {
+      enable = true;
+      package = pkgs.zed-editor-fhs;
+      extensions = [
+        "nix"
+      ];
+      userSettings = {
+        theme = lib.mkDefault "One Dark";
+      };
+      extraPackages = [
+        pkgs.nixd
+        pkgs.nil
+      ];
+      installRemoteServer = true;
+    };
+  };
   home.packages = with pkgs; [
     uv
     python314
     code-cursor
-    zed-editor
     claude-code
     # 排版 (Typst)
     typst # 新一代科学排版语言和编译器。
