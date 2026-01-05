@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  catppuccin-bat,
   ...
 }:
 {

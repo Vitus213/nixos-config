@@ -10,34 +10,34 @@ in
 {
   options.modules.desktop.hyprland = {
     enable = lib.mkEnableOption "hyprland compositor";
-    settings = lib.mkOption {
-      type =
-        with lib.types;
-        let
-          valueType =
-            nullOr (oneOf [
-              bool
-              int
-              float
-              str
-              path
-              (attrsOf valueType)
-              (listOf valueType)
-            ])
-            // {
-              description = "Hyprland configuration value";
-            };
-        in
-        valueType;
-      default = { };
-    };
+    #递归分解settings类型
+    # settings = lib.mkOption {
+    #   type =
+    #     with lib.types;
+    #     let
+    #       valueType =
+    #         nullOr (oneOf [
+    #           bool
+    #           int
+    #           float
+    #           str
+    #           path
+    #           (attrsOf valueType)
+    #           (listOf valueType)
+    #         ])
+    #         // {
+    #           description = "Hyprland configuration value";
+    #         };
+    #     in
+    #     valueType;
+    #   default = { };
+    # };
   };
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
-      { wayland.windowManager.hyprland.settings = cfg.settings; }
+      # { wayland.windowManager.hyprland.settings = cfg.settings; }
       (import ./hyprland.nix args)
-      # (import ./xdg.nix args)
     ]
   );
 }
