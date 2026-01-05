@@ -22,6 +22,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     anyrun = {
       url = "github:/anyrun-org/anyrun/v25.9.0";
@@ -62,7 +66,11 @@
         system = linuxSystem;
         config.allowUnfree = true;
       };
-
+      pkgs = import nixpkgs {
+        system = linuxSystem;
+        overlays = [ fenix.overlays.default ];
+        config.allowUnfree = true;
+      };
       # ========== Darwin 系统变量 ==========
       darwinSystem = "aarch64-darwin";
       unstableDarwin = import nixpkgs-darwin {
@@ -90,7 +98,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
-            { nixpkgs.overlays = [ fenix.overlays.default ]; }
+            { nixpkgs.pkgs = pkgs; }
             ./overlays
             ./hosts/Vitus5600
             ./modules/system

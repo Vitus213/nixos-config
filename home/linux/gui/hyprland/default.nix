@@ -37,7 +37,7 @@ in
     lib.mkMerge [
       { wayland.windowManager.hyprland.settings = cfg.settings; }
       (import ./hyprland.nix args)
-      (import ./xdg.nix args)
+      # (import ./xdg.nix args)
     ]
   );
 }

@@ -7,18 +7,8 @@ let
   hyprlandPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in
 {
-  # ========== Hyprland 窗口管理器 ==========
-  services.displayManager.sessionPackages = [ hyprlandPackage ];
 
   programs = {
-    hyprland = {
-      enable = true;
-      withUWSM = false;
-      package = hyprlandPackage;
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      xwayland.enable = true;
-    };
     dconf.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
@@ -33,6 +23,15 @@ in
     ];
     zsh.enable = true;
   };
+  # ========== Hyprland 窗口管理器 ==========
+  programs.hyprland = {
+    enable = true;
+    # withUWSM = false;
+    # package = hyprlandPackage;
+    # portalPackage =
+    #   inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    xwayland.enable = true;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  nixpkgs.config.allowUnfree = true;
 }

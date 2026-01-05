@@ -10,7 +10,7 @@
     enable = true;
     enableCompletion = true;
     autocd = true;
-    dotDir = config.home.homeDirectory;  # 锁定当前行为，消除警告
+    dotDir = config.home.homeDirectory; # 锁定当前行为，消除警告
 
     autosuggestion = {
       enable = true;

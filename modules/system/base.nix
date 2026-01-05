@@ -38,6 +38,8 @@
     substituters = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
+    ];
+    trusted-substituters = [
       "https://hyprland.cachix.org"
     ];
 
@@ -74,7 +76,6 @@
 
   # ========== 环境变量 ==========
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
     GOPROXY = "https://goproxy.cn,https://goproxy.io,direct";
   };
   environment.variables.EDITOR = "nvim";
