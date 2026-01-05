@@ -13,20 +13,20 @@ in
     ./sops.nix
   ];
 
-  # add environment variables
-  home.sessionVariables = {
-    # clean up ~
-    LESSHISTFILE = cache + "/less/history";
-    LESSKEY = c + "/less/lesskey";
-    WINEPREFIX = d + "/wine";
+  # # add environment variables
+  # home.sessionVariables = {
+  #   # clean up ~
+  #   LESSHISTFILE = cache + "/less/history";
+  #   LESSKEY = c + "/less/lesskey";
+  #   WINEPREFIX = d + "/wine";
 
-    # enable scrolling in git diff
-    DELTA_PAGER = "less -R";
+  #   # enable scrolling in git diff
+  #   DELTA_PAGER = "less -R";
 
-    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-  };
+  #   MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+  # };
 
-  home.shellAliases = {
-    k = "kubectl";
-  };
+  # home.shellAliases = {
+  #   k = "kubectl";
+  # };
 }

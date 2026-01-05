@@ -1,7 +1,7 @@
 {
   imports = [
     ./wayland-apps.nix
-    ./xdg.nix
+    # ./xdg.nix
     ./desktop
     ./theme.nix
   ];

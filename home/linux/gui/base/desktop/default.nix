@@ -7,6 +7,7 @@
 {
   imports = [
     ./anyrun.nix
+    ./homedir.nix
     # ./nvidia.nix
   ];
 
