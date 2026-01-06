@@ -9,6 +9,7 @@
     "margin-top": 8,
     "margin-left": 3,
     "margin-right": 8,
+    "reload_style_on_change": true,
     "modules-left": [
         "custom/power",
         "tray",
@@ -17,18 +18,28 @@
         "custom/pomodoro"
     ],
     "modules-center": [
-        "custom/datetime-weather"
+
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "custom/notification",
-        "custom/netspeed",
+        "bluetooth",
+        "network",
         "idle_inhibitor",
         "pulseaudio",
-        "cpu",
-        "memory",
-        "temperature",
-        "battery"
+        "custom/datetime-weather"
     ],
+    "hyprland/workspaces": {
+            "format": "{icon}",
+            "format-icons": {
+                "active": "",
+                "default": "",
+                "empty": ""
+            },
+            "persistent-workspaces": {
+                "*": [ 1,2,3,4,5 ]
+            }
+        },
     "custom/power": {
         "format": "󰐥",
         "on-click": "wlogout",
@@ -176,6 +187,6 @@
         "on-click-right": "~/.config/waybar/pomodoro-control.sh right",
         "on-click-middle": "~/.config/waybar/pomodoro-control.sh middle",
         "signal": 8,
-        "tooltip": true
+        "tooltipP": true
     }
 }

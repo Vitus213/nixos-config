@@ -34,8 +34,7 @@
     pandoc # 通用文档转换器。
     obsidian
     #hyprland stuff
-    wlogout
-    swww
+
     grim
     slurp
     swappy

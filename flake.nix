@@ -122,7 +122,7 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
-            { nixpkgs.pkgs=pkgs; }
+            { nixpkgs.pkgs = pkgs; }
             ./hosts/Vitus8500
             ./modules/system
             ./users/${username}/nixos.nix
