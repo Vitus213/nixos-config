@@ -20,7 +20,7 @@
   modules.secrets.enable = true; # 启用用户级sops以渲染环境变量和gh配置
   modules.desktop.hyprland.enable = true; # Enable Hyprland
   home.packages = with pkgs; [
-    # wechat  # 暂时禁用，网络下载失败
+    wechat  # 暂时禁用，网络下载失败
     feishu
     qq
   ];
