@@ -36,8 +36,8 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
-      # { wayland.windowManager.hyprland.settings = cfg.settings; }
       (import ./hyprland.nix args)
+      (import ./keybind.nix args)
     ]
   );
 }

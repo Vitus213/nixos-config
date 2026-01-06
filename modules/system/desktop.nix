@@ -12,6 +12,9 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  programs={
+    steam.enable=true;
+  };
 
   # ========== 蓝牙 ==========
   hardware.bluetooth.enable = true;
