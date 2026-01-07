@@ -5,10 +5,10 @@ let
 in
 {
   home.packages = with pkgs; [
-    playerctl      # 媒体控制
-    grim           # 截图
-    slurp          # 区域选择
-    swappy         # 截图编辑
+    playerctl # 媒体控制
+    grim # 截图
+    slurp # 区域选择
+    swappy # 截图编辑
   ];
 
   wayland.windowManager.hyprland.settings = {
@@ -19,8 +19,8 @@ in
 
     # --- 鼠标绑定 ---
     bindm = [
-      "${mod}, mouse:272, movewindow"    # Super + 左键拖动窗口
-      "${mod}, mouse:273, resizewindow"  # Super + 右键调整大小
+      "${mod}, mouse:272, movewindow" # Super + 左键拖动窗口
+      "${mod}, mouse:273, resizewindow" # Super + 右键调整大小
     ];
 
     # --- 重复触发绑定 (音量键长按) ---
@@ -56,25 +56,25 @@ in
       "${mod}, Print, exec, grim -g \"$(slurp)\" - | ${pkgs.swappy}/bin/swappy -f -"
 
       # ========== 窗口管理 ==========
-      "${mod}, Q, killactive"                     # 关闭窗口
-      "${mod}, K, togglefloating"                 # 浮动/平铺切换
-      "${mod}, J, togglesplit"                    # 水平/垂直分割切换
-      "${mod}, Tab, hyprexpo:expo, toggle"        # 工作区概览
+      "${mod}, Q, killactive" # 关闭窗口
+      "${mod}, K, togglefloating" # 浮动/平铺切换
+      "${mod}, J, togglesplit" # 水平/垂直分割切换
+      "${mod}, Tab, hyprexpo:expo, toggle" # 工作区概览
       "${mod}, Return, layoutmsg, swapwithmaster master"
 
       # ========== Scrolling 布局操作 ==========
-      "${mod}, mouse_up, layoutmsg, move +col"    # 窗口移到上一列
-      "${mod}, mouse_down, layoutmsg, move -col"  # 窗口移到下一列
-      "${mod}, Equal, layoutmsg, colresize +conf"    # 当前列变宽
-      "${mod}, Minus, layoutmsg, colresize -conf"    # 当前列变窄
+      "${mod}, mouse_up, layoutmsg, move +col" # 窗口移到上一列
+      "${mod}, mouse_down, layoutmsg, move -col" # 窗口移到下一列
+      "${mod}, Equal, layoutmsg, colresize +conf" # 当前列变宽
+      "${mod}, Minus, layoutmsg, colresize -conf" # 当前列变窄
 
       # ========== SUPER + ALT 窗口操作 ==========
-      "${mod}_ALT, bracketleft, layoutmsg, movewindowto l"   # 移动窗口到左列
-      "${mod}_ALT, bracketright, layoutmsg, movewindowto r"  # 移动窗口到右列
-      "${mod}_ALT, Left, layoutmsg, swapcol l"               # 交换左右列
-      "${mod}_ALT, Right, layoutmsg, swapcol r"              # 交换左右列
-      "${mod}_ALT, Up, movewindow, u"                        # 移动窗口向上
-      "${mod}_ALT, Down, movewindow, d"                      # 移动窗口向下
+      "${mod}_ALT, bracketleft, layoutmsg, movewindowto l" # 移动窗口到左列
+      "${mod}_ALT, bracketright, layoutmsg, movewindowto r" # 移动窗口到右列
+      "${mod}_ALT, Left, layoutmsg, swapcol l" # 交换左右列
+      "${mod}_ALT, Right, layoutmsg, swapcol r" # 交换左右列
+      "${mod}_ALT, Up, movewindow, u" # 移动窗口向上
+      "${mod}_ALT, Down, movewindow, d" # 移动窗口向下
 
       # ========== 焦点切换 ==========
       "${mod}, left, movefocus, l"
@@ -98,13 +98,18 @@ in
     ]
     ++ (
       # ========== 工作区 1-9 ==========
-      builtins.concatLists (builtins.genList (i:
-        let ws = toString (i + 1);
-        in [
-          "${mod}, ${ws}, workspace, ${ws}"
-          "${mod} SHIFT, ${ws}, movetoworkspace, ${ws}"
-        ]
-      ) 9)
+      builtins.concatLists (
+        builtins.genList (
+          i:
+          let
+            ws = toString (i + 1);
+          in
+          [
+            "${mod}, ${ws}, workspace, ${ws}"
+            "${mod} SHIFT, ${ws}, movetoworkspace, ${ws}"
+          ]
+        ) 9
+      )
     );
   };
 }

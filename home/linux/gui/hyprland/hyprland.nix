@@ -54,7 +54,6 @@ in
       in
       [
         hostSpecificHyprlandConfig
-        "${configPath}/exec.conf"
         "${configPath}/fcitx5.conf"
         "${configPath}/windowrules.conf"
       ];
