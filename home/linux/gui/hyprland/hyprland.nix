@@ -56,8 +56,6 @@ in
         hostSpecificHyprlandConfig
         "${configPath}/exec.conf"
         "${configPath}/fcitx5.conf"
-        # "${configPath}/keybindings.conf"  # 已迁移到 keybind.nix
-        "${configPath}/settings.conf"
         "${configPath}/windowrules.conf"
       ];
     env = [
