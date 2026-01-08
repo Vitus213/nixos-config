@@ -109,7 +109,7 @@ in
     decoration = {
       rounding = 10; # 稍微大一点的圆角更美观
       active_opacity = 1.0;
-      inactive_opacity = 0.9; # 让后台窗口更透明一点，效果更明显
+      inactive_opacity = 1.0; # 让后台窗口更透明一点，效果更明显
 
       blur = {
         enabled = true;
