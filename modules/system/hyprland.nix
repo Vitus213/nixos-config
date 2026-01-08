@@ -34,4 +34,20 @@ in
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # ========== xdg-desktop-portal (应用认证、文件选择、屏幕共享) ==========
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      Hyprland.default = [
+        "hyprland"
+        "gtk"
+      ];
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+  };
+
 }
