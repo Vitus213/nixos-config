@@ -31,7 +31,12 @@
     hypridle
     wlogout
     waybar
+    pavucontrol
     mako
+    swww
+    wl-clip-persist
+    hyprpolkitagent
+    glava
     swaybg # the wallpaper
     wl-clipboard # copying and pasting
     hyprpicker # color picker
