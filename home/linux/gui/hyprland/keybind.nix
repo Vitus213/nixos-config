@@ -40,9 +40,10 @@ in
     # --- 普通快捷键 ---
     bind = [
       # ========== 应用程序启动 ==========
-      "${mod}, G, fullscreenstate, 1 3"
+      "${mod}, F, fullscreenstate, 1 3"
+      "${mod}, U, fullscreen"
       "${mod}, SPACE, exec, ${terminal}"
-      "${mod}, F, exec, ${pkgs.microsoft-edge}/bin/microsoft-edge"
+      "${mod}, E, exec, ${pkgs.microsoft-edge}/bin/microsoft-edge"
       "${mod}, V, exec, ${pkgs.vscode}/bin/code"
       "${mod}, D, exec, ${pkgs.firefox}/bin/firefox"
       "${mod}, Z, exec, zeditor"
