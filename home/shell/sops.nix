@@ -38,6 +38,9 @@ in
       secrets.agent_base_url = { };
       secrets.glm_auth_token = { };
       secrets.glm_base_url = { };
+      secrets.totp_secrets = {
+        path = "${homeDir}/.config/totp/secrets.conf";
+      };
 
       # 这里加上刚才说的模板，自动生成 source 文件
       templates."my-env".content = ''
