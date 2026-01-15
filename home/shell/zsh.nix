@@ -35,6 +35,9 @@
     };
 
     shellAliases = {
+      #用nix编译dragonos
+      test="make kernel && nix run .#rootfs-x86_64 && nix run .#start-x86_64";
+      gpush="git add . && git commit -m \"update\" && git push";
       np = "unset http_proxy https_proxy all_proxy";
       p = "export http_proxy=http://127.0.0.1:7897 https_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897";
       ls = "ls --color=auto";

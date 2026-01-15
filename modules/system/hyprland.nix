@@ -7,6 +7,17 @@ let
   hyprlandPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 in
 {
+  imports = [
+    inputs.tail.nixosModules.default
+  ];
+
+  services.tail = {
+    enable = true;
+    user = "Vitus213"; # 替换为您的用户名
+    afkTimeout = 300; # AFK 超时时间（秒）
+    logLevel = "info"; # 日志级别: error, warn, info, debug, trace
+    autoStart = true; # 自动启动
+  };
 
   programs = {
     dconf.enable = true;
