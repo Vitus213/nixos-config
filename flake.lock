@@ -875,11 +875,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1768464654,
-        "narHash": "sha256-0Ghqrrl0S6U5tKEg6LOteOL61EaVjGI/McIT7rNNm0w=",
+        "lastModified": 1768662287,
+        "narHash": "sha256-xCbyef7tkyCWLco25ihjqTi5TAHK4CVDMTYhremNtIs=",
         "owner": "Vitus213",
         "repo": "TaiL",
-        "rev": "cea628e42e266ed4d47215c2a7fe55605a443b2d",
+        "rev": "adcdb747a6bfcc75fb3fcd0c4762d6e2324ad8a4",
         "type": "github"
       },
       "original": {
