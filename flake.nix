@@ -50,6 +50,7 @@
       self,
       nixpkgs,
       nixpkgs-darwin,
+      nixpkgs-unstable,
       home-manager,
       vscode-server,
       fenix,
@@ -63,6 +64,11 @@
       # ========== Linux 系统变量 ==========
       linuxSystem = "x86_64-linux";
       pkgs = import nixpkgs {
+        system = linuxSystem;
+        overlays = [ fenix.overlays.default ];
+        config.allowUnfree = true;
+      };
+       unstable = import nixpkgs-unstable {
         system = linuxSystem;
         overlays = [ fenix.overlays.default ];
         config.allowUnfree = true;
@@ -86,6 +92,7 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
+            inherit unstable;
             inherit username;
             inherit hostname;
           };
@@ -109,6 +116,7 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
+            inherit unstable;
             inherit username;
             inherit hostname;
           };

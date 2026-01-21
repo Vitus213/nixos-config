@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  unstable,
   ...
 }:
 {
@@ -30,7 +31,7 @@
       uv
       python314
       code-cursor
-      claude-code
+      unstable.claude-code
       vscode
       codex
       # 排版 (Typst)
