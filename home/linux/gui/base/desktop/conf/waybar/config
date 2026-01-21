@@ -39,7 +39,7 @@
         },
     "custom/power": {
         "format": "󰐥",
-        "on-click": "wlogout",
+        "on-click": "swaylock -c 333333",
         "on-click-right": "systemctl suspend",
         "tooltip": "左键: 电源菜单 | 右键: 休眠"
     },

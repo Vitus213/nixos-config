@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     xdg-utils # provides cli tools such as `xdg-mime` `xdg-open`
     xdg-user-dirs
+    xarchiver
   ];
 
   xdg.configFile."mimeapps.list".force = true;
@@ -40,6 +41,7 @@
             "code.desktop"
             "code-insiders.desktop"
           ];
+          archiver = [ "xarchiver.desktop" ];
         in
         {
           "application/json" = browser;
@@ -87,6 +89,21 @@
           "image/webp" = [ "imv-dir.desktop" ];
 
           "inode/directory" = [ "yazi.desktop" ];
+
+          # Archive formats
+          "application/zip" = archiver;
+          "application/x-7z-compressed" = archiver;
+          "application/x-rar" = archiver;
+          "application/x-rar-compressed" = archiver;
+          "application/x-tar" = archiver;
+          "application/x-compressed-tar" = archiver;
+          "application/x-bzip-compressed-tar" = archiver;
+          "application/x-lzma-compressed-tar" = archiver;
+          "application/x-xz-compressed-tar" = archiver;
+          "application/gzip" = archiver;
+          "application/x-bzip2" = archiver;
+          "application/x-lzma" = archiver;
+          "application/x-xz" = archiver;
         };
 
       associations.removed = {
@@ -94,12 +111,5 @@
       };
     };
 
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-      extraConfig = {
-        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
-      };
-    };
   };
 }

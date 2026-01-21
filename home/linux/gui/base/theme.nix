@@ -21,5 +21,8 @@
       enable = true;
       accent = "pink";
     };
+
+    # 禁用 mpv 主题（需要下载 catppuccin-mpv）
+    mpv.enable = false;
   };
 }

@@ -25,12 +25,10 @@ in
     mtr.enable = true;
     nm-applet.indicator = true;
     thunar.enable = true;
-    thunar.plugins = with pkgs; [
-      xfce4-exo
-      mousepad
-      thunar-archive-plugin
-      thunar-volman
-      tumbler
+    thunar.plugins = [
+      # pkgs.exo
+      # pkgs.thunar-volman
+      # pkgs.tumbler
     ];
     zsh.enable = true;
   };

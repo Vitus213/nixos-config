@@ -2,12 +2,12 @@
   description = "Vitus's NixOS and nix-darwin configuration";
   inputs = {
     # ========== 通用 inputs ==========
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,7 +51,6 @@
       nixpkgs,
       nixpkgs-darwin,
       home-manager,
-      nixpkgs-2511,
       vscode-server,
       fenix,
       anyrun,
@@ -63,10 +62,6 @@
     let
       # ========== Linux 系统变量 ==========
       linuxSystem = "x86_64-linux";
-      stable = import nixpkgs-2511 {
-        system = linuxSystem;
-        config.allowUnfree = true;
-      };
       pkgs = import nixpkgs {
         system = linuxSystem;
         overlays = [ fenix.overlays.default ];
@@ -91,7 +86,6 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
-            inherit stable;
             inherit username;
             inherit hostname;
           };
@@ -115,7 +109,6 @@
           specialArgs = {
             system = linuxSystem;
             inherit inputs;
-            inherit stable;
             inherit username;
             inherit hostname;
           };
@@ -189,7 +182,7 @@
           "vitus@ubuntu" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs stable;
+              inherit inputs;
               username = "vitus";
               hostname = "ubuntu";
             };
@@ -220,7 +213,7 @@
           "vitus@wsl" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs stable;
+              inherit inputs;
               username = "vitus";
               hostname = "wsl";
             };
