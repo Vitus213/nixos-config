@@ -237,6 +237,7 @@
                 home.stateVersion = "25.11";
                 programs.home-manager.enable = true;
                 modules.secrets.enable = true; # 启用 sops secret management
+                modules.shell.enableProxy = false;
                 nix = {
                   package = pkgs.nix;
                   settings.experimental-features = [
