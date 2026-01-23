@@ -24,6 +24,7 @@ in
       defaultSopsFile = ../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
       age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+      # age.keyFile= "/etc/sops/age/keys.txt";
       age.sshKeyPaths = [ ]; # 禁用 SSH 密钥查找
       secrets.github_token = {
         owner = "root";

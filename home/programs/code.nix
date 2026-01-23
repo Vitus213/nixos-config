@@ -11,7 +11,7 @@
   programs = {
     zed-editor = {
       enable = true;
-      package = pkgs.zed-editor-fhs;
+      package = pkgs.zed-editor;
       extensions = [
         "nix"
       ];
@@ -31,7 +31,7 @@
       uv
       python314
       code-cursor
-      unstable.claude-code
+      claude-code
       vscode
       codex
       # 排版 (Typst)
