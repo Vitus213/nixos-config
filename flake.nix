@@ -4,7 +4,6 @@
     # ========== 通用 inputs ==========
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -29,7 +28,7 @@
     };
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     anyrun = {
-      url = "github:/anyrun-org/anyrun/v25.9.0";
+      url = "github:/anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin = {
@@ -38,10 +37,10 @@
     };
 
     # ========== Darwin 专用 inputs ==========
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
 
@@ -75,9 +74,15 @@
       };
       # ========== Darwin 系统变量 ==========
       darwinSystem = "aarch64-darwin";
-      unstableDarwin = import nixpkgs-darwin {
+      unstableDarwin = import nixpkgs-unstable {
         system = darwinSystem;
         config.allowUnfree = true;
+        overlays = [ fenix.overlays.default ];
+      };
+      darwinPkgs = import nixpkgs-darwin {
+        system = darwinSystem;
+        config.allowUnfree = true;
+        overlays = [ fenix.overlays.default ];
       };
 
     in
@@ -147,22 +152,22 @@
           system = darwinSystem;
           inherit specialArgs;
           modules = [
+            { nixpkgs.pkgs = darwinPkgs; }
             ./hosts/darwin
             ./modules/darwin
-            { nixpkgs.overlays = [ fenix.overlays.default ]; }
             home-manager.darwinModules.home-manager
-            (
-              { username, inputs, ... }:
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  backupFileExtension = "backup";
-                  users.${username} = import ./users/${username}/darwin.nix;
-                  extraSpecialArgs = { inherit inputs username; };
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                users.${username} = import ./users/${username}/darwin.nix;
+                extraSpecialArgs = {
+                  inherit inputs username;
+                  unstable = unstableDarwin;
                 };
-              }
-            )
+              };
+            }
             sops-nix.darwinModules.sops
           ];
         };

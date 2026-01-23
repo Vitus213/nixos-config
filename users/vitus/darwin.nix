@@ -2,6 +2,7 @@
   pkgs,
   username,
   inputs,
+  unstable,
   ...
 }:
 {

@@ -2,8 +2,6 @@
 { pkgs, lib, ... }:
 
 {
-  # 允许 unfree 软件包
-  nixpkgs.config.allowUnfree = true;
 
   nix = {
     # Determinate uses its own daemon to manage the Nix installation that

@@ -23,12 +23,14 @@ in
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
-      age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
-      # age.keyFile= "/etc/sops/age/keys.txt";
-      age.sshKeyPaths = lib.mkForce [ ]; # 禁用 SSH 密钥查找
+      age = {
+        keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+        sshKeyPaths = lib.mkForce [ ];
+        generateKey = false;
+      };
       secrets.github_token = {
         owner = "root";
-        group = "wheel";
+        group = "staff";
         mode = "0400";
       };
     };

@@ -43,6 +43,9 @@
       "microsoft-edge"
       "notion"
       "obsidian"
+      "zed"
+      "visual-studio-code"
+      "cursor"
     ];
   };
 
