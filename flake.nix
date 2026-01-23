@@ -68,7 +68,7 @@
         overlays = [ fenix.overlays.default ];
         config.allowUnfree = true;
       };
-       unstable = import nixpkgs-unstable {
+      unstable = import nixpkgs-unstable {
         system = linuxSystem;
         overlays = [ fenix.overlays.default ];
         config.allowUnfree = true;

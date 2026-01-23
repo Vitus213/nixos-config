@@ -29,7 +29,7 @@ in
       defaultSopsFile = ../../secrets/secrets.yaml; # 注意相对路径可能要调整
       defaultSopsFormat = "yaml";
       age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
-      age.sshKeyPaths = [ ];
+      age.sshKeyPaths = lib.mkForce [ ];
       # 【重要】这里不需要写 owner = ...，因为 Home Manager 跑在用户态
       secrets.github_token = { };
       secrets.anyrouter_auth_token = { };

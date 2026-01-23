@@ -8,7 +8,7 @@
       inetutils
       android-tools
       bat
-  
+
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
       cpuid
@@ -16,7 +16,7 @@
       light
       lm_sensors
       lshw
-            cpufetch
-          psmisc
+      cpufetch
+      psmisc
     ];
 }
