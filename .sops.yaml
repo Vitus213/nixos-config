@@ -17,6 +17,7 @@ keys:
     - &wsl age1pmpct65e9p6xymw0fxs8zed7t9wkmku9k74pxqjevwnv5yvhxqlqrwsnku
     - &vitus8500 age1paytx9hm9c475yd4fywuqa9mm0zcm5ekg07l0wjkjyjnakxxqudseny95h
     - &vitus5600 age1rpxxn0dpeda320mxsgyzrswv754tguz3h8m0p9s8sd5wxup9f9us7p28xq
+    - &dragonos5600 age1l9yj29taz6kd7n40saqf724yc5ggwnd9q48k2tg8wwxfm5pycyxscqwz6h
     # ========== Darwin (macOS) ==========
     - &vitusmac age12l22pkwhea5pa5ske2ejckpg44qwu8wgv2u98a0zs0ne6m90nucsvr5qm6 # TODO: 在 Mac 上运行 ssh-to-age < ~/.ssh/id_ed25519.pub 获取
 
@@ -30,3 +31,4 @@ creation_rules:
                 - *vitusmac
                 - *vitus8500
                 - *vitus5600
+                - *dragonos5600
