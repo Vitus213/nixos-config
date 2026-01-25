@@ -17,7 +17,6 @@
     unzip
     # 网络 (Net)
     clash-verge-rev # Clash Verge 的复刻版本，代理客户端。
-    flclash # 可能与 Clash 相关的工具。
 
     # 社交 (Social)
     ente-auth # Ente Photos 的认证客户端。

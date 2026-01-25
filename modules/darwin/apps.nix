@@ -46,6 +46,7 @@
       "zed"
       "visual-studio-code"
       "cursor"
+      "clash-verge-rev"
     ];
   };
 

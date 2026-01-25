@@ -1,5 +1,6 @@
 # Darwin (macOS) 主机配置
 {
+  inputs,
   pkgs,
   hostname,
   username,

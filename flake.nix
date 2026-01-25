@@ -168,7 +168,6 @@
                 };
               };
             }
-            sops-nix.darwinModules.sops
           ];
         };
 
