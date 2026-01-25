@@ -98,7 +98,11 @@ in
         PATH="$PATH:$HOME/opt/riscv64-linux-musl-cross-gcc-9.4.0/bin"
         PATH="$PATH:$HOME/opt/loongarch64-cross-14.2.0/bin"
         export PATH
+
+        # SOPS age 密钥文件 (Darwin & Linux)
+        export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
         export SOPS_AGE_SSH_PRIVATE_KEY_FILE="$HOME/.ssh/id_rsa"
+
         # SOPS 密钥加载 (NixOS)
         if [ -f "/run/secrets/anyrouter_auth_token" ]; then
           export ANYROUTER_AUTH_TOKEN="$(cat /run/secrets/anyrouter_auth_token)"

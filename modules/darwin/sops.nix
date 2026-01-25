@@ -28,6 +28,11 @@ in
         sshKeyPaths = lib.mkForce [ ];
         generateKey = false;
       };
+      # 明确禁用 GPG（确保只使用 age）
+      gnupg = {
+        home = null;
+        sshKeyPaths = lib.mkForce [ ];
+      };
       secrets.github_token = {
         owner = "root";
         group = "staff";

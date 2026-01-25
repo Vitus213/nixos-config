@@ -24,6 +24,8 @@ in
       defaultSopsFormat = "yaml";
       age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
       age.sshKeyPaths = lib.mkForce [ ];
+      # 明确禁用 GPG（确保只使用 age）
+      gnupg.sshKeyPaths = lib.mkForce [ ];
       secrets.github_token = {
         owner = username;
         group = "users";

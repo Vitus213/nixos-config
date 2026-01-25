@@ -183,6 +183,12 @@
             overlays = [ fenix.overlays.default ];
           };
 
+          unstable = import nixpkgs-unstable {
+            system = linuxSystem;
+            config.allowUnfree = true;
+            overlays = [ fenix.overlays.default ];
+          };
+
           # 共享的核心模块 (CLI 环境)
           coreModules = [
             ./home/core.nix
@@ -197,6 +203,7 @@
               inherit inputs;
               username = "vitus";
               hostname = "ubuntu";
+              inherit unstable;
             };
             modules = coreModules ++ [
               {
@@ -228,6 +235,7 @@
               inherit inputs;
               username = "vitus";
               hostname = "wsl";
+              inherit unstable;
             };
             modules = coreModules ++ [
               {
