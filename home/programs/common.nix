@@ -15,8 +15,6 @@
     activitywatch # 自动时间追踪器。
     qbittorrent-enhanced # qBittorrent 增强版。
     unzip
-    # 网络 (Net)
-    clash-verge-rev # Clash Verge 的复刻版本，代理客户端。
 
     # 社交 (Social)
     ente-auth # Ente Photos 的认证客户端。
@@ -105,12 +103,16 @@
         "--exact"
       ];
     };
+    clash-verge = {
+      enable = true;
+      serviceMode = true;
+      tunMode = true;
+    };
 
   };
 
   services = {
     syncthing.enable = true;
-
     # auto mount usb drives
     udiskie.enable = true;
   };
