@@ -46,7 +46,22 @@ in
 
       shellAliases = {
         #用nix编译dragonos
-        test = "make kernel && nix run .#rootfs-x86_64 && nix run .#start-x86_64";
+        test = ''
+          if grep -q 'autotest = "syscall";' flake.nix; then
+            sed -i 's/autotest = "syscall";/autotest = "none";/' flake.nix && \
+            echo "✓ 已将 autotest 重置为 none"
+          fi
+          make kernel && nix run .#rootfs-x86_64 && nix run .#start-x86_64
+        '';
+
+        test-syscall = ''
+          if grep -q 'autotest = "none";' flake.nix; then
+            sed -i 's/autotest = "none";/autotest = "syscall";/' flake.nix && \
+            echo "✓ 已将 autotest 从 none 改为 syscall"
+          else
+            echo "ℹ autotest 当前不是 none，无需修改"
+          fi && make kernel && nix run .#rootfs-x86_64 && nix run .#start-x86_64
+        '';
         t = "make kernel && nix run .#start-x86_64";
         gpush = "git add . && git commit -m \"update\" && git push";
         np = "unset http_proxy https_proxy all_proxy";
