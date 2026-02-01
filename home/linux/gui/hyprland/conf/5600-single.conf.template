@@ -1,17 +1,17 @@
-# Monitors
+    # Monitors
 # ===================================================
-# Monitor for Host 1
-monitor=desc:SAC G72 Max 0000000000000, highrr, 0x0, 1, transform, 1, bitdepth, 10
+    # Monitor for Host 1
+    monitor=SAC G72 Max 0000000000000,highrr,auto,1,transform,0,bitdepth,10
+    monitor=DP-1, disable
 
-monitor=desc:AOC U32V5N AK05445J00615, 3840x2160@60, 1440x500, 2, transform, 0, bitdepth, 10
-# 右侧4K主屏：主要工作区
-workspace = 1, monitor:DP-1
-workspace = 2, monitor:DP-1
-workspace = 3, monitor:DP-1
-workspace = 4, monitor:DP-1
-
-# 左侧2K副屏：聊天社交
-workspace = 5, monitor:DP-2
+    # # 为显示器分配工作区 for Host 1
+    # 发现用r[1-5]会不起效
+    # workspace = r[1-5], monitor:DP-2
+    workspace = 1, monitor:DP-2
+    workspace = 2, monitor:DP-2
+    workspace = 3, monitor:DP-2
+    workspace = 4, monitor:DP-2
+    workspace = 5, monitor:DP-2
 # ============================================================================
 # WINDOW RULES (NEW FORMAT)
 # ============================================================================
@@ -28,7 +28,7 @@ windowrule = match:class ^(cursor)$, workspace 2
 windowrule = match:class ^(microsoft-edge)$, workspace 3
 windowrule = match:class ^(firefox)$, workspace 3
 
-# Workspace 4: Zed
+# Workspace 4: Zed 
 windowrule = match:class ^(dev.zed.Zed)$, workspace 4
 
 # Workspace 9: Chat & Social
