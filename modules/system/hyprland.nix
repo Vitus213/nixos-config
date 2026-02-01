@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  unstable,
   ...
 }:
 let
@@ -35,11 +36,10 @@ in
   # ========== Hyprland 窗口管理器 ==========
   programs.hyprland = {
     enable = true;
-    # withUWSM = false;
-    # package = hyprlandPackage;
-    # portalPackage =
-    #   inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = hyprlandPackage;
     xwayland.enable = true;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -55,7 +55,6 @@ in
     };
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
     ];
   };
 

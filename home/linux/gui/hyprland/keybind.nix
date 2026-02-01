@@ -60,7 +60,7 @@ in
       "${mod}, Q, killactive" # 关闭窗口
       "${mod}, K, togglefloating" # 浮动/平铺切换
       "${mod}, J, togglesplit" # 水平/垂直分割切换
-      "${mod}, Tab, hyprexpo:expo, toggle" # 工作区概览
+      # "${mod}, Tab, hyprexpo:expo, toggle" # 工作区概览,插件过时了
       "${mod}, Return, layoutmsg, swapwithmaster master"
 
       # ========== Scrolling 布局操作 ==========

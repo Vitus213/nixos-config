@@ -16,6 +16,12 @@
     };
     openFirewall = false;
   };
+  # clash-verge 代理工具
+  programs.clash-verge = {
+    enable = true;
+    serviceMode = true;
+    tunMode = true;
+  };
 
   # ========== Tailscale VPN ==========
   services.tailscale.enable = true;

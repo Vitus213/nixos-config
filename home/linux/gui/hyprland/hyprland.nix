@@ -33,7 +33,7 @@ in
   };
   wayland.windowManager.hyprland.plugins = [
     # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
-    pkgs.hyprlandPlugins.hyprexpo
+    #pkgs.hyprlandPlugins.hyprexpo
     pkgs.hyprlandPlugins.hyprwinwrap
     pkgs.hyprlandPlugins.hyprscrolling
   ];
