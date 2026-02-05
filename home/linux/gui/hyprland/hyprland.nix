@@ -32,10 +32,8 @@ in
     portalPackage = null;
   };
   wayland.windowManager.hyprland.plugins = [
-    # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
-    #pkgs.hyprlandPlugins.hyprexpo
-    pkgs.hyprlandPlugins.hyprwinwrap
-    pkgs.hyprlandPlugins.hyprscrolling
+    inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
+    inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
   ];
   wayland.windowManager.hyprland.settings = {
     source =
@@ -136,6 +134,8 @@ in
         focus_fit_method = 1;
         follow_focus = true;
         fullscreen_on_one_column = true;
+        force_gap = 10;
+        col_width_from_active = true;
       };
       hyprwinwrap = {
         # class = "GLava";
