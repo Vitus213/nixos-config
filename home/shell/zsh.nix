@@ -112,6 +112,7 @@ in
         PATH="$PATH:$HOME/opt/x86_64-linux-musl-cross-gcc-9.4.0/bin"
         PATH="$PATH:$HOME/opt/riscv64-linux-musl-cross-gcc-9.4.0/bin"
         PATH="$PATH:$HOME/opt/loongarch64-cross-14.2.0/bin"
+        PATH="$HOME/.local/share/pnpm:$PATH"
         export PATH
 
         # SOPS age 密钥文件 (Darwin & Linux)
@@ -127,6 +128,7 @@ in
           export ANYROUTER_BASE_URL="$(cat /run/secrets/anyrouter_base_url)"
           export ANTHROPIC_BASE_URL="$ANYROUTER_BASE_URL"
         fi
+         
       '';
     };
 
