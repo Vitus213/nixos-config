@@ -84,7 +84,11 @@
           # 你也可以在这里添加其他针对 5600 的设置
           # identityFile = "~/.ssh/id_rsa_5600";
         };
+        "mac" = {
+          hostname = "100.64.0.14";
+          user = "vitus";
 
+        };
         # 你的 "Host Nixos" 配置
         "Vitus8500" = {
           hostname = "100.64.0.41";
